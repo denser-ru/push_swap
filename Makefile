@@ -18,10 +18,12 @@ SRCDIR  = ./src/
 INCDIR  = ./inc/
 OBJDIR  = ./obj/
 FTDIR   = ./libft/
+PRNTDIR  = ./ft_printf/
 
 SRC = main.c
 OBJ	= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 LIBFT = $(FTDIR)libft.a
+LIBPRNT = $(PRNTDIR)libftprintf.a
 
 .PHONY: all clean fclean count
 
@@ -31,13 +33,16 @@ obj:
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
-	$(CC) $(CFLAGS) -I $(INCDIR) -I $(FTDIR) -o $@ -c $<
+	$(CC) $(CFLAGS) -I $(INCDIR) -I $(FTDIR) -I $(PRNTDIR)inc/ -o $@ -c $<
 
 $(LIBFT):
 	make -C $(FTDIR)
 
-$(NAME): obj $(LIBFT) $(OBJ)
-	$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+$(LIBPRNT):
+	make -C $(PRNTDIR)
+
+$(NAME): obj $(LIBFT) $(LIBPRNT) $(OBJ)
+	$(CC) $(OBJ) $(LIBFT) $(LIBPRNT) -o $(NAME)
 
 count:
 	wc ./src/*.c ./inc/*.h
@@ -45,9 +50,11 @@ count:
 clean:
 	rm -rf $(OBJDIR)
 	make -sC $(FTDIR) clean
+	make -sC $(PRNTDIR) clean
 
 fclean: clean
 	rm -f $(NAME)
 	make -sC $(FTDIR) fclean
+	make -sC $(PRNTDIR) fclean
 
 re: fclean all
