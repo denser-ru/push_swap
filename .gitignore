@@ -50,3 +50,25 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Anjuta
+*.c~
+*~
+push_swap
+.anjuta
+.anjuta_sym_db.db
+src/Makefile.am
+AUTHORS
+COPYING
+ChangeLog
+Makefile.am
+NEWS
+README
+autogen.sh
+configure.ac
+ft_ls.anjuta
+
+# CLion
+.idea/
+CMakeLists.txt
+cmake-build-debug/
