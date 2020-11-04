@@ -96,4 +96,4 @@ add_executable(push_swap
         libft/ft_tolower.c
         libft/ft_toupper.c
         libft/libft.h
-        src/main.c)
+        src/main.c src/ft_lst_swaps.c src/ft_mem_u.c)

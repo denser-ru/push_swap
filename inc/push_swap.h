@@ -10,16 +10,21 @@
 
 typedef struct		s_swap
 {
-	int 			*swap;
+	int 			*nb;
 	int 			chunk;
 	struct s_swap	*next;
 }					t_swap;
 
 typedef struct 		s_ps
 {
+	int 			*nb;
 	t_swap			*a;
 	t_swap			*b;
 	t_swap			*c;
+	int 			chunk;
 }					t_ps;
+
+t_swap				*ft_lstsw_new(t_ps *ps, int *nb);
+t_swap				*ft_lstsw_add(t_ps *ps, t_swap *prev, int *nb);
 
 #endif
