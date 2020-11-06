@@ -1,10 +1,18 @@
-//
-// Created by Cheyenne Ayako on 11/4/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lst_swaps.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/05 04:30:47 by cayako            #+#    #+#             */
+/*   Updated: 2020/11/05 04:30:54 by cayako           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_swap		*ft_lstsw_new(t_ps *ps, int *nb)
+t_swap		*ft_lstsw_new(int *nb)
 {
 	t_swap	*sw;
 
@@ -15,7 +23,7 @@ t_swap		*ft_lstsw_new(t_ps *ps, int *nb)
 	return (sw);
 }
 
-t_swap		*ft_lstsw_add(t_ps *ps, t_swap *prev, int *nb)
+t_swap		*ft_lstsw_add(t_swap *prev, int *nb)
 {
 	t_swap	*sw;
 
