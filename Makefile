@@ -20,7 +20,7 @@ OBJDIR  = ./obj/
 FTDIR   = ./libft/
 PRNTDIR  = ./ft_printf/
 
-SRC = main.c ft_lst_swaps.c  ft_mem_u.c ft_frame.c
+SRC = main.c ft_lst_swaps.c  ft_mem_u.c ft_frame.c ft_read_in.c ft_print_bg.c
 
 OBJ	= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 LIBFT = $(FTDIR)libft.a

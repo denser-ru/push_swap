@@ -29,6 +29,7 @@
 */
 # define RESETCOLOR()			ft_printf(ESC "[0m")
 # define SET_DISP_ATR(color)	ft_printf(ESC "[%dm",color)
+# define SET_DISP_2ATR(fg, bg)	ft_printf(ESC "[%d;%dm",fg ,bg)
 
 /*
 ** Format text

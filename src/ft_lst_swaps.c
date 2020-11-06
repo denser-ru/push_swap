@@ -17,6 +17,7 @@ t_swap		*ft_lstsw_new(int *nb)
 	t_swap	*sw;
 
 	sw = (t_swap*)malloc(sizeof(t_swap));
+	ft_bzero(sw, sizeof(t_swap));
 	sw->nb = nb;
 	sw->chunk = 1;
 	sw->next = NULL;
@@ -28,6 +29,7 @@ t_swap		*ft_lstsw_add(t_swap *prev, int *nb)
 	t_swap	*sw;
 
 	sw = (t_swap*)malloc(sizeof(t_swap));
+	ft_bzero(sw, sizeof(t_swap));
 	prev->next = sw;
 	sw->nb = nb;
 	sw->chunk = 1;

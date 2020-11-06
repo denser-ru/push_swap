@@ -20,38 +20,33 @@ static void		ft_put_line(int w, char *l, char *m, char *r)
 	ft_putstr(r);
 }
 
-void			ft_get_param(t_frame *f, char *p, int fg, int bg)
+t_frame 		*ft_get_param1(t_frame *f, int x, int y, int w)
 {
-	f->x = ft_atoi(p);
-	while (*p && *p != ',')
-		++p;
-	f->y = ft_atoi(++p);
-	while (*p && *p != ',')
-		++p;
-	f->w = ft_atoi(++p);
-	while (*p && *p != ',')
-		++p;
-	f->h = ft_atoi(++p);
-	f->fg = fg;
-	f->bg = bg;
+	f->x = x;
+	f->y = y;
+	f->w = w;
+	return (f);
 }
 
-void			ft_frame(char *param, int fg, int bg)
+t_frame 		*ft_get_param2(t_frame *f, int h, int fg, int bg)
 {
-	t_frame		f;
+	f->h = h;
+	f->fg = fg;
+	f->bg = bg;
+	return (f);
+}
 
-	GOTOXY(10, 3);
-	ft_get_param(&f, param, fg, bg);
-	ft_printf("x=%d, y=%d, w=%d, h=%d\n", f.x, f.y, f.w, f.h);
-	SET_DISP_ATR(f.bg);
-	GOTOXY(f.x, f.y);
-	ft_put_line(f.w - 2, "┌", "─", "┐");
-	GOTOXY(f.x, f.y + (f.h)--);
-	ft_put_line(f.w - 2, "└", "─", "┘");
-	while (f.h > 0)
+void			ft_frame(t_frame		*f)
+{
+	SET_DISP_2ATR(f->fg,f->bg);
+	GOTOXY(f->x, f->y);
+	ft_put_line(f->w - 2, "┌", "─", "┐");
+	GOTOXY(f->x, f->y + (f->h)--);
+	ft_put_line(f->w - 2, "└", "─", "┘");
+	while (f->h > 0)
 	{
-		GOTOXY(f.x, f.y + (f.h)--);
-		ft_put_line(f.w - 2, "│", " ", "│");
+		GOTOXY(f->x, f->y + (f->h)--);
+		ft_put_line(f->w - 2, "│", " ", "│");
 	}
 	RESETCOLOR();
 }
