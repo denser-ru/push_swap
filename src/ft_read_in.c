@@ -9,7 +9,6 @@ void 	ft_put_cmd(t_ps *ps, int i, int c)
 	t_list	*cmd;
 
 	(void)c;
-//	GOTOXY(30, 33);
 	cmd = ps->cmds;
 	GOTOXY(30, 33);
 	ft_printf(ESC "[38;1;250m[ %d ] команды: ", (ps->count)++);
@@ -53,7 +52,7 @@ int 	ft_ft_read_in(t_ps *ps, char *buf)
 	}
 }
 
-void	ft_print_sw(t_swap *sw)
+void	ft_print_sw(t_swap *sw, char c)
 {
 	int 	n;
 
@@ -62,8 +61,16 @@ void	ft_print_sw(t_swap *sw)
 		return ;
 	while (sw && sw->nb && n > 4)
 	{
-		GOTOXY(7, n--);
-		SET_DISP_2ATR(F_WHITE, B_RED);
+		if (c == 'b')
+		{
+			GOTOXY(100, n--);
+			SET_DISP_2ATR(F_WHITE, B_BLUE);
+		}
+		else
+		{
+			GOTOXY(7, n--);
+			SET_DISP_2ATR(F_WHITE, B_RED);
+		}
 		ft_printf("%d\n", *(sw->nb));
 		sw = sw->next;
 	}

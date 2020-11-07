@@ -1,18 +1,9 @@
 #!/bin/bash
+# Длина генерируемой последовательности чисел.
 
-n=$1
-e=$1
-
-random()
-{
-    local range=${1:-1}
-
-    RAND=`od -t uI -N 4 /dev/urandom | awk '{printf $2}'`
-    let "RAND=$RAND%($range+1)"
-}
-
-
-while [ $(( n -=1 )) -ge "0" ]; do
-    random e
-    printf "$RAND "
-done
+ARG=$(shuf -i 1-$1 -n $2);
+seeds=
+for i in $ARG; do
+	seeds="$seeds $i"
+done; 
+echo $seeds;

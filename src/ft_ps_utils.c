@@ -22,3 +22,30 @@ int 		ft_add_cmd(t_ps *ps, char *buf)
 	ft_putendl("Error");
 	exit (1);
 }
+
+void		ft_swap_nb(int *a, int *b)
+{
+	int		i;
+
+	i = *a;
+	*a = *b;
+	*b = i;
+}
+
+int			*ft_sort_nb_arr(int *nb, size_t size)
+{
+	int		i;
+
+	i = 0;
+	--size;
+	while (i < (int)size)
+	{
+		if (nb[i] > nb[i + 1])
+		{
+			ft_swap_nb(&nb[i], &nb[i + 1]);
+			i = 0;
+		}
+		++i;
+	}
+	return (nb);
+}
