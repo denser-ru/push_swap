@@ -50,10 +50,12 @@ int 			main(int argc, char **argv)
 
 	if (argc < 2)
 		return (1);
+	ft_bzero(&ps, sizeof(ps));
 	ft_init_ps(&ps, argc, argv);
 	ft_print_bg(&f);
 	ft_print_sw(ps.a);
-	ft_ft_read_in(buf);
+	if(ft_ft_read_in(&ps, buf))
+		return (1);
 	ft_putchar('\n');
 	return (0);
 }

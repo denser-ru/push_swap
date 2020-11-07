@@ -35,6 +35,8 @@ typedef struct		s_ps
 	int 			count_a;
 	int 			count_b;
 	int				chunk;
+	t_list			*cmds;
+	int 			count;
 }					t_ps;
 
 t_swap				*ft_lstsw_new(int *nb);
@@ -43,9 +45,11 @@ void				ft_frame(t_frame *f);
 t_frame 			*ft_get_param1(t_frame *f, int x, int y, int w);
 t_frame 			*ft_get_param2(t_frame *f, int h, int fg, int bg);
 int 				ft_ft_read_args(t_ps *ps, int argc, char **argv);
-int 				ft_ft_read_in(char *buf);
+int 				ft_ft_read_in(t_ps *ps, char *buf);
 
 void				ft_print_bg(t_frame *f);
 void				ft_print_sw(t_swap *sw);
+
+int					ft_add_cmd(t_ps *ps, char *buf);
 
 #endif
