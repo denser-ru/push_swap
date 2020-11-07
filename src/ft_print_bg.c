@@ -25,7 +25,7 @@ void	ft_put_bug(int i)
 
 	while (cmd[i] && i++ < 14)
 	{
-		GOTOXY(42, 5 + i);
+		GOTOXY(42, 2 + i);
 		ft_putendl(cmd[i]);
 	}
 }
@@ -50,21 +50,21 @@ void	ft_print_bg(t_frame *f)
 {
 	CLRSRC();
 	ft_put_bug(0);
-	ft_put_menu(23);
-	ft_frame(ft_get_param2(ft_get_param1(f, 5, 3, 20), 40, F_WHITE, B_RED));
-	ft_frame(ft_get_param2(ft_get_param1(f, 100, 3, 20), 40, F_WHITE, B_BLUE));
-	ft_frame(ft_get_param2(ft_get_param1(f, 27, 41, 71), 2, F_WHITE, 90));
+	ft_put_menu(17);
+	ft_frame(ft_get_param2(ft_get_param1(f, 5, 1, 20), 32, F_WHITE, B_RED));
+	ft_frame(ft_get_param2(ft_get_param1(f, 100, 1, 20), 32, F_WHITE, B_BLUE));
+	ft_frame(ft_get_param2(ft_get_param1(f, 27, 32, 67), 2, F_WHITE, 90));
 	ft_printf(ESC "[H");
 	SET_DISP_2ATR(F_BLACK, B_WHITE);
-	GOTOXY(40, 2);
+	GOTOXY(40, 0);
 	ft_printf("Проект Push Swap студента cayako \"Школы 21\"\n");
 	SET_DISP_2ATR(F_WHITE, B_RED);
-	GOTOXY(14, 3);
+	GOTOXY(14, 1);
 	ft_putnstr(" A ", 3);
 	SET_DISP_2ATR(F_WHITE, B_BLUE);
-	GOTOXY(108, 3);
+	GOTOXY(108, 1);
 	ft_putnstr(" B ", 3);
 	RESETCOLOR();
-	GOTOXY(10, 51);
+	GOTOXY(10, 37);
 	ft_putchar('\n');
 }

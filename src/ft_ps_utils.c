@@ -17,7 +17,7 @@ int 		ft_add_cmd(t_ps *ps, char *buf)
 			return (ft_lstpushf(&(ps->cmds), buf, ft_strlen(buf - 1)) != NULL);
 		++i;
 	}
-	GOTOXY(0, 51);
+	GOTOXY(0, 47);
 	ft_printf(ESC "[0K");
 	ft_putendl("Error");
 	exit (1);
