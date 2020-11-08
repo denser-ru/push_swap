@@ -72,3 +72,6 @@ ft_ls.anjuta
 .idea/
 #CMakeLists.txt
 cmake-build-debug/
+
+# Vim
+*.swp
