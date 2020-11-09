@@ -11,11 +11,11 @@ void 	ft_put_cmd(t_ps *ps, int i, int c)
 	(void)c;
 	cmd = ps->cmds;
 	GOTOXY(30, 33);
-	ft_printf(ESC "[38;1;250m[ %d ] команды: ", (ps->count)++);
+	ft_printf(ESC "[40;37m[ %d ] команды: ", (ps->count)++);
 	while (cmd && i < 43)
 	{
 		GOTOXY(43 + i, 33);
-		ft_printf(ESC "[38;5;%dm", c);
+		ft_printf(ESC "[38;5;%dm\e[40m", c);
 		c -= c > 249 ? 1 : 2;
 		ft_putchar(' ');
 		ft_putnstr(cmd->content, cmd->content_size);
@@ -36,7 +36,7 @@ int 	ft_ft_read_in(t_ps *ps, char *buf)
 	GOTOXY(27, 35);
 	while (1)
 	{
-		ft_printf(ESC "[38;5;%dm", 255);
+		ft_printf(ESC "[38;5;%d;m\e[48;5;16m", 255);
 		if(!read(0, buf, 4))
 			return (0);
 		if (!ft_strcmp(buf, "exit"))
@@ -47,7 +47,7 @@ int 	ft_ft_read_in(t_ps *ps, char *buf)
 		buf[ft_strlen(buf) - 1] = '\0';
 		ft_put_cmd(ps, 1, 255);
 		GOTOXY(27, 35);
-		ft_printf(ESC "[0K");
+		ft_printf(ESC "[40;97m\e[0K");
 		GOTOXY(27, 35);
 	}
 }
@@ -71,7 +71,7 @@ void	ft_print_sw(t_swap *sw, char c)
 			GOTOXY(7, n--);
 			SET_DISP_2ATR(F_WHITE, B_RED);
 		}
-		ft_printf("%d\n", *(sw->nb));
+		ft_printf("%-16d\n", *(sw->nb));
 		sw = sw->next;
 	}
 }

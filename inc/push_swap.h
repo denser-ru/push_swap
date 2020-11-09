@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:53:30 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/09 18:26:30 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/10 00:34:18 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void				ft_print_nb(int nb, int y, char c);
 int					ft_add_cmd(t_ps *ps, char *buf);
 int					*ft_sort_nb_arr(int *nb, size_t size);
 void				ft_ps_sa(t_ps *ps);
+void				ft_ps_sb(t_ps *ps);
 
 #endif
