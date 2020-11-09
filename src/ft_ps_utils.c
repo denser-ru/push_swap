@@ -4,6 +4,12 @@
 
 #include "push_swap.h"
 
+void		ft_do_cmd(t_ps *ps, char *buf)
+{
+	if (*buf == 's' && buf[1] == 'a')
+		ft_ps_sa(ps);
+}
+
 int 		ft_add_cmd(t_ps *ps, char *buf)
 {
 	const char	*cmd[11] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n",
@@ -14,7 +20,10 @@ int 		ft_add_cmd(t_ps *ps, char *buf)
 	while (cmd[i] && *buf && i < 11)
 	{
 		if (!ft_strcmp(cmd[i], buf))
+		{
+			ft_do_cmd(ps, buf);
 			return (ft_lstpushf(&(ps->cmds), buf, ft_strlen(buf - 1)) != NULL);
+		}
 		++i;
 	}
 	GOTOXY(0, 47);
@@ -49,3 +58,19 @@ int			*ft_sort_nb_arr(int *nb, size_t size)
 	}
 	return (nb);
 }
+
+void		ft_print_nb(int nb, int y, char c)
+{
+	if (c == 'a')
+	{
+		SET_DISP_2ATR(F_WHITE, B_RED);		
+		GOTOXY(7, y);
+	}
+	else
+	{
+		SET_DISP_2ATR(F_WHITE, B_RED);		
+		GOTOXY(102, y);
+	}
+	ft_printf("%-16d", nb);
+}
+

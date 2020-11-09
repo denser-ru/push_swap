@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:25:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/09 11:01:34 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/09 16:03:52 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void 	ft_init_ps(t_ps *ps, int argc, char **argv)
 		new->next = ft_lstsw_add(new, nb++);
 		new = new->next;
 	}
+	ps->a_end = new;
 }
 
 int 			main(int argc, char **argv)
