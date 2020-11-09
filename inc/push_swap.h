@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:53:30 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/08 01:15:44 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/09 11:01:50 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct		s_swap
 typedef struct		s_ps
 {
 	int				*nb;
+	int				*sort;
 	t_swap			*a;
 	t_swap			*b;
 	t_swap			*c;
