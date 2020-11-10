@@ -63,13 +63,13 @@ void	ft_print_sw(t_swap *sw, char c)
 	{
 		if (c == 'b')
 		{
-			GOTOXY(100, n--);
-			SET_DISP_2ATR(F_WHITE, B_BLUE);
+			ft_clear_line(102, n - 1, F_WHITE, B_BLUE);
+			GOTOXY(102, n--);
 		}
 		else
 		{
+			ft_clear_line(7, n - 1, F_WHITE, B_RED);
 			GOTOXY(7, n--);
-			SET_DISP_2ATR(F_WHITE, B_RED);
 		}
 		ft_printf("%-16d\n", *(sw->nb));
 		sw = sw->next;

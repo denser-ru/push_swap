@@ -6,7 +6,7 @@
 #    By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/21 22:11:50 by cayako            #+#    #+#              #
-#    Updated: 2020/11/09 18:33:38 by cayako           ###   ########.fr        #
+#    Updated: 2020/11/10 23:08:33 by cayako           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ FTDIR   = ./libft/
 PRNTDIR  = ./ft_printf/
 
 SRC = main.c ft_lst_swaps.c  ft_mem_u.c ft_frame.c ft_read_in.c ft_print_bg.c \
-        ft_ps_utils.c ft_ps_ss.c
+        ft_ps_utils.c ft_ps_ss.c ft_ps_p.c
 OBJ	= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 LIBFT = $(FTDIR)libft.a
 LIBPRNT = $(PRNTDIR)libftprintf.a

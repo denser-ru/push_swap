@@ -8,6 +8,12 @@ void		ft_do_cmd(t_ps *ps, char *buf)
 {
 	if (*buf == 's' && buf[1] == 'a')
 		ft_ps_sa(ps);
+	if (*buf == 's' && buf[1] == 'b')
+		ft_ps_sb(ps);
+	if (*buf == 'p' && buf[1] == 'a')
+		ft_ps_pa(ps);
+	if (*buf == 'p' && buf[1] == 'b')
+		ft_ps_pb(ps);
 }
 
 int 		ft_add_cmd(t_ps *ps, char *buf)

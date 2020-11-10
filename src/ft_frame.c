@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 01:15:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/06 03:22:04 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/11 00:18:04 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,11 @@ void			ft_frame(t_frame		*f)
 		ft_put_line(f->w - 2, "│", " ", "│");
 	}
 	RESETCOLOR();
+}
+
+void			ft_clear_line(int x, int y, int fg, int bg)
+{
+	GOTOXY(x, y);
+	SET_DISP_2ATR(fg, bg);
+	ft_printf("                ");
 }
