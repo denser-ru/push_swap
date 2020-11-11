@@ -102,4 +102,8 @@ add_executable(push_swap
         src/ft_mem_u.c src/ft_read_in.c
         src/ft_print_bg.c
         src/ft_ps_utils.c
+        src/ft_ps_utils.c
+        src/ft_ps_ss.c
+        src/ft_ps_p.c
+        src/ft_ps_rr.c
         )

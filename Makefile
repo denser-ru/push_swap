@@ -19,9 +19,10 @@ INCDIR  = ./inc/
 OBJDIR  = ./obj/
 FTDIR   = ./libft/
 PRNTDIR  = ./ft_printf/
+INCL		= $(wildcard $(INCDIR)*.h)
 
 SRC = main.c ft_lst_swaps.c  ft_mem_u.c ft_frame.c ft_read_in.c ft_print_bg.c \
-        ft_ps_utils.c ft_ps_ss.c ft_ps_p.c
+        ft_ps_utils.c ft_ps_ss.c ft_ps_p.c ft_ps_rr.c
 OBJ	= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 LIBFT = $(FTDIR)libft.a
 LIBPRNT = $(PRNTDIR)libftprintf.a
@@ -33,7 +34,7 @@ all: $(NAME)
 obj:
 	mkdir -p $(OBJDIR)
 
-$(OBJDIR)%.o: $(SRCDIR)%.c
+$(OBJDIR)%.o: $(SRCDIR)%.c $(INCL)
 	$(CC) $(CFLAGS) -I $(INCDIR) -I $(FTDIR) -I $(PRNTDIR)inc/ -o $@ -c $<
 
 $(LIBFT):

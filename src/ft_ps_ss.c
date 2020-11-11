@@ -42,3 +42,14 @@ void	ft_ps_sb(t_ps *ps)
 	ft_print_sw(ps->b, 'b');
 }
 
+void	ft_ps_ss(t_ps *ps)
+{
+	ft_ps_sa(ps);
+	ft_ps_sb(ps);
+}
+
+void	ft_ps_rr(t_ps *ps)
+{
+	ft_ps_ra(ps);
+	ft_ps_rb(ps);
+}
