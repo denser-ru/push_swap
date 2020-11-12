@@ -88,7 +88,7 @@ void		ft_print_nb(int nb, int y, char c)
 	}
 	else
 	{
-		SET_DISP_2ATR(F_WHITE, B_RED);		
+		SET_DISP_2ATR(F_WHITE, B_BLUE);		
 		GOTOXY(102, y);
 	}
 	ft_printf("%-16d", nb);

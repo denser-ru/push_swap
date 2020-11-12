@@ -39,6 +39,8 @@ int 	ft_ft_read_in(t_ps *ps, char *buf)
 		ft_printf(ESC "[38;5;%d;m\e[48;5;16m", 255);
 		if(!read(0, buf, 4))
 			return (0);
+		if (ft_isdigit(buf[0]))
+			return (ft_push_swap(ps, ps->sort[ps->count_a / 2], ft_atoi(buf)));
 		if (!ft_strcmp(buf, "exit"))
 			return (0);
 		if(!(ft_add_cmd(ps, buf)))

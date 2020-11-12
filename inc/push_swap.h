@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:53:30 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/11 00:15:51 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/12 18:34:39 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_ps
 	t_swap			prev;
 	int 			count_a;
 	int 			count_b;
+	int				i;
 	int				chunk;
 	t_list			*cmds;
 	int 			count;
@@ -56,6 +57,7 @@ void				ft_print_nb(int nb, int y, char c);
 void				ft_clear_line(int x, int y, int fg, int bg);
 
 int					ft_add_cmd(t_ps *ps, char *buf);
+void			 	ft_put_cmd(t_ps *ps, int i, int c);
 int					*ft_sort_nb_arr(int *nb, size_t size);
 void				ft_ps_sa(t_ps *ps);
 void				ft_ps_sb(t_ps *ps);
@@ -68,5 +70,7 @@ void				ft_ps_rrb(t_ps *ps);
 void				ft_ps_rrr(t_ps *ps);
 void				ft_ps_rr(t_ps *ps);
 void				ft_ps_ss(t_ps *ps);
+
+int					ft_push_swap(t_ps *ps, int mediana, int s);
 
 #endif

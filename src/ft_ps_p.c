@@ -1,6 +1,15 @@
 #include "push_swap.h"
 
-void	ft_ps_pa(t_ps *ps)
+static	void	ft_ps_count(t_ps *ps, int a, int b)
+{
+	--ps->i;
+	ps->count_a += a;
+	ps->count_b += b;
+	ft_print_sw(ps->b, 'b');
+	ft_print_sw(ps->a, 'a');
+}
+
+void			ft_ps_pa(t_ps *ps)
 {
 	t_swap	*prev;
 	t_swap	*c;
@@ -24,11 +33,10 @@ void	ft_ps_pa(t_ps *ps)
 		ps->a_end->next = NULL;
 	if (!ps->b)
 		ft_clear_line(102, 32, F_WHITE, B_BLUE);
-	ft_print_sw(ps->b, 'b');
-	ft_print_sw(ps->a, 'a');
+	ft_ps_count(ps, 1, -1);
 }
 
-void	ft_ps_pb(t_ps *ps)
+void			ft_ps_pb(t_ps *ps)
 {
 	t_swap	*prev;
 	t_swap	*c;
@@ -52,6 +60,5 @@ void	ft_ps_pb(t_ps *ps)
 		ps->b_end->next = NULL;
 	if (!ps->a)
 		ft_clear_line(7, 32, F_WHITE, B_RED);
-	ft_print_sw(ps->b, 'b');
-	ft_print_sw(ps->a, 'a');
+	ft_ps_count(ps, -1, 1);
 }
