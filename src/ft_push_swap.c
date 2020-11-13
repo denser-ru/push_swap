@@ -41,15 +41,17 @@ void	ft_ps_step2(t_ps *ps, int mediana, int s, t_stak *d)
 	}
 }
 
-int		ft_ps_sw_sort(t_ps *ps, t_swap *sw, int mediana, int *sort)
+int		ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort)
 {
-	while (sw)
+	while (sw && (!sw->prev || sw->chunk == sw->prev->chunk))
 	{
 		*(sort++) = *(sw->nb);
 		sw = sw->next;
+		++i;
 	}
-	mediana = sort[ps->st->count / 2];
-	return (mediana);
+	ft_sort_nb_arr(ps->sort, i);
+	ps->i = i / 2;
+	return (sort[ps->i]);
 }
 
 int		ft_push_swap(t_ps *ps, int mediana, int s)
@@ -64,7 +66,6 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 		ft_ps_step1(ps, mediana, s, ps->st == ps->a ? ps->b : ps->a);
 		ft_ps_step2(ps, mediana, s, ps->st == ps->a ? ps->b : ps->a);
 		mediana = ft_ps_sw_sort(ps, ps->st->start, 0, ps->sort);
-		ps->i = ps->st->count / 2;
 		GOTOXY(43, 35);
 	}
 	return (0);
