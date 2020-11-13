@@ -73,7 +73,7 @@ void	ft_print_sw(t_swap *sw, char c)
 			ft_clear_line(7, n - 1, F_WHITE, B_RED);
 			GOTOXY(7, n--);
 		}
-		ft_printf("\e[38;5;%dm%-12d - %d\n", 254 - 4 * sw->chunk, *(sw->nb), sw->chunk);
+		ft_printf("\e[38;5;%dm%-16d", 262 - 7 * sw->chunk, *(sw->nb));
 		sw = sw->next;
 	}
 }
