@@ -22,7 +22,7 @@ void 	ft_put_cmd(t_ps *ps, int i, int c)
 		i += cmd->content_size + 1;
 		cmd = cmd->next;
 	}
-	GOTOXY(43 + i, 33);
+	GOTOXY(43, 35);
 	//ft_putnstr("    ", 4);
 }
 
@@ -73,7 +73,7 @@ void	ft_print_sw(t_swap *sw, char c)
 			ft_clear_line(7, n - 1, F_WHITE, B_RED);
 			GOTOXY(7, n--);
 		}
-		ft_printf("%-16d\n", *(sw->nb));
+		ft_printf("\e[38;5;%dm%-16d\n", 254 - 4 * sw->chunk, *(sw->nb));
 		sw = sw->next;
 	}
 }
