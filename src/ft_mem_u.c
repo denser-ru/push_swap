@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:31:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/06 01:06:36 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/13 12:14:44 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ static void		ft_lst_swaps_del(t_swap *sw)
 
 void	ft_memfree(t_ps *ps)
 {
-	ft_lst_swaps_del(ps->a);
+	ft_lst_swaps_del(ps->a->start);
 }

@@ -3,10 +3,10 @@
 static	void	ft_ps_count(t_ps *ps, int a, int b)
 {
 	--ps->i;
-	ps->count_a += a;
-	ps->count_b += b;
-	ft_print_sw(ps->b, 'b');
-	ft_print_sw(ps->a, 'a');
+	ps->a->count += a;
+	ps->b->count += b;
+	ft_print_sw(ps->b->start, 'b');
+	ft_print_sw(ps->a->start, 'a');
 }
 
 void			ft_ps_pa(t_ps *ps)
@@ -14,24 +14,24 @@ void			ft_ps_pa(t_ps *ps)
 	t_swap	*prev;
 	t_swap	*c;
 
-	if(!ps->b_end)
+	if(!ps->b->end)
 		return ;
-	c = ps->a_end;
-	if ((prev = ps->b_end->prev))
+	c = ps->a->end;
+	if ((prev = ps->b->end->prev))
 		prev->next = NULL;
-	ps->a_end = ps->b_end;
-	ps->b_end = prev ? prev : NULL;
-	ps->b = ps->b_end ? ps->b : NULL;
-	if (c && (ps->a_end->prev = c))
-		c->next = ps->a_end;
+	ps->a->end = ps->b->end;
+	ps->b->end = prev ? prev : NULL;
+	ps->b->start = ps->b->end ? ps->b->start : NULL;
+	if (c && (ps->a->end->prev = c))
+		c->next = ps->a->end;
 	else if (!c)
 	{
-		ps->a = ps->a_end;
-		ps->a->prev = NULL;
+		ps->a->start = ps->a->end;
+		ps->a->start->prev = NULL;
 	}
-	if (ps->a_end)
-		ps->a_end->next = NULL;
-	if (!ps->b)
+	if (ps->a->end)
+		ps->a->end->next = NULL;
+	if (!ps->b->start)
 		ft_clear_line(102, 32, F_WHITE, B_BLUE);
 	ft_ps_count(ps, 1, -1);
 }
@@ -41,24 +41,24 @@ void			ft_ps_pb(t_ps *ps)
 	t_swap	*prev;
 	t_swap	*c;
 
-	if(!ps->a_end)
+	if(!ps->a->end)
 		return ;
-	c = ps->b_end;
-	if ((prev = ps->a_end->prev))
+	c = ps->b->end;
+	if ((prev = ps->a->end->prev))
 		prev->next = NULL;
-	ps->b_end = ps->a_end;
-	ps->a_end = prev ? prev : NULL;
-	ps->a = ps->a_end ? ps->a : NULL;
-	if (c && (ps->b_end->prev = c))
-		c->next = ps->b_end;
+	ps->b->end = ps->a->end;
+	ps->a->end = prev ? prev : NULL;
+	ps->a->start = ps->a->end ? ps->a->start : NULL;
+	if (c && (ps->b->end->prev = c))
+		c->next = ps->b->end;
 	else if (!c)
 	{
-		ps->b = ps->b_end;
-		ps->b->prev = NULL;
+		ps->b->start = ps->b->end;
+		ps->b->start->prev = NULL;
 	}
-	if (ps->b_end)
-		ps->b_end->next = NULL;
-	if (!ps->a)
+	if (ps->b->end)
+		ps->b->end->next = NULL;
+	if (!ps->a->start)
 		ft_clear_line(7, 32, F_WHITE, B_RED);
 	ft_ps_count(ps, -1, 1);
 }

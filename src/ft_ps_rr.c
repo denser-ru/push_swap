@@ -4,64 +4,64 @@ void	ft_ps_ra(t_ps *ps)
 {
 	t_swap	*end;
 
-	if(!ps->a_end || !ps->a || ps->a == ps->a_end)
+	if(!ps->a->end || !ps->a->start || ps->a->start == ps->a->end)
 		return ;
-	end = ps->a_end->prev;
+	end = ps->a->end->prev;
 	end->next = NULL;
-	ps->a_end->next = ps->a;
-	ps->a_end->prev = NULL;
-	ps->a->prev = ps->a_end;
-	ps->a_end = end;
-	ps->a = ps->a->prev;
-	ft_print_sw(ps->a, 'a');
+	ps->a->end->next = ps->a->start;
+	ps->a->end->prev = NULL;
+	ps->a->start->prev = ps->a->end;
+	ps->a->end = end;
+	ps->a->start = ps->a->start->prev;
+	ft_print_sw(ps->a->start, 'a');
 }
 
 void	ft_ps_rb(t_ps *ps)
 {
 	t_swap	*end;
 
-	if(!ps->b_end || !ps->b || ps->b == ps->b_end)
+	if(!ps->b->end || !ps->b->start || ps->b->start == ps->b->end)
 		return ;
-	end = ps->b_end->prev;
+	end = ps->b->end->prev;
 	end->next = NULL;
-	ps->b_end->next = ps->b;
-	ps->b_end->prev = NULL;
-	ps->b->prev = ps->b_end;
-	ps->b_end = end;
-	ps->b = ps->b->prev;
-	ft_print_sw(ps->b, 'b');
+	ps->b->end->next = ps->b->start;
+	ps->b->end->prev = NULL;
+	ps->b->start->prev = ps->b->end;
+	ps->b->end = end;
+	ps->b->start = ps->b->start->prev;
+	ft_print_sw(ps->b->start, 'b');
 }
 
 void	ft_ps_rra(t_ps *ps)
 {
 	t_swap	*start;
 
-	if(!ps->a_end || !ps->a || ps->a == ps->a_end)
+	if(!ps->a->end || !ps->a->start || ps->a->start == ps->a->end)
 		return ;
-	start = ps->a->next;
+	start = ps->a->start->next;
 	start->prev = NULL;
-	ps->a->prev = ps->a_end;
-	ps->a->next = NULL;
-	ps->a_end->next = ps->a;
-	ps->a = start;
-	ps->a_end = ps->a_end->next;
-	ft_print_sw(ps->a, 'a');
+	ps->a->start->prev = ps->a->end;
+	ps->a->start->next = NULL;
+	ps->a->end->next = ps->a->start;
+	ps->a->start = start;
+	ps->a->end = ps->a->end->next;
+	ft_print_sw(ps->a->start, 'a');
 }
 
 void	ft_ps_rrb(t_ps *ps)
 {
 	t_swap	*start;
 
-	if(!ps->b_end || !ps->b || ps->b == ps->b_end)
+	if(!ps->b->end || !ps->b->start || ps->b->start == ps->b->end)
 		return ;
-	start = ps->b->next;
+	start = ps->b->start->next;
 	start->prev = NULL;
-	ps->b->prev = ps->b_end;
-	ps->b->next = NULL;
-	ps->b_end->next = ps->b;
-	ps->b = start;
-	ps->b_end = ps->b_end->next;
-	ft_print_sw(ps->b, 'b');
+	ps->b->start->prev = ps->b->end;
+	ps->b->start->next = NULL;
+	ps->b->end->next = ps->b->start;
+	ps->b->start = start;
+	ps->b->end = ps->b->end->next;
+	ft_print_sw(ps->b->start, 'b');
 }
 
 void	ft_ps_rrr(t_ps *ps)

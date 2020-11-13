@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:25:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/09 23:06:05 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/13 12:54:52 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int 		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 	{
 		*(nb) = ft_atoi(*(++argv));
 		*(sort++) = *(nb++);
-		++(ps->count_a);
+		++(ps->a->count);
 	}
 	return (ps->nb);
 }
@@ -37,32 +37,38 @@ static void 	ft_init_ps(t_ps *ps, int argc, char **argv)
 	t_swap	*new;
 	int 	*nb;
 
+	ft_bzero(ps->a, sizeof(t_stak));
+	ft_bzero(ps->b, sizeof(t_stak));
 	nb = ft_create_nbarr(ps, argc--, argv);
 	ps->nb = nb;
-	ft_sort_nb_arr(ps->sort, ps->count_a);
-	ps->a = ft_lstsw_new(nb++);
-	new = ps->a;
+	ft_sort_nb_arr(ps->sort, ps->a->count);
+	ps->st = ps->a;
+	ps->a->start = ft_lstsw_new(nb++);
+	new = ps->a->start;
 	while (--argc)
 	{
 		new->next = ft_lstsw_add(new, nb++);
 		new = new->next;
 	}
-	ps->a_end = new;
+	ps->a->end = new;
 }
 
 int 			main(int argc, char **argv)
 {
 	t_ps	ps;
+	t_stak	a;
+	t_stak	b;
 	t_frame f;
 	char 	buf[5];
 
 	if (argc < 2)
 		return (1);
 	ft_bzero(&ps, sizeof(ps));
+	ps.a = &a;
+	ps.b = &b;
 	ft_init_ps(&ps, argc, argv);
 	ft_print_bg(&f);
-	ft_print_sw(ps.a, 'a');
-	ft_print_sw(ps.b, 'b');
+	ft_print_sw(a.start, 'a');
 	if(ft_ft_read_in(&ps, buf))
 		return (1);
 	ft_putchar('\n');

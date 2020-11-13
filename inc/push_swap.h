@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:53:30 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/12 18:34:39 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/13 12:10:45 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,21 @@ typedef struct		s_swap
 	struct s_swap	*next;
 }					t_swap;
 
+typedef struct		s_stak
+{
+	t_swap			*start;
+	t_swap			*end;
+	int 			count;
+}					t_stak;
+
 typedef struct		s_ps
 {
 	int				*nb;
 	int				*sort;
-	t_swap			*a;
-	t_swap			*a_end;
-	t_swap			*b;
-	t_swap			*b_end;
+	t_stak			*a;
+	t_stak			*b;
+	t_stak			*st;
 	t_swap			prev;
-	int 			count_a;
-	int 			count_b;
 	int				i;
 	int				chunk;
 	t_list			*cmds;
