@@ -58,7 +58,7 @@ int		ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort)
 		++i;
 	}
 	ft_sort_nb_arr(ps->sort, i);
-	ps->i = i / 2;
+	ps->i = i > 1 ? i / 2: i;
 	return (sort[ps->i]);
 }
 
@@ -81,10 +81,7 @@ int		ft_lst_issorted(t_ps *ps)
 int		ft_push_swap(t_ps *ps, int mediana, int s)
 {
 	s *= 1000;
-	ps->i = ps->st->count / 2;
-	GOTOXY(54, 30);
-	ft_printf("\e[38;5;251mмедиана: %d", mediana);
-	ft_ps_step1(ps, mediana + 1, s);
+	ps->i = ps->st->count > 1 ? ps->st->count / 2 : ps->st->count;
 	while (!ft_lst_issorted(ps))
 	{
 	while (ps->st->end && ps->i && ps->st->count > 2)
@@ -93,12 +90,15 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 			++ps->chunk;
 		GOTOXY(54, 30);
 		ft_printf("\e[38;5;251mмедиана: %d", mediana);
+		if (ps->st == ps->a)
+			ft_ps_step1(ps, mediana, s);
 		ft_ps_step2(ps, mediana, s);
 		mediana = ft_ps_sw_sort(ps, ps->st->start, 0, ps->sort);
 		GOTOXY(43, 35);
 	}
-	ps->st = ps->st == ps->a ? ps->b : ps->a;
-	ps->chunk = ps->st == ps->a ? 1 : ps->chunk;
+	if (!ps->b->start)
+		ps->st = ps->st == ps->a ? ps->b : ps->a;
+	ps->chunk = ps->st->end->chunk;
 	mediana = ft_ps_sw_sort(ps, ps->st->start, 0, ps->sort);
 	}
 	return (0);
