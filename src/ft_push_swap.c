@@ -90,11 +90,13 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 			++ps->chunk;
 		GOTOXY(54, 30);
 		ft_printf("\e[38;5;251mмедиана: %d", mediana);
-		GOTOXY(48, 31);
-		ft_printf("\e[38;5;251msw: %c; chunk: %d", ps->st == ps->a ? 'a' : 'b', ps->chunk);
 		if (ps->st == ps->a)
 			ft_ps_step1(ps, mediana, s);
+		GOTOXY(42, 31);
+		ft_printf("\e[38;5;251msw: %c; chunk: %d; end->nb: %-2d; ps->i: %-2d", ps->st == ps->a ? 'a' : 'b', ps->chunk, *(ps->st->end->nb), ps->i);
 		ft_ps_step2(ps, mediana, s);
+		GOTOXY(42, 31);
+		ft_printf("\e[38;5;251msw: %c; chunk: %d; end->nb: %-2d ps->i: %-2d", ps->st == ps->a ? 'a' : 'b', ps->chunk, *(ps->st->end->nb), ps->i);
 		mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
 		GOTOXY(43, 35);
 	}
