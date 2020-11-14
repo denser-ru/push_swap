@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:53:30 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/13 12:10:45 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/15 01:03:31 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void				ft_clear_line(int x, int y, int fg, int bg);
 
 int					ft_add_cmd(t_ps *ps, char *buf);
 void			 	ft_put_cmd(t_ps *ps, int i, int c);
-int					*ft_sort_nb_arr(int *nb, size_t size);
+int					*ft_sort_nb_arr(t_ps *ps, int *nb, size_t size);
 void				ft_ps_sa(t_ps *ps);
 void				ft_ps_sb(t_ps *ps);
 void				ft_ps_pa(t_ps *ps);

@@ -1,6 +1,14 @@
-//
-// Created by Cheyenne Ayako on 11/7/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ps_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/15 01:15:03 by cayako            #+#    #+#             */
+/*   Updated: 2020/11/15 01:15:04 by cayako           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -61,7 +69,7 @@ void		ft_swap_nb(int *a, int *b)
 	*b = i;
 }
 
-int			*ft_sort_nb_arr(int *nb, size_t size)
+int			*ft_sort_nb_arr(t_ps *ps, int *nb, size_t size)
 {
 	int		i;
 
@@ -69,7 +77,7 @@ int			*ft_sort_nb_arr(int *nb, size_t size)
 	--size;
 	while (i < (int)size)
 	{
-		if (nb[i] > nb[i + 1])
+		if (ps->st == ps->a ? nb[i] > nb[i + 1] : nb[i] < nb[i + 1])
 		{
 			ft_swap_nb(&nb[i], &nb[i + 1]);
 			i = 0;

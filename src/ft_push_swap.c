@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_push_swap.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/15 01:13:28 by cayako            #+#    #+#             */
+/*   Updated: 2020/11/15 01:13:40 by cayako           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -34,7 +45,7 @@ int            ft_check_ckunk(t_ps *ps, int mediana)
 
 void	ft_ps_step2(t_ps *ps, int mediana, int s)
 {
-	while (ps->i && ps->st->count > 2)
+	while (ps->i && ps->st->count > 2 * (ps->st == ps->a))
 	{
 		if (ft_check_ckunk(ps, mediana))
 		{
@@ -51,15 +62,17 @@ void	ft_ps_step2(t_ps *ps, int mediana, int s)
 
 int		ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort)
 {
-	while (sw && (!sw->prev || sw->chunk == sw->prev->chunk))
+	while (sw)
 	{
-		*(sort++) = *(sw->nb);
+		sort[i] = *(sw->nb);
 		sw = sw->prev;
 		++i;
+		if (sw && sw->next->chunk != sw->chunk)
+			break ;
 	}
-	ft_sort_nb_arr(ps->sort, i);
-	ps->i = i > 1 ? i / 2: i;
-	return (sort[ps->i]);
+	ps->i = i > 2 ? i / 2: i;
+	ft_sort_nb_arr(ps, ps->sort, i);
+	return (sort[i / 2]);
 }
 
 int		ft_lst_issorted(t_ps *ps)
@@ -84,12 +97,12 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 	ps->i = ps->st->count > 1 ? ps->st->count / 2 : ps->st->count;
 	while (!ft_lst_issorted(ps))
 	{
-		while (ps->st->end && ps->i && ps->st->count > 2)
+		while (ps->st->end && ps->i && ps->st->count > 2 * (ps->st == ps->a))
 		{
 			if (ps->st == ps->a)
 				++ps->chunk;
 			GOTOXY(54, 30);
-			ft_printf("\e[38;5;251mмедиана: %d", mediana);
+			ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
 			if (ps->st == ps->a)
 				ft_ps_step1(ps, mediana, s);
 			GOTOXY(42, 31);
@@ -104,9 +117,9 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 		ps->st = ps->st == ps->a ? ps->b : ps->a;
 	ps->chunk = ps->st->end->chunk;
 	mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
-		usleep(s * 2);
+		usleep(s * 3);
 			GOTOXY(54, 30);
-			ft_printf("\e[38;5;251mмедиана: %d", mediana);
+			ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
 		GOTOXY(39, 31);
 		ft_printf("\e[38;5;251mf - sw: %c; chunk: %d; end->nb: %-2d; ps->i: %-2d", ps->st == ps->a ? 'a' : 'b', ps->chunk, *(ps->st->end->nb), ps->i);
 	}

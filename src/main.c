@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:25:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/13 12:54:52 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/15 01:04:39 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void 	ft_init_ps(t_ps *ps, int argc, char **argv)
 	ft_bzero(ps->b, sizeof(t_stak));
 	nb = ft_create_nbarr(ps, argc--, argv);
 	ps->nb = nb;
-	ft_sort_nb_arr(ps->sort, ps->a->count);
+	ft_sort_nb_arr(ps, ps->sort, ps->a->count);
 	ps->st = ps->a;
 	ps->a->start = ft_lstsw_new(nb++);
 	new = ps->a->start;
