@@ -54,7 +54,7 @@ int		ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort)
 	while (sw && (!sw->prev || sw->chunk == sw->prev->chunk))
 	{
 		*(sort++) = *(sw->nb);
-		sw = sw->next;
+		sw = sw->prev;
 		++i;
 	}
 	ft_sort_nb_arr(ps->sort, i);
@@ -90,16 +90,18 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 			++ps->chunk;
 		GOTOXY(54, 30);
 		ft_printf("\e[38;5;251mмедиана: %d", mediana);
+		GOTOXY(48, 31);
+		ft_printf("\e[38;5;251msw: %c; chunk: %d", ps->st == ps->a ? 'a' : 'b', ps->chunk);
 		if (ps->st == ps->a)
 			ft_ps_step1(ps, mediana, s);
 		ft_ps_step2(ps, mediana, s);
-		mediana = ft_ps_sw_sort(ps, ps->st->start, 0, ps->sort);
+		mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
 		GOTOXY(43, 35);
 	}
-	if (!ps->b->start)
+	if (!ps->b->start || ps->a->count <= 2)
 		ps->st = ps->st == ps->a ? ps->b : ps->a;
 	ps->chunk = ps->st->end->chunk;
-	mediana = ft_ps_sw_sort(ps, ps->st->start, 0, ps->sort);
+	mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
 	}
 	return (0);
 }
