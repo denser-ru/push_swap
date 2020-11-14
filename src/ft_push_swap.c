@@ -24,11 +24,19 @@ void	ft_ps_step1(t_ps *ps, int mediana, int s)
 	}
 }
 
+int            ft_check_ckunk(t_ps *ps, int mediana)
+{
+	if (ps->st == ps->a)
+		return (*(ps->st->end->nb) <= mediana);
+	else
+		return (*(ps->st->end->nb) >= mediana);
+}
+
 void	ft_ps_step2(t_ps *ps, int mediana, int s)
 {
 	while (ps->i && ps->st->count > 2)
 	{
-		if (*(ps->st->end->nb) <= mediana)
+		if (ft_check_ckunk(ps, mediana))
 		{
 			if (ps->st->end)
 				ps->st->end->chunk = ps->st == ps->a ? ps->chunk: 1;
@@ -74,6 +82,9 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 {
 	s *= 1000;
 	ps->i = ps->st->count / 2;
+	GOTOXY(54, 30);
+	ft_printf("\e[38;5;251mмедиана: %d", mediana);
+	ft_ps_step1(ps, mediana + 1, s);
 	while (!ft_lst_issorted(ps))
 	{
 	while (ps->st->end && ps->i && ps->st->count > 2)
@@ -82,7 +93,6 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 			++ps->chunk;
 		GOTOXY(54, 30);
 		ft_printf("\e[38;5;251mмедиана: %d", mediana);
-		ft_ps_step1(ps, mediana, s);
 		ft_ps_step2(ps, mediana, s);
 		mediana = ft_ps_sw_sort(ps, ps->st->start, 0, ps->sort);
 		GOTOXY(43, 35);
