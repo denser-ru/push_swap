@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:13:28 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 01:13:40 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/15 09:25:31 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int            ft_check_ckunk(t_ps *ps, int mediana)
 
 void	ft_ps_step2(t_ps *ps, int mediana, int s)
 {
-	while (ps->i && ps->st->count > 2 * (ps->st == ps->a))
+	while (ps->st->end && ps->i && ps->st->count > 2 * (ps->st == ps->a))
 	{
 		if (ft_check_ckunk(ps, mediana))
 		{
@@ -79,8 +79,6 @@ int		ft_lst_issorted(t_ps *ps)
 {
 	t_swap	*cur;
 
-	if (!ps->a->start)
-		return (0);
 	cur = ps->a->start;
 	while (cur && cur->next)
 	{
@@ -105,23 +103,17 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 			ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
 			if (ps->st == ps->a)
 				ft_ps_step1(ps, mediana, s);
-			GOTOXY(42, 31);
-			ft_printf("\e[38;5;251msw: %c; chunk: %d; end->nb: %-2d; ps->i: %-2d", ps->st == ps->a ? 'a' : 'b', ps->chunk, *(ps->st->end->nb), ps->i);
 			ft_ps_step2(ps, mediana, s);
-			GOTOXY(42, 31);
-			ft_printf("\e[38;5;251msw: %c; chunk: %d; end->nb: %-2d ps->i: %-2d", ps->st == ps->a ? 'a' : 'b', ps->chunk, *(ps->st->end->nb), ps->i);
 			mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
 			GOTOXY(43, 35);
 		}
 	if (!ps->b->start || ps->a->count <= 2)
 		ps->st = ps->st == ps->a ? ps->b : ps->a;
-	ps->chunk = ps->st->end->chunk;
+	ps->chunk = ps->st->end ? ps->st->end->chunk: 0;
 	mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
 		usleep(s * 3);
 			GOTOXY(54, 30);
 			ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
-		GOTOXY(39, 31);
-		ft_printf("\e[38;5;251mf - sw: %c; chunk: %d; end->nb: %-2d; ps->i: %-2d", ps->st == ps->a ? 'a' : 'b', ps->chunk, *(ps->st->end->nb), ps->i);
 	}
 	return (0);
 }
