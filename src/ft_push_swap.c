@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:13:28 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 09:59:14 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/15 13:03:09 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_ps_step1(t_ps *ps, int mediana, int s)
 	}
 }
 
-int            ft_check_ckunk(t_ps *ps, int mediana)
+int            ft_check_chunk(t_ps *ps, int mediana)
 {
 	if (ps->st == ps->a)
 		return (*(ps->st->end->nb) <= mediana);
@@ -47,7 +47,7 @@ void	ft_ps_step2(t_ps *ps, int mediana, int s)
 {
 	while (ps->st->end && ps->i && ps->st->count > 2 * (ps->st == ps->a))
 	{
-		if (ft_check_ckunk(ps, mediana))
+		if (ft_check_chunk(ps, mediana))
 		{
 			if (ps->st->end)
 				ps->st->end->chunk = ps->st == ps->a ? ps->chunk: 1;
@@ -57,6 +57,14 @@ void	ft_ps_step2(t_ps *ps, int mediana, int s)
 			ft_add_cmd(ps, ps->st == ps->a ? "ra\n" : "rb\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
+		if (ps->st->count && ps->st->end->prev && (!ps->st->end->prev->prev ||
+			ps->st->end->prev->prev->chunk != ps->st->end->prev->chunk))
+			if (!ft_check_chunk(ps, *(ps->st->end->prev->nb)))
+			{
+				ft_add_cmd(ps, ps->st == ps->a ? "sa\n" : "sb\n");
+				ft_put_cmd(ps, 1, 255);
+				usleep(s);
+			}		
 	}
 }
 
@@ -70,8 +78,12 @@ int		ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort)
 		if (sw && sw->next->chunk != sw->chunk)
 			break ;
 	}
-	ps->i = i > 2 ? i / 2: i;
+	ps->i = i > 1 ? i / 2 : i;
 	ft_sort_nb_arr(ps, ps->sort, i);
+			GOTOXY(70, 29);
+			ft_printf("\e[38;5;251mi: %-2d; sort: %-2d", i, sort[i / 2]);
+		sleep(3);
+
 	return (sort[i / 2]);
 }
 
@@ -88,10 +100,10 @@ int		ft_lst_issorted(t_ps *ps)
 		if (*(cur->nb) < *(cur->next->nb))
 		{
 			GOTOXY(54, 29);
-			ft_printf("\e[38;5;251mHET");
+			ft_printf("\e[38;5;251mHET: %-2d < %-2d", *(cur->nb), *(cur->next->nb));
 		sleep(1);
 			GOTOXY(54, 29);
-			ft_printf("\e[38;5;251m   ");
+			ft_printf("\e[38;5;251m           ");
 			return (0);
 		}
 		cur = cur->next;
@@ -130,5 +142,6 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 			GOTOXY(54, 30);
 			ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
 	}
+	GOTOXY(54, 35);
 	return (0);
 }

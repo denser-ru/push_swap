@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:15:03 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 01:15:04 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/15 13:00:13 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,12 @@ int			*ft_sort_nb_arr(t_ps *ps, int *nb, size_t size)
 {
 	int		i;
 
-	i = 0;
+	i = 0 * ps->count;
 	--size;
 	while (i < (int)size)
 	{
-		if (ps->st == ps->a ? nb[i] > nb[i + 1] : nb[i] < nb[i + 1])
+//		if (ps->st == ps->a ? nb[i] > nb[i + 1] : nb[i] < nb[i + 1])
+		if (nb[i] > nb[i + 1])
 		{
 			ft_swap_nb(&nb[i], &nb[i + 1]);
 			i = 0;
