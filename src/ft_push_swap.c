@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:13:28 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 09:25:31 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/15 09:59:14 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,27 @@ int		ft_lst_issorted(t_ps *ps)
 	t_swap	*cur;
 
 	cur = ps->a->start;
+			GOTOXY(54, 29);
+			ft_printf("\e[38;5;251m???");
+		sleep(2);
 	while (cur && cur->next)
 	{
-		if (*(cur->nb) > *(cur->next->nb))
+		if (*(cur->nb) < *(cur->next->nb))
+		{
+			GOTOXY(54, 29);
+			ft_printf("\e[38;5;251mHET");
+		sleep(1);
+			GOTOXY(54, 29);
+			ft_printf("\e[38;5;251m   ");
 			return (0);
+		}
 		cur = cur->next;
 	}
+			GOTOXY(54, 29);
+			ft_printf("\e[38;5;251mВозможно");
+		sleep(1);
+			GOTOXY(54, 29);
+			ft_printf("\e[38;5;251m         ");
 	return (!ps->b->start);
 }
 
@@ -111,7 +126,7 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 		ps->st = ps->st == ps->a ? ps->b : ps->a;
 	ps->chunk = ps->st->end ? ps->st->end->chunk: 0;
 	mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
-		usleep(s * 3);
+		usleep(s * 5);
 			GOTOXY(54, 30);
 			ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
 	}
