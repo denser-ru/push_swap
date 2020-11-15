@@ -43,6 +43,18 @@ int            ft_check_chunk(t_ps *ps, int mediana)
 		return (*(ps->st->end->nb) >= mediana);
 }
 
+void	ft_check_tail(t_ps *ps, int s)
+{
+	if (ps->st->end->prev && (!ps->st->end->prev->prev ||
+							 ps->st->end->prev->prev->chunk != ps->st->end->prev->chunk))
+	if (!ft_check_chunk(ps, *(ps->st->end->prev->nb)))
+	{
+		ft_add_cmd(ps, ps->st == ps->a ? "sa\n" : "sb\n");
+		ft_put_cmd(ps, 1, 255);
+		usleep(s);
+	}
+}
+
 void	ft_ps_step2(t_ps *ps, int mediana, int s)
 {
 	while (ps->st->end && ps->i && ps->st->count > 2 * (ps->st == ps->a))
@@ -57,14 +69,8 @@ void	ft_ps_step2(t_ps *ps, int mediana, int s)
 			ft_add_cmd(ps, ps->st == ps->a ? "ra\n" : "rb\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
-		if (ps->st->end && ps->st->end->prev && (!ps->st->end->prev->prev ||
-			ps->st->end->prev->prev->chunk != ps->st->end->prev->chunk))
-			if (!ft_check_chunk(ps, *(ps->st->end->prev->nb)))
-			{
-				ft_add_cmd(ps, ps->st == ps->a ? "sa\n" : "sb\n");
-				ft_put_cmd(ps, 1, 255);
-				usleep(s);
-			}
+		if (ps->st->end)
+			ft_check_tail(ps, s);
 	}
 }
 
