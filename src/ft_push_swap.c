@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:13:28 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 13:03:09 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 12:07:22 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,18 @@ void	ft_check_tail(t_ps *ps, int s)
 	}
 }
 
-void	ft_ps_step2(t_ps *ps, int mediana, int s)
+void	ft_ps_step2(t_ps *ps, int ab, int mediana, int s)
 {
-	while (ps->st->end && ps->i && ps->st->count > 2 * (ps->st == ps->a))
+	while (ps->st->end && ps->i && ps->st->count > 2 * ab)
 	{
 		if (ft_check_chunk(ps, mediana))
 		{
 			if (ps->st->end)
-				ps->st->end->chunk = ps->st == ps->a ? ps->chunk: 1;
-			ft_add_cmd(ps, ps->st == ps->a ? "pb\n" : "pa\n");
+				ps->st->end->chunk = ab ? ps->chunk: 1;
+			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 		}
 		else
-			ft_add_cmd(ps, ps->st == ps->a ? "ra\n" : "rb\n");
+			ft_add_cmd(ps, ab ? "ra\n" : "rb\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
 		if (ps->st->end)
@@ -136,7 +136,7 @@ int		ft_push_swap(t_ps *ps, int mediana, int s)
 			ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
 			if (ps->st == ps->a)
 				ft_ps_step1(ps, mediana, s);
-			ft_ps_step2(ps, mediana, s);
+			ft_ps_step2(ps, ps->st == ps->a, mediana, s);
 			mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
 			GOTOXY(43, 35);
 		}
