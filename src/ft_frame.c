@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 01:15:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/11 00:18:04 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 12:43:36 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		ft_put_line(int w, char *l, char *m, char *r)
 	ft_putstr(r);
 }
 
-t_frame 		*ft_get_param1(t_frame *f, int x, int y, int w)
+t_frame			*ft_get_param1(t_frame *f, int x, int y, int w)
 {
 	f->x = x;
 	f->y = y;
@@ -28,7 +28,7 @@ t_frame 		*ft_get_param1(t_frame *f, int x, int y, int w)
 	return (f);
 }
 
-t_frame 		*ft_get_param2(t_frame *f, int h, int fg, int bg)
+t_frame			*ft_get_param2(t_frame *f, int h, int fg, int bg)
 {
 	f->h = h;
 	f->fg = fg;
@@ -36,9 +36,9 @@ t_frame 		*ft_get_param2(t_frame *f, int h, int fg, int bg)
 	return (f);
 }
 
-void			ft_frame(t_frame		*f)
+void			ft_frame(t_frame *f)
 {
-	SET_DISP_2ATR(f->fg,f->bg);
+	SET_DISP_2ATR(f->fg, f->bg);
 	GOTOXY(f->x, f->y);
 	ft_put_line(f->w - 2, "┌", "─", "┐");
 	GOTOXY(f->x, f->y + (f->h)--);

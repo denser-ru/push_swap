@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:49:01 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/07 22:54:42 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 13:14:37 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define GOTOXY(x,y)			ft_printf(ESC "[%d;%dH", y, x);
 # define VISIBLE_CURSOR()		ft_printf(ESC "[?251");
 
-/* 
+/*
 ** Set Display Attribute Mode	<ESC>[{attr1};...;{attrn}m
 */
 # define RESETCOLOR()			ft_printf(ESC "[0m")

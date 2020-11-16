@@ -6,13 +6,13 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:14:11 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 01:14:14 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 12:46:32 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_put_bug(int i)
+static void		ft_put_bug(int i)
 {
 	const char	*cmd[15] = {"s                       m",
 						"   $m                mm            m",
@@ -38,7 +38,7 @@ void	ft_put_bug(int i)
 	}
 }
 
-void 	ft_put_menu(int i)
+static void		ft_put_menu(int i)
 {
 	ft_printf(ESC "[%d;%dH\tкоманды перестановок:", i++, 42);
 	++i;
@@ -54,7 +54,7 @@ void 	ft_put_menu(int i)
 	ft_printf(ESC "[%d;%dH\t   rrr: rra + rrb", i, 42);
 }
 
-void	ft_print_bg(t_frame *f)
+void			ft_print_bg(t_frame *f)
 {
 	SET_DISP_2ATR(F_WHITE, B_BLACK);
 	CLRSRC();

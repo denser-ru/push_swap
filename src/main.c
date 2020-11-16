@@ -6,17 +6,16 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:25:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 01:04:39 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 13:13:49 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
-#include "tests.h"
 
-static int 		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
+static int		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 {
-	int 	*nb;
+	int		*nb;
 	int		*sort;
 
 	nb = (int*)malloc(sizeof(int) * argc);
@@ -32,10 +31,10 @@ static int 		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 	return (ps->nb);
 }
 
-static void 	ft_init_ps(t_ps *ps, int argc, char **argv)
+static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 {
 	t_swap	*new;
-	int 	*nb;
+	int		*nb;
 
 	ft_bzero(ps->a, sizeof(t_stak));
 	ft_bzero(ps->b, sizeof(t_stak));
@@ -53,13 +52,13 @@ static void 	ft_init_ps(t_ps *ps, int argc, char **argv)
 	ps->a->end = new;
 }
 
-int 			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	t_ps	ps;
 	t_stak	a;
 	t_stak	b;
 	t_frame f;
-	char 	buf[5];
+	char	buf[5];
 
 	if (argc < 2)
 		return (1);
@@ -69,7 +68,7 @@ int 			main(int argc, char **argv)
 	ft_init_ps(&ps, argc, argv);
 	ft_print_bg(&f);
 	ft_print_sw(a.start, 'a');
-	if(ft_ft_read_in(&ps, buf))
+	if (ft_ft_read_in(&ps, buf))
 		return (1);
 	ft_putchar('\n');
 	return (0);

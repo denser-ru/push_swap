@@ -1,10 +1,18 @@
-//
-// Created by Cheyenne Ayako on 11/6/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_read_in.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/16 12:48:59 by cayako            #+#    #+#             */
+/*   Updated: 2020/11/16 12:58:20 by cayako           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-void 	ft_put_cmd(t_ps *ps, int i, int c)
+void	ft_put_cmd(t_ps *ps, int i, int c)
 {
 	t_list	*cmd;
 
@@ -23,10 +31,9 @@ void 	ft_put_cmd(t_ps *ps, int i, int c)
 		cmd = cmd->next;
 	}
 	GOTOXY(43, 35);
-	//ft_putnstr("    ", 4);
 }
 
-int 	ft_ft_read_in(t_ps *ps, char *buf)
+int		ft_ft_read_in(t_ps *ps, char *buf)
 {
 	SET_DISP_2ATR(F_WHITE, B_BLACK);
 	GOTOXY(30, 33);
@@ -37,13 +44,13 @@ int 	ft_ft_read_in(t_ps *ps, char *buf)
 	while (1)
 	{
 		ft_printf(ESC "[38;5;%d;m\e[48;5;16m", 255);
-		if(!read(0, buf, 4))
+		if (!read(0, buf, 4))
 			return (0);
 		if (ft_isdigit(buf[0]))
 			return (ft_push_swap(ps, ps->sort[ps->a->count / 2], ft_atoi(buf)));
 		if (!ft_strcmp(buf, "exit"))
 			return (0);
-		if(!(ft_add_cmd(ps, buf)))
+		if (!(ft_add_cmd(ps, buf)))
 			return (1);
 		GOTOXY(30, 33);
 		buf[ft_strlen(buf) - 1] = '\0';
@@ -56,7 +63,7 @@ int 	ft_ft_read_in(t_ps *ps, char *buf)
 
 void	ft_print_sw(t_swap *sw, char c)
 {
-	int 	n;
+	int		n;
 
 	n = 32;
 	if (!sw)

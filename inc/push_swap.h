@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:53:30 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 01:03:31 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 13:11:55 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct		s_stak
 {
 	t_swap			*start;
 	t_swap			*end;
-	int 			count;
+	int				count;
 }					t_stak;
 
 typedef struct		s_ps
@@ -44,16 +44,16 @@ typedef struct		s_ps
 	int				i;
 	int				chunk;
 	t_list			*cmds;
-	int 			count;
+	int				count;
 }					t_ps;
 
 t_swap				*ft_lstsw_new(int *nb);
 t_swap				*ft_lstsw_add(t_swap *prev, int *nb);
 void				ft_frame(t_frame *f);
-t_frame 			*ft_get_param1(t_frame *f, int x, int y, int w);
-t_frame 			*ft_get_param2(t_frame *f, int h, int fg, int bg);
-int 				ft_ft_read_args(t_ps *ps, int argc, char **argv);
-int 				ft_ft_read_in(t_ps *ps, char *buf);
+t_frame				*ft_get_param1(t_frame *f, int x, int y, int w);
+t_frame				*ft_get_param2(t_frame *f, int h, int fg, int bg);
+int					ft_ft_read_args(t_ps *ps, int argc, char **argv);
+int					ft_ft_read_in(t_ps *ps, char *buf);
 
 void				ft_print_bg(t_frame *f);
 void				ft_print_sw(t_swap *sw, char c);
@@ -61,7 +61,7 @@ void				ft_print_nb(int nb, int y, char c);
 void				ft_clear_line(int x, int y, int fg, int bg);
 
 int					ft_add_cmd(t_ps *ps, char *buf);
-void			 	ft_put_cmd(t_ps *ps, int i, int c);
+void				ft_put_cmd(t_ps *ps, int i, int c);
 int					*ft_sort_nb_arr(t_ps *ps, int *nb, size_t size);
 void				ft_ps_sa(t_ps *ps);
 void				ft_ps_sb(t_ps *ps);
@@ -76,5 +76,7 @@ void				ft_ps_rr(t_ps *ps);
 void				ft_ps_ss(t_ps *ps);
 
 int					ft_push_swap(t_ps *ps, int mediana, int s);
+int					ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort);
+int					ft_lst_issorted(t_ps *ps);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:14:50 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 01:14:52 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 12:44:04 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_ps_sa(t_ps *ps)
 	t_swap	*prev;
 	t_swap	*c;
 
-	if(!ps->a->end || !ps->a->end->prev)
+	if (!ps->a->end || !ps->a->end->prev)
 		return ;
 	c = ps->a->end;
 	prev = ps->a->end->prev->prev;
@@ -38,7 +38,7 @@ void	ft_ps_sb(t_ps *ps)
 	t_swap	*prev;
 	t_swap	*c;
 
-	if(!ps->b->end || !ps->b->end->prev)
+	if (!ps->b->end || !ps->b->end->prev)
 		return ;
 	c = ps->b->end;
 	prev = ps->b->end->prev->prev;

@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:14:39 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 01:14:41 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 12:49:57 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_ps_ra(t_ps *ps)
 {
 	t_swap	*end;
 
-	if(!ps->a->end || !ps->a->start || ps->a->start == ps->a->end)
+	if (!ps->a->end || !ps->a->start || ps->a->start == ps->a->end)
 		return ;
 	end = ps->a->end->prev;
 	end->next = NULL;
@@ -32,7 +32,7 @@ void	ft_ps_rb(t_ps *ps)
 {
 	t_swap	*end;
 
-	if(!ps->b->end || !ps->b->start || ps->b->start == ps->b->end)
+	if (!ps->b->end || !ps->b->start || ps->b->start == ps->b->end)
 		return ;
 	end = ps->b->end->prev;
 	end->next = NULL;
@@ -48,7 +48,7 @@ void	ft_ps_rra(t_ps *ps)
 {
 	t_swap	*start;
 
-	if(!ps->a->end || !ps->a->start || ps->a->start == ps->a->end)
+	if (!ps->a->end || !ps->a->start || ps->a->start == ps->a->end)
 		return ;
 	start = ps->a->start->next;
 	start->prev = NULL;
@@ -64,7 +64,7 @@ void	ft_ps_rrb(t_ps *ps)
 {
 	t_swap	*start;
 
-	if(!ps->b->end || !ps->b->start || ps->b->start == ps->b->end)
+	if (!ps->b->end || !ps->b->start || ps->b->start == ps->b->end)
 		return ;
 	start = ps->b->start->next;
 	start->prev = NULL;

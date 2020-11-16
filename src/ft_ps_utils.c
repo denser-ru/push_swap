@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:15:03 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/15 13:00:13 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 12:59:07 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void		ft_do_cmd(t_ps *ps, char *buf)
 		ft_ps_rrr(ps);
 	if (*buf == 'r' && buf[1] == 'r' && buf[2] == '\n')
 		ft_ps_rr(ps);
-}	
+}
 
-int 		ft_add_cmd(t_ps *ps, char *buf)
+int			ft_add_cmd(t_ps *ps, char *buf)
 {
 	const char	*cmd[11] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n",
-					   "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
-	int 		i;
+					"rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
+	int			i;
 
 	i = 0;
 	while (cmd[i] && *buf && i < 11)
@@ -57,49 +57,20 @@ int 		ft_add_cmd(t_ps *ps, char *buf)
 	GOTOXY(0, 47);
 	ft_printf(ESC "[0K");
 	ft_putendl("Error");
-	exit (1);
-}
-
-void		ft_swap_nb(int *a, int *b)
-{
-	int		i;
-
-	i = *a;
-	*a = *b;
-	*b = i;
-}
-
-int			*ft_sort_nb_arr(t_ps *ps, int *nb, size_t size)
-{
-	int		i;
-
-	i = 0 * ps->count;
-	--size;
-	while (i < (int)size)
-	{
-//		if (ps->st == ps->a ? nb[i] > nb[i + 1] : nb[i] < nb[i + 1])
-		if (nb[i] > nb[i + 1])
-		{
-			ft_swap_nb(&nb[i], &nb[i + 1]);
-			i = 0;
-		}
-		++i;
-	}
-	return (nb);
+	exit(1);
 }
 
 void		ft_print_nb(int nb, int y, char c)
 {
 	if (c == 'a')
 	{
-		SET_DISP_2ATR(F_WHITE, B_RED);		
+		SET_DISP_2ATR(F_WHITE, B_RED);
 		GOTOXY(7, y);
 	}
 	else
 	{
-		SET_DISP_2ATR(F_WHITE, B_BLUE);		
+		SET_DISP_2ATR(F_WHITE, B_BLUE);
 		GOTOXY(102, y);
 	}
 	ft_printf("%-16d", nb);
 }
-
