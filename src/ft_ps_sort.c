@@ -6,11 +6,30 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 12:32:24 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 12:44:38 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 19:10:00 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void			ft_check_duble(t_ps *ps, t_stack *st, int mediana, int s)
+{
+	int		*sort;
+
+	if (st == ps->b || !st->end || !st->end->prev || *(st->end->nb) > mediana ||
+		*(st->end->prev->nb) > mediana || *(st->end->nb) < *(st->end->prev->nb))
+		return ;
+	sort = ps->sort;
+	while (*sort != *(st->end->nb))
+		++sort;
+	if (*(sort - 1) == *(st->end->prev->nb))
+	{
+		ft_add_cmd(ps, ps->st == ps->a ? "sa\n" : "sb\n");
+		ft_put_cmd(ps, 1, 255);
+		usleep(s);
+	}
+		ft_lst_issorted(ps);
+}
 
 static void		ft_swap_nb(int *a, int *b)
 {
@@ -65,5 +84,7 @@ int				ft_lst_issorted(t_ps *ps)
 			return (0);
 		cur = cur->next;
 	}
-	return (!ps->b->start);
+	if (!ps->b->start)
+		ft_ps_end(ps);
+	return (0);
 }

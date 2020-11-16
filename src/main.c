@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:25:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 15:56:20 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 18:31:05 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	t_swap	*new;
 	int		*nb;
 
-	ft_bzero(ps->a, sizeof(t_stak));
-	ft_bzero(ps->b, sizeof(t_stak));
+	ft_bzero(ps->a, sizeof(t_stack));
+	ft_bzero(ps->b, sizeof(t_stack));
 	nb = ft_create_nbarr(ps, argc--, argv);
 	ps->nb = nb;
 	ft_sort_nb_arr(ps, ps->sort, ps->a->count);
@@ -57,8 +57,8 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 int				main(int argc, char **argv)
 {
 	t_ps	ps;
-	t_stak	a;
-	t_stak	b;
+	t_stack	a;
+	t_stack	b;
 	t_frame f;
 	char	buf[5];
 

@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:13:28 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 13:06:03 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 19:22:13 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void		ft_ps_step1(t_ps *ps, int mediana, int s)
 		ft_add_cmd(ps, ps->st == ps->a ? "pb\n" : "pa\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
+	ft_check_duble(ps, ps->st, mediana, s);
 	}
 	while (*(ps->st->start->nb) < mediana && ps->i && ps->st->count > 2)
 	{
@@ -32,6 +33,7 @@ static void		ft_ps_step1(t_ps *ps, int mediana, int s)
 		ft_add_cmd(ps, "pb\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
+		ft_check_duble(ps, ps->st, mediana, s);
 	}
 }
 
@@ -58,8 +60,11 @@ void			ft_check_tail(t_ps *ps, int s)
 
 void			ft_ps_step2(t_ps *ps, int ab, int mediana, int s)
 {
+	if (ps->st->end)
+		ft_check_tail(ps, s);
 	while (ps->st->end && ps->i && ps->st->count > 2 * ab)
 	{
+	ft_check_duble(ps, ps->st, mediana, s);
 		if (ft_check_chunk(ps, mediana))
 		{
 			if (ps->st->end)
@@ -87,7 +92,7 @@ int				ft_push_swap(t_ps *ps, int mediana, int s)
 				++ps->chunk;
 			GOTOXY(54, 30);
 			ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
-			if (ps->st == ps->a)
+			if (ps->st == ps->a && ps->a->count > 3)
 				ft_ps_step1(ps, mediana, s);
 			ft_ps_step2(ps, ps->st == ps->a, mediana, s);
 			mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
@@ -97,6 +102,7 @@ int				ft_push_swap(t_ps *ps, int mediana, int s)
 			ps->st = ps->st == ps->a ? ps->b : ps->a;
 		ps->chunk = ps->st->end ? ps->st->end->chunk : 0;
 		mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
+		GOTOXY(54, 30);
 		ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
 	}
 	GOTOXY(54, 35);

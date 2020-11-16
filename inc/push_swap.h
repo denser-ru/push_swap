@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:53:30 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 13:11:55 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 18:59:16 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ typedef struct		s_swap
 	struct s_swap	*next;
 }					t_swap;
 
-typedef struct		s_stak
+typedef struct		s_stack
 {
 	t_swap			*start;
 	t_swap			*end;
 	int				count;
-}					t_stak;
+}					t_stack;
 
 typedef struct		s_ps
 {
 	int				*nb;
 	int				*sort;
-	t_stak			*a;
-	t_stak			*b;
-	t_stak			*st;
+	t_stack			*a;
+	t_stack			*b;
+	t_stack			*st;
 	t_swap			prev;
 	int				i;
 	int				chunk;
@@ -78,5 +78,7 @@ void				ft_ps_ss(t_ps *ps);
 int					ft_push_swap(t_ps *ps, int mediana, int s);
 int					ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort);
 int					ft_lst_issorted(t_ps *ps);
+void				ft_check_duble(t_ps *ps, t_stack *st, int mediana, int s);
+void				ft_ps_end(t_ps *ps);
 
 #endif
