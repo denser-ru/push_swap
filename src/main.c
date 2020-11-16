@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:25:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 13:13:49 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/16 15:56:20 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ static int		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 	sort = (int*)malloc(sizeof(int) * argc--);
 	ps->nb = nb;
 	ps->sort = sort;
+	nb += argc - 1;
+	sort += argc - 1;
 	while (argc--)
 	{
 		*(nb) = ft_atoi(*(++argv));
-		*(sort++) = *(nb++);
+		*(sort--) = *(nb--);
 		++(ps->a->count);
 	}
 	return (ps->nb);
