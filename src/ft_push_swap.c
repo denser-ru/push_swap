@@ -59,7 +59,6 @@ void			ft_check_tail(t_ps *ps, int s)
 	if (ps->st->end->prev && ps->st->end->prev->chunk != ps->st->end->chunk
 		&& *(ps->st->end->nb) < *(ps->st->end->prev->nb))
 	{
-		ps->st->end->chunk = ps->st->end->prev->chunk;
 		ft_add_cmd(ps, "rb\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
@@ -72,7 +71,6 @@ void			ft_check_tail2(t_ps *ps, int s)
 		*(ps->a->end->nb) > *(ps->a->end->prev->nb) &&
 		*(ps->b->end->nb) < *(ps->b->end->prev->nb))
 	{
-		ps->b->end->chunk = ps->b->end->prev->chunk;
 		ft_add_cmd(ps, "ss\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
@@ -80,7 +78,6 @@ void			ft_check_tail2(t_ps *ps, int s)
 	if (ps->b->end && ps->b->end->prev &&
 		*(ps->b->end->nb) < *(ps->b->end->prev->nb))
 	{
-		ps->b->end->chunk = ps->b->end->prev->chunk;
 		ft_add_cmd(ps, "sb\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
@@ -102,10 +99,7 @@ void			ft_ps_step2(t_ps *ps, int ab, int mediana, int s)
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 		}
 		else
-		{
-//			ps->st->end->chunk = ps->st->start->chunk;
 			ft_add_cmd(ps, ab ? "ra\n" : "rb\n");
-		}
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
 		if (ps->st->end)
