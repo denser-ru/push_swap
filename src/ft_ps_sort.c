@@ -40,18 +40,18 @@ static void		ft_swap_nb(int *a, int *b)
 	*b = i;
 }
 
-int				*ft_sort_nb_arr(t_ps *ps, int *nb, size_t size)
+int				*ft_sort_nb_arr(int *nb, size_t size)
 {
 	int		i;
 
-	i = 0 * ps->count;
+	i = 0;
 	--size;
 	while (i < (int)size)
 	{
 		if (nb[i] > nb[i + 1])
 		{
 			ft_swap_nb(&nb[i], &nb[i + 1]);
-			i = 0;
+			i = -1;
 		}
 		++i;
 	}
@@ -69,7 +69,7 @@ int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort)
 			break ;
 	}
 	ps->i = i > 1 ? i / 2 : i;
-	ft_sort_nb_arr(ps, ps->sort, i);
+	ft_sort_nb_arr(ps->sort, i);
 	return (sort[i / 2]);
 }
 

@@ -88,9 +88,33 @@ void			ft_check_tail2(t_ps *ps, int s)
 
 void			ft_ps_step2(t_ps *ps, int ab, int mediana, int s)
 {
+	if (!ab && ps->st->end && *(ps->st->end->nb) == *(ps->sort2 + ps->end))
+	{
+		ps->st->end->chunk = 0;
+		ft_add_cmd(ps, "pa\n");
+		ft_put_cmd(ps, 1, 255);
+		--ps->i;
+		usleep(s * 2);
+		ft_add_cmd(ps, "ra\n");
+		ft_put_cmd(ps, 1, 255);
+		++ps->end;
+		usleep(s * 5);
+	}
 	ft_check_tail2(ps, s);
 	while (ps->st->end && ps->i && ps->st->count > 2 * ab)
 	{
+		if (!ab && ps->st->end && *(ps->st->end->nb) == *(ps->sort2 + ps->end))
+		{
+			ps->st->end->chunk = 0;
+			ft_add_cmd(ps, "pa\n");
+			ft_put_cmd(ps, 1, 255);
+			--ps->i;
+			usleep(s * 2);
+			ft_add_cmd(ps, "ra\n");
+			ft_put_cmd(ps, 1, 255);
+			++ps->end;
+			usleep(s * 5);
+		}
 	ft_check_duble(ps, ps->st, mediana, s);
 		if (ft_check_chunk(ps, mediana))
 		{
@@ -102,6 +126,19 @@ void			ft_ps_step2(t_ps *ps, int ab, int mediana, int s)
 			ft_add_cmd(ps, ab ? "ra\n" : "rb\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
+
+		if (!ab && ps->st->end && *(ps->st->end->nb) == *(ps->sort2 + ps->end))
+		{
+			ps->st->end->chunk = 0;
+			ft_add_cmd(ps, "pa\n");
+			ft_put_cmd(ps, 1, 255);
+			--ps->i;
+			usleep(s * 2);
+			ft_add_cmd(ps, "ra\n");
+			ft_put_cmd(ps, 1, 255);
+			++ps->end;
+			usleep(s * 5);
+		}
 		if (ps->st->end)
 			ft_check_tail(ps, s);
 	}
@@ -118,7 +155,7 @@ int				ft_push_swap(t_ps *ps, int mediana, int s)
 			if (ps->st == ps->a)
 				++ps->chunk;
 			GOTOXY(54, 30);
-			ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
+			ft_printf("\e[38;5;251mмедиана: %-3d; end:%-3d", mediana, *(ps->sort2 + ps->end));
 			if (ps->st == ps->a && ps->a->count > 3)
 				ft_ps_step1(ps, mediana, s);
 			ft_ps_step2(ps, ps->st == ps->a, mediana, s);
@@ -130,7 +167,7 @@ int				ft_push_swap(t_ps *ps, int mediana, int s)
 		ps->chunk = ps->st->end ? ps->st->end->chunk : 0;
 		mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
 		GOTOXY(54, 30);
-		ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
+		ft_printf("\e[38;5;251mмедиана: %-3d; end:%-3d", mediana, *(ps->sort2 + ps->end));
 	}
 	GOTOXY(54, 35);
 	return (0);
