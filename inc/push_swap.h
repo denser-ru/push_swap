@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:53:30 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 18:59:16 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/18 00:17:01 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct		s_stack
 typedef struct		s_ps
 {
 	int				*nb;
+	size_t			nb_size;
 	int				*sort;
 	int 			*sort2;
 	int				end;
@@ -77,7 +78,7 @@ void				ft_ps_rrr(t_ps *ps);
 void				ft_ps_rr(t_ps *ps);
 void				ft_ps_ss(t_ps *ps);
 
-int					ft_push_swap(t_ps *ps, int mediana, int s);
+int					ft_push_swap(t_ps *ps, int mediana, int s, int ab);
 int					ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort);
 int					ft_lst_issorted(t_ps *ps);
 void				ft_check_duble(t_ps *ps, t_stack *st, int mediana, int s);

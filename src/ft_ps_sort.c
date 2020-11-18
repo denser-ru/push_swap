@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 12:32:24 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 19:10:00 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/18 00:34:58 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 void			ft_check_duble(t_ps *ps, t_stack *st, int mediana, int s)
 {
 	int		*sort;
+	int		ab;
 
+	ab = ps->st == ps->a;
 	if (st == ps->b || !st->end || !st->end->prev || *(st->end->nb) > mediana ||
-		*(st->end->prev->nb) > mediana || *(st->end->nb) < *(st->end->prev->nb))
+		*(st->end->prev->nb) > mediana || (*(st->end->nb) < *(st->end->prev->nb) && !(ab || (!ab && ps->st->end->chunk > 0))))
 		return ;
 	sort = ps->sort;
 	while (*sort != *(st->end->nb))

@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 12:48:59 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 12:58:20 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/18 00:17:38 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		ft_ft_read_in(t_ps *ps, char *buf)
 		if (!read(0, buf, 4))
 			return (0);
 		if (ft_isdigit(buf[0]))
-			return (ft_push_swap(ps, ps->sort[ps->a->count / 2], ft_atoi(buf)));
+			return (ft_push_swap(ps, ps->sort[ps->a->count / 2], ft_atoi(buf), 1));
 		if (!ft_strcmp(buf, "exit"))
 			return (0);
 		if (!(ft_add_cmd(ps, buf)))

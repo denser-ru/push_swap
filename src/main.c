@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:25:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 18:31:05 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/17 23:26:50 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 	sort = (int*)malloc(sizeof(int) * argc);
 	sort2 = (int*)malloc(sizeof(int) * argc--);
 	ps->nb = nb;
+	ps->nb_size = argc;
 	ps->sort = sort;
 	ps->sort2 = sort2;
 	nb += argc - 1;
@@ -54,7 +55,8 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	ps->nb = nb;
 	ft_sort_nb_arr(ps->sort, ps->a->count);
 	ft_ps_cp_sort2(ps->sort2, ps->sort, ps->a->count);
-	ft_print_nb_arr(ps->sort, ps->a->count);
+//	ft_print_nb_arr(ps->sort, ps->nb_size);
+//	exit(0);
 	ps->st = ps->a;
 	ps->a->start = ft_lstsw_new(nb++);
 	new = ps->a->start;
