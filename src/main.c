@@ -13,15 +13,26 @@
 #include "push_swap.h"
 #include <stdio.h>
 
+void		ft_print_nb_arr(int *arr, size_t size)
+{
+	ft_putnendl("ok", 2);
+	while (size--)
+		ft_printf("nb[%d]: %d\n", size, arr[size]);
+}
+
 static int		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 {
 	int		*nb;
 	int		*sort;
+	int 	*sort2;
 
 	nb = (int*)malloc(sizeof(int) * argc);
-	sort = (int*)malloc(sizeof(int) * argc--);
+	sort = (int*)malloc(sizeof(int) * argc);
+	sort2 = (int*)malloc(sizeof(int) * argc--);
 	ps->nb = nb;
+	ps->nb_size = argc;
 	ps->sort = sort;
+	ps->sort2 = sort2;
 	nb += argc - 1;
 	sort += argc - 1;
 	while (argc--)
@@ -33,6 +44,12 @@ static int		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 	return (ps->nb);
 }
 
+void 			ft_ps_cp_sort2(int *sort2, int *sort1, size_t i)
+{
+	while (i--)
+		*(sort2++) = *(sort1 + i);
+}
+
 static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 {
 	t_swap	*new;
@@ -42,7 +59,11 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	ft_bzero(ps->b, sizeof(t_stack));
 	nb = ft_create_nbarr(ps, argc--, argv);
 	ps->nb = nb;
-	ft_sort_nb_arr(ps, ps->sort, ps->a->count);
+	ft_sort_nb_arr(ps->sort, ps->a->count);
+	ft_ps_cp_sort2(ps->sort2, ps->sort, ps->a->count);
+//	ft_print_nb_arr(ps->sort, ps->nb_size);
+//	ft_print_nb_arr(ps->sort2, ps->nb_size);
+//	exit(0);
 	ps->st = ps->a;
 	ps->a->start = ft_lstsw_new(nb++);
 	new = ps->a->start;

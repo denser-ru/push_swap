@@ -40,10 +40,9 @@ static void		ft_ps_step1(t_ps *ps, int mediana, int s)
 int				ft_check_chunk(t_ps *ps, int mediana)
 {
 	if (ps->st == ps->a)
-		return (*(ps->st->end->nb) <= mediana);
+		return (*(ps->st->end->nb) < mediana);
 	else
-		return (ps->i != 1 ? *(ps->st->end->nb) > mediana :
-			*(ps->st->end->nb) >= mediana);
+		return (*(ps->st->end->nb) >= mediana);
 }
 
 void			ft_check_tail(t_ps *ps, int s)
@@ -83,7 +82,7 @@ void			ft_ps_step2(t_ps *ps, int ab, int mediana, int s)
 int				ft_push_swap(t_ps *ps, int mediana, int s)
 {
 	s *= 1000;
-	ps->i = ps->st->count > 1 ? ps->st->count / 2 : ps->st->count;
+	ps->i = ps->st->count / 2;
 	while (!ft_lst_issorted(ps))
 	{
 		while (ps->st->end && ps->i && ps->st->count > 2 * (ps->st == ps->a))
@@ -91,11 +90,12 @@ int				ft_push_swap(t_ps *ps, int mediana, int s)
 			if (ps->st == ps->a)
 				++ps->chunk;
 			GOTOXY(54, 30);
-			ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
+			ft_printf("\e[38;5;251mмедиана<: %-3d; i: %-2d", mediana, ps->i);
 			if (ps->st == ps->a && ps->a->count > 3)
 				ft_ps_step1(ps, mediana, s);
 			ft_ps_step2(ps, ps->st == ps->a, mediana, s);
 			mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
+			usleep(s);
 			GOTOXY(43, 35);
 		}
 		if (!ps->b->start || ps->a->count <= 2)
@@ -103,7 +103,8 @@ int				ft_push_swap(t_ps *ps, int mediana, int s)
 		ps->chunk = ps->st->end ? ps->st->end->chunk : 0;
 		mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
 		GOTOXY(54, 30);
-		ft_printf("\e[38;5;251mмедиана: %-3d", mediana);
+		ft_printf("\e[38;5;251mмедиана>: %-3d; i: %-2d", mediana, ps->i);
+		usleep(s);
 	}
 	GOTOXY(54, 35);
 	return (0);

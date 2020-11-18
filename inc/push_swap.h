@@ -36,7 +36,10 @@ typedef struct		s_stack
 typedef struct		s_ps
 {
 	int				*nb;
+	size_t			nb_size;
 	int				*sort;
+	int 			*sort2;
+	int				end;
 	t_stack			*a;
 	t_stack			*b;
 	t_stack			*st;
@@ -62,7 +65,7 @@ void				ft_clear_line(int x, int y, int fg, int bg);
 
 int					ft_add_cmd(t_ps *ps, char *buf);
 void				ft_put_cmd(t_ps *ps, int i, int c);
-int					*ft_sort_nb_arr(t_ps *ps, int *nb, size_t size);
+int					*ft_sort_nb_arr(int *nb, size_t size);
 void				ft_ps_sa(t_ps *ps);
 void				ft_ps_sb(t_ps *ps);
 void				ft_ps_pa(t_ps *ps);
