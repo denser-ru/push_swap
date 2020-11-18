@@ -19,14 +19,16 @@ void			ft_check_duble(t_ps *ps, t_stack *st, int mediana, int s)
 
 	ab = ps->st == ps->a;
 	if (st == ps->b || !st->end || !st->end->prev || *(st->end->nb) > mediana ||
-		*(st->end->prev->nb) > mediana || (*(st->end->nb) < *(st->end->prev->nb) && !(ab || (!ab && ps->st->end->chunk > 0))))
+		*(st->end->prev->nb) > mediana || (*(st->end->nb) < *(st->end->prev->nb) && !(!ab || (ab && ps->st->end->chunk > 0))))
 		return ;
 	sort = ps->sort;
 	while (*sort != *(st->end->nb))
 		++sort;
-	if (*(sort - 1) == *(st->end->prev->nb))
+	if (*(sort - 1) == *(st->end->prev->nb) && (!ab || (ab && ps->a->end->chunk > 0)))
 	{
-		ft_add_cmd(ps, ps->st == ps->a ? "sa\n" : "sb\n");
+		if (ab && (ps->a->end->chunk == 0 || ps->a->end->prev->chunk == 0))
+			return ;
+		ft_add_cmd(ps, ab ? "sa\n" : "sb\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
 	}

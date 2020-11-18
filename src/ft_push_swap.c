@@ -14,21 +14,27 @@
 
 static void		ft_ps_step1(t_ps *ps, int ab, int mediana, int s)
 {
-	while (*(ps->st->end->nb) < mediana && ps->i && ps->st->count > 2 && (ab || (!ab && ps->st->end->chunk > 0)))
+	while (*(ps->st->end->nb) < mediana && ps->i && ps->st->count > 2)
 	{
-		if (ps->st->end)
+		if (ab && ps->a->end->chunk == 0)
+			break ;
+		if (ps->st->end && ps->a->end->chunk > 0)
 			ps->st->end->chunk = ab ? ps->chunk : 1;
-		ft_add_cmd(ps, ps->st == ps->a ? "pb\n" : "pa\n");
+		ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
 	ft_check_duble(ps, ps->st, mediana, s);
 	}
-	while (*(ps->st->start->nb) < mediana && ps->i && ps->st->count > 2 && ps->st->start->chunk > 0)
+	while (*(ps->st->start->nb) < mediana && ps->i && ps->st->count > 2)
 	{
+		if (ab && ps->a->start->chunk == 0)
+			break ;
 		ft_add_cmd(ps, ps->st == ps->a ? "rra\n" : "rrb\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
-		if (ps->st->end)
+//		if (!ab && ps->a->start->chunk == 0)
+//			break ;
+		if (ps->st->end && ps->a->end->chunk > 0)
 			ps->st->end->chunk = ps->st == ps->a ? ps->chunk : 1;
 		ft_add_cmd(ps, "pb\n");
 		ft_put_cmd(ps, 1, 255);
@@ -50,14 +56,16 @@ void			ft_check_tail(t_ps *ps, int s, int ab)
 {
 	if (ps->st->end->prev && (!ps->st->end->prev->prev ||
 		ps->st->end->prev->prev->chunk != ps->st->end->prev->chunk))
-		if (!ft_check_chunk(ps, *(ps->st->end->prev->nb)) && (ab || (!ab && ps->st->end->chunk > 0)))
+		if (!ft_check_chunk(ps, *(ps->st->end->prev->nb)))
 		{
-			ft_add_cmd(ps, ps->st == ps->a ? "sa\n" : "sb\n");
+//			if (ab && (ps->a->end->chunk == 0 || ps->a->end->prev->chunk == 0))
+//				return ;
+			ft_add_cmd(ps, ab ? "sa\n" : "sb\n");
 			ft_put_cmd(ps, 1, 255);
 			usleep(s);
 		}
 	if (ps->st->end->prev && ps->st->end->prev->chunk != ps->st->end->chunk
-		&& *(ps->st->end->nb) < *(ps->st->end->prev->nb) && (ab || (!ab && ps->st->start->chunk > 0)))
+		&& *(ps->st->end->nb) < *(ps->st->end->prev->nb))
 	{
 		ft_add_cmd(ps, "rb\n");
 		ft_put_cmd(ps, 1, 255);
@@ -69,14 +77,17 @@ void			ft_check_tail2(t_ps *ps, int s, int ab)
 {
 	if (ps->a->end && ps->b->end && ps->a->end->prev && ps->b->end->prev &&
 		*(ps->a->end->nb) > *(ps->a->end->prev->nb) &&
-		*(ps->b->end->nb) < *(ps->b->end->prev->nb) && (ab || (!ab && ps->st->end->chunk > 0)))
+		*(ps->b->end->nb) < *(ps->b->end->prev->nb))
 	{
+		if (ab && (ps->a->end->chunk == 0 || ps->a->end->prev->chunk == 0))
+			return ;
 		ft_add_cmd(ps, "ss\n");
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
+		return ;
 	}
 	if (ps->b->end && ps->b->end->prev &&
-		*(ps->b->end->nb) < *(ps->b->end->prev->nb) && (ab || (!ab && ps->st->end->chunk > 0)))
+		*(ps->b->end->nb) < *(ps->b->end->prev->nb))
 	{
 		ft_add_cmd(ps, "sb\n");
 		ft_put_cmd(ps, 1, 255);
@@ -113,14 +124,18 @@ void			ft_ps_step2(t_ps *ps, int ab, int mediana, int s)
 	{
 	ft_ps_check_chunk_sort(ps, ab, mediana, s);
 	ft_check_duble(ps, ps->st, mediana, s);
-		if (ft_check_chunk(ps, mediana) && (ab || (!ab && ps->st->end->chunk > 0)))
+		if (ps->st->end && ft_check_chunk(ps, mediana))
 		{
-			if (ps->st->end)
+			if (ab && ps->a->end->chunk == 0)
+				break ;
+			if (ps->st->end && ps->a->end->chunk > 0)
 				ps->st->end->chunk = ab ? ps->chunk : 1;
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 		}
-		else if (ab || (!ab && ps->st->start->chunk > 0))
+		else
 			ft_add_cmd(ps, ab ? "ra\n" : "rb\n");
+		if (ps->a->start && *(ps->a->start->nb) == ps->sort2[ps->end])
+			ps->a->start->chunk = 0;
 		ft_put_cmd(ps, 1, 255);
 		usleep(s);
 		ft_ps_check_chunk_sort(ps, ab, mediana, s);
@@ -134,19 +149,21 @@ int				ft_push_swap(t_ps *ps, int mediana, int s, int ab)
 	while (!ft_lst_issorted(ps))
 	{
 		while (ps->st->end && ps->i && ps->st->count > 2 *
-			(ab = ps->st == ps->a) && (ab || (!ab && ps->st->end->chunk > 0)))
+			(ab = ps->st == ps->a))
 		{
+			if (ab && ps->a->end->chunk == 0 && ps->a->end->prev->chunk == 0)
+				break ;
 			if (ps->st == ps->a)
 				++ps->chunk;
 			GOTOXY(54, 30);
 			ft_printf("\e[38;5;251mмедиана: %-3d; end:%-3d", mediana, *(ps->sort2 + ps->end));
-			if (ps->st == ps->a && ps->a->count > 3)
-				ft_ps_step1(ps, ps->st == ps->a, mediana, s);
-			ft_ps_step2(ps, ps->st == ps->a, mediana, s);
+			if ((ab && ps->a->count > 3) || (!ab && ps->b->end && ps->b->end->chunk == 1))
+				ft_ps_step1(ps, ab, mediana, s);
+			ft_ps_step2(ps, ab, mediana, s);
 			mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
 			GOTOXY(43, 35);
 		}
-		if (!ps->b->start || ps->a->count <= 2)
+		if (!ps->b->start || ps->a->count <= 2 || (ps->a->end->chunk == 0 || ps->a->end->prev->chunk == 0))
 			ps->st = ps->st == ps->a ? ps->b : ps->a;
 		ps->chunk = ps->st->end ? ps->st->end->chunk : 0;
 		mediana = ft_ps_sw_sort(ps, ps->st->end, 0, ps->sort);
