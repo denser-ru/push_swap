@@ -47,7 +47,7 @@ static int		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 void 			ft_ps_cp_sort2(int *sort2, int *sort1, size_t i)
 {
 	while (i--)
-		*(sort2++) = *(sort1 + i);
+		*(sort2++) = *(sort1++);
 }
 
 static void		ft_init_ps(t_ps *ps, int argc, char **argv)

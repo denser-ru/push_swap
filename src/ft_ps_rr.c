@@ -32,6 +32,7 @@ void	ft_ps_rb(t_ps *ps)
 {
 	t_swap	*end;
 
+	ft_ps_check_chunk_sort(ps);
 	if (!ps->b->end || !ps->b->start || ps->b->start == ps->b->end)
 		return ;
 	end = ps->b->end->prev;
@@ -42,6 +43,7 @@ void	ft_ps_rb(t_ps *ps)
 	ps->b->end = end;
 	ps->b->start = ps->b->start->prev;
 	ft_print_sw(ps->b->start, 'b');
+	ft_ps_check_chunk_sort(ps);
 }
 
 void	ft_ps_rra(t_ps *ps)
@@ -74,6 +76,7 @@ void	ft_ps_rrb(t_ps *ps)
 	ps->b->start = start;
 	ps->b->end = ps->b->end->next;
 	ft_print_sw(ps->b->start, 'b');
+	ft_ps_check_chunk_sort(ps);
 }
 
 void	ft_ps_rrr(t_ps *ps)

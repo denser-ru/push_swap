@@ -4,14 +4,16 @@
 
 #include "push_swap.h"
 
-void			ft_ps_check_chunk_sort(t_ps *ps, int ab, int mediana, int s)
+void			ft_ps_check_chunk_sort(t_ps *ps)
 {
-	if (!ab && ps->b->end && *(ps->b->end->nb) == *(ps->sort2 + ps->end)
+	if (ps->b->end && *(ps->b->end->nb) == ps->sort2[ps->end]
 		&& (size_t)ps->end <= ps->nb_size)
 	{
-		GOTOXY(54, 30);
-		ft_printf("\e[38;5;251mмедиана: %-3d; end:%-3d", mediana, *(ps->sort2 + ps->end));
-		ps->st->end->chunk = 0;
+		ps->b->end->chunk = 0;
+		ft_add_cmd(ps, "pa\n");
+		ft_put_cmd(ps, 1, 255);
+		ft_add_cmd(ps, "ra\n");
+		ft_put_cmd(ps, 1, 255);
 		++ps->end;
 	}
 }

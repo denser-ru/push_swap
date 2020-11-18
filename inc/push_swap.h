@@ -83,5 +83,6 @@ int					ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort);
 int					ft_lst_issorted(t_ps *ps);
 void				ft_check_duble(t_ps *ps, t_stack *st, int mediana, int s);
 void				ft_ps_end(t_ps *ps);
+void				ft_ps_check_chunk_sort(t_ps *ps);
 
 #endif

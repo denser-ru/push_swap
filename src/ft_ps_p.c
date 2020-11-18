@@ -46,6 +46,7 @@ void			ft_ps_pa(t_ps *ps)
 	if (!ps->b->start)
 		ft_clear_line(102, 32, F_WHITE, B_BLUE);
 	ft_ps_count(ps, 1, -1);
+	ft_ps_check_chunk_sort(ps);
 }
 
 void			ft_ps_pb(t_ps *ps)

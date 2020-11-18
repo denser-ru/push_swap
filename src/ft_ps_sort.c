@@ -17,7 +17,8 @@ void			ft_check_duble(t_ps *ps, t_stack *st, int mediana, int s)
 	int		*sort;
 
 	if (st == ps->b || !st->end || !st->end->prev || *(st->end->nb) > mediana ||
-		*(st->end->prev->nb) > mediana || *(st->end->nb) < *(st->end->prev->nb))
+		*(st->end->prev->nb) > mediana || *(st->end->nb) < *(st->end->prev->nb)
+		|| st->end->chunk == 0 || st->end->prev->chunk == 0)
 		return ;
 	sort = ps->sort;
 	while (*sort != *(st->end->nb))
@@ -60,6 +61,8 @@ int				*ft_sort_nb_arr(int *nb, size_t size)
 
 int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort)
 {
+	while (sw && sw->chunk == 0)
+		sw = sw->prev;
 	while (sw)
 	{
 		sort[i] = *(sw->nb);

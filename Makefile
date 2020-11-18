@@ -12,7 +12,7 @@
 
 NAME = push_swap
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRCDIR  = ./src/
 INCDIR  = ./inc/
@@ -35,7 +35,7 @@ all: $(NAME)
 obj:
 	mkdir -p $(OBJDIR)
 
-$(OBJDIR)%.o: $(SRCDIR)%.c $(INCL)
+$(OBJDIR)%.o: $(SRCDIR)%.c $(INCL) | obj
 	$(CC) $(CFLAGS) -I $(INCDIR) -I $(FTDIR) -I $(PRNTDIR)inc/ -o $@ -c $<
 
 $(LIBFT):
@@ -44,7 +44,7 @@ $(LIBFT):
 $(LIBPRNT):
 	make -C $(PRNTDIR)
 
-$(NAME): obj $(LIBFT) $(LIBPRNT) $(OBJ)
+$(NAME): $(LIBFT) $(LIBPRNT) $(OBJ)
 	$(CC) $(OBJ) $(LIBFT) $(LIBPRNT) -o $(NAME)
 
 count:
