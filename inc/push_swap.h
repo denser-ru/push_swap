@@ -48,6 +48,7 @@ typedef struct		s_ps
 	int				chunk;
 	t_list			*cmds;
 	int				count;
+	int 			s;
 }					t_ps;
 
 t_swap				*ft_lstsw_new(int *nb);

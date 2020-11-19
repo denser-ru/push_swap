@@ -67,6 +67,7 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	ps->st = ps->a;
 	ps->a->start = ft_lstsw_new(nb++);
 	new = ps->a->start;
+	ps->s = 300000;
 	while (--argc)
 	{
 		new->next = ft_lstsw_add(new, nb++);
