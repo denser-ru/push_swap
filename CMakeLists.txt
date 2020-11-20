@@ -109,4 +109,5 @@ add_executable(push_swap
 		src/ft_push_swap.c
         src/ft_ps_sort.c
 		src/ft_ps_chunk.c
-        )
+		src/ft_ps_move.c
+		)

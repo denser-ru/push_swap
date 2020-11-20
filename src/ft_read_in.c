@@ -12,12 +12,9 @@
 
 #include "push_swap.h"
 
-void	ft_put_cmd(t_ps *ps, int i, int c)
+void	ft_put_cmd(t_ps *ps, t_list *cmd, int i, int c)
 {
-	t_list	*cmd;
-
 	(void)c;
-	cmd = ps->cmds;
 	GOTOXY(30, 33);
 	ft_printf(ESC "[40;37m[ %d ] команды: ", (ps->count)++);
 	while (cmd && i < 43)
@@ -47,14 +44,14 @@ int		ft_ft_read_in(t_ps *ps, char *buf)
 		if (!read(0, buf, 4))
 			return (0);
 		if (ft_isdigit(buf[0]))
-			return (ft_push_swap(ps, ps->sort[ps->a->count / 2], ft_atoi(buf)));
+			return (ft_push_swap(ps, 0, ft_atoi(buf)));
 		if (!ft_strcmp(buf, "exit"))
 			return (0);
 		if (!(ft_add_cmd(ps, buf)))
 			return (1);
 		GOTOXY(30, 33);
 		buf[ft_strlen(buf) - 1] = '\0';
-		ft_put_cmd(ps, 1, 255);
+		ft_put_cmd(ps, ps->cmds, 1, 255);
 		GOTOXY(27, 35);
 		ft_printf(ESC "[40;97m\e[0K");
 		GOTOXY(27, 35);

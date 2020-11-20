@@ -49,11 +49,13 @@ typedef struct		s_ps
 	t_list			*cmds;
 	int				count;
 	int 			s;
+	t_frame			*f;
 }					t_ps;
 
 t_swap				*ft_lstsw_new(int *nb);
 t_swap				*ft_lstsw_add(t_swap *prev, int *nb);
 void				ft_frame(t_frame *f);
+void 				ft_ps_move(t_ps *ps, int s);
 t_frame				*ft_get_param1(t_frame *f, int x, int y, int w);
 t_frame				*ft_get_param2(t_frame *f, int h, int fg, int bg);
 int					ft_ft_read_args(t_ps *ps, int argc, char **argv);
@@ -65,7 +67,8 @@ void				ft_print_nb(int nb, int y, char c);
 void				ft_clear_line(int x, int y, int fg, int bg);
 
 int					ft_add_cmd(t_ps *ps, char *buf);
-void				ft_put_cmd(t_ps *ps, int i, int c);
+void				ft_put_cmd(t_ps *ps, t_list *cmd, int i, int c);
+void				ft_do_cmd(t_ps *ps, char *buf);
 int					*ft_sort_nb_arr(int *nb, size_t size);
 void				ft_ps_sa(t_ps *ps);
 void				ft_ps_sb(t_ps *ps);

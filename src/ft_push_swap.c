@@ -26,6 +26,7 @@
 //
 int				ft_push_swap(t_ps *ps, int mediana, int s)
 {
+	ft_ps_move(ps, s);
 	ps->i = mediana + s;
 	return (0);
 }
