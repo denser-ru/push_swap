@@ -12,26 +12,6 @@
 
 #include "push_swap.h"
 
-void			ft_check_duble(t_ps *ps, t_stack *st, int mediana, int s)
-{
-	int		*sort;
-
-	if (st == ps->b || !st->end || !st->end->prev || *(st->end->nb) > mediana ||
-		*(st->end->prev->nb) > mediana || *(st->end->nb) < *(st->end->prev->nb)
-		|| st->end->chunk == 0 || st->end->prev->chunk == 0)
-		return ;
-	sort = ps->sort;
-	while (*sort != *(st->end->nb))
-		++sort;
-	if (*(sort - 1) == *(st->end->prev->nb))
-	{
-		ft_add_cmd(ps, ps->st == ps->a ? "sa\n" : "sb\n");
-		ft_put_cmd(ps, 1, 255);
-		usleep(s);
-	}
-		ft_lst_issorted(ps);
-}
-
 static void		ft_swap_nb(int *a, int *b)
 {
 	int		i;

@@ -23,9 +23,7 @@ INCL		= $(wildcard $(INCDIR)*.h)
 
 SRC = main.c ft_lst_swaps.c  ft_mem_u.c ft_frame.c ft_read_in.c ft_print_bg.c \
         ft_ps_utils.c ft_ps_ss.c ft_ps_p.c ft_ps_rr.c \
-		ft_ps_sort.c ft_ps_chunk.c testsort2.c
-
-#ft_push_swap.c \
+		ft_ps_sort.c ft_ps_chunk.c ft_push_swap.c \
 
 OBJ	= $(addprefix $(OBJDIR),$(SRC:.c=.o))
 LIBFT = $(FTDIR)libft.a
