@@ -39,21 +39,22 @@ int				*ft_sort_nb_arr(int *nb, size_t size)
 	return (nb);
 }
 
-int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort)
+int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 {
-	while (sw && sw->chunk == 0)
-		sw = sw->prev;
-	while (sw)
+	int		i;
+
+	i = 0;
+	while (sw && i < ps->i)
 	{
 		sort[i] = *(sw->nb);
 		sw = sw->prev;
 		++i;
-		if (sw && sw->next->chunk != sw->chunk)
-			break ;
 	}
-	ps->i =  i == 1 ? 1 : i / 2 ;
+	ps->i = i / 2;
 	ft_sort_nb_arr(ps->sort, i);
-	return (sort[i / 2]);
+	GOTOXY(54, 30);
+	ft_printf("\e[38;5;251mмедиана: %-3d; ps->i: %-3d", sort[i / d], ps->i);
+	return (sort[i / d]);
 }
 
 int				ft_lst_issorted(t_ps *ps)

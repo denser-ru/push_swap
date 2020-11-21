@@ -21,7 +21,9 @@
 typedef struct		s_swap
 {
 	int				*nb;
-	int				chunk;
+	int 			l;
+	int 			s;
+	int 			chunk;
 	struct s_swap	*prev;
 	struct s_swap	*next;
 }					t_swap;
@@ -43,11 +45,10 @@ typedef struct		s_ps
 	t_stack			*a;
 	t_stack			*b;
 	t_stack			*st;
-	t_swap			prev;
 	int				i;
-	int				chunk;
 	t_list			*cmds;
 	int				count;
+	int 			chunk;
 	int 			s;
 	t_frame			*f;
 }					t_ps;

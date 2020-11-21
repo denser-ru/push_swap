@@ -60,6 +60,8 @@ void 	ft_ps_print_stacks(t_ps *ps, t_list *cmd, int s)
 {
 	ft_do_cmd(ps, cmd->content);
 	ft_put_cmd(ps, cmd, 1, 255);
+	GOTOXY(54, 30);
+	ft_printf("\e[38;5;251mps->i: %-3d", ps->i);
 	GOTOXY(27, 35);
 	usleep(s);
 }

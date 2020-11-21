@@ -50,6 +50,19 @@ void 			ft_ps_cp_sort2(int *sort2, int *sort1, size_t i)
 		*(sort2++) = *(sort1++);
 }
 
+void 			ft_ps_nb_link(t_ps *ps, t_swap *sw, int i)
+{
+	while (i < ps->a->count)
+	{
+		while (sw && ps->sort2[i] != *(sw->nb))
+			sw = sw->prev;
+		sw->s = i > 0 ? ps->sort2[i - 1] : ps->sort2[i];
+		sw->l = i < ps->a->count ? ps->sort2[i + 1] : ps->sort2[i];
+		++i;
+		sw = ps->a->end;
+	}
+}
+
 static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 {
 	t_swap	*new;
@@ -57,6 +70,7 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 
 	ft_bzero(ps->a, sizeof(t_stack));
 	ft_bzero(ps->b, sizeof(t_stack));
+	ps->st = ps->a;
 	nb = ft_create_nbarr(ps, argc--, argv);
 	ps->nb = nb;
 	ft_sort_nb_arr(ps->sort, ps->a->count);
@@ -64,7 +78,6 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 //	ft_print_nb_arr(ps->sort, ps->nb_size);
 //	ft_print_nb_arr(ps->sort2, ps->nb_size);
 //	exit(0);
-	ps->st = ps->a;
 	ps->a->start = ft_lstsw_new(nb++);
 	new = ps->a->start;
 	ps->s = 300000;
@@ -75,6 +88,7 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 		new = new->next;
 	}
 	ps->a->end = new;
+	ft_ps_nb_link(ps, ps->a->end, 0);
 }
 
 int				main(int argc, char **argv)

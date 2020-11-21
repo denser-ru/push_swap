@@ -41,7 +41,7 @@ void	ft_ps_rb(t_ps *ps)
 	ps->b->start->prev = ps->b->end;
 	ps->b->end = end;
 	ps->b->start = ps->b->start->prev;
-	ft_print_sw(ps->a->start, 'a');
+	ft_print_sw(ps->b->start, 'b');
 }
 
 void	ft_ps_rra(t_ps *ps)
