@@ -48,7 +48,7 @@ typedef struct		s_ps
 	int				i;
 	t_list			*cmds;
 	int				count;
-	int 			chunk;
+	int 			isread;
 	int 			s;
 	t_frame			*f;
 }					t_ps;

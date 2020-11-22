@@ -50,10 +50,9 @@ int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 		sw = sw->prev;
 		++i;
 	}
-	ps->i = i / 2;
 	ft_sort_nb_arr(ps->sort, i);
 	GOTOXY(54, 30);
-	ft_printf("\e[38;5;251mмедиана: %-3d; ps->i: %-3d", sort[i / d], ps->i);
+	ft_printf("\e[38;5;251mмедиана: %-3d; ps->i: %-3d; ab: %-3c", sort[i / d], ps->i, ps->st == ps->a ? 'a' : 'b');
 	return (sort[i / d]);
 }
 
