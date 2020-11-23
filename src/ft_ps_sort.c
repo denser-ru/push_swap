@@ -49,7 +49,10 @@ int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 		sort[i] = *(sw->nb);
 		sw = sw->prev;
 		++i;
+		if (sw && sw->next->chunk != sw->chunk)
+			break ;
 	}
+	ps->i = i;
 	ft_sort_nb_arr(ps->sort, i);
 	GOTOXY(54, 30);
 	ft_printf("\e[38;5;251mмедиана: %-3d; ps->i: %-3d; ab: %-3c", sort[i / d], ps->i, ps->st == ps->a ? 'a' : 'b');
