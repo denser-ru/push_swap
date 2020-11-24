@@ -44,7 +44,7 @@ int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 	int		i;
 
 	i = 0;
-	while (sw && i < ps->i)
+	while (sw)
 	{
 		sort[i] = *(sw->nb);
 		sw = sw->prev;
@@ -63,6 +63,8 @@ int				ft_lst_issorted(t_ps *ps)
 {
 	t_swap	*cur;
 
+	if (ps->b->start)
+		return (0);
 	cur = ps->a->start;
 	while (cur && cur->next)
 	{
@@ -70,7 +72,6 @@ int				ft_lst_issorted(t_ps *ps)
 			return (0);
 		cur = cur->next;
 	}
-	if (!ps->b->start)
 		ft_ps_end(ps);
 	return (0);
 }
