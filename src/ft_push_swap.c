@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 01:13:28 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 19:22:13 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/25 01:45:08 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int			ft_check_duble(t_ps *ps, t_stack *st, t_swap *sw, int i)
 		if (i > 2 && sw && sw->next->chunk != sw->chunk)
 			return (0);
 	}
-	if ((ps->st == ps->a) * (*(st->end->nb) > *(st->end->prev->nb)) ||
-			(ps->st == ps->b) * (*(st->end->nb) < *(st->end->prev->nb)))
+	if (((ps->st == ps->a) && (*(st->end->nb) > *(st->end->prev->nb))) ||
+			((ps->st == ps->b) && (*(st->end->nb) < *(st->end->prev->nb))))
 	{
 		ft_add_cmd(ps, ps->st == ps->a ? "sa\n" : "sb\n");
 		ft_put_cmd(ps, ps->cmds, 1, 255);
@@ -42,10 +42,10 @@ int			ft_check_duble(t_ps *ps, t_stack *st, t_swap *sw, int i)
 
 static void		ft_ps_step_f2(t_ps *ps, int m, int ab)
 {
-	while (ps->st->end && ps->i > 0 && (!ab * ps->b->count || ab * (ps->st->count > 2)))
+	while (ps->st->end && ps->i > 0 && ((!ab && ps->b->count) || (ab && (ps->st->count > 2))))
 	{
 		ft_check_duble(ps, ps->st, ps->st->end, 0);
-		if (ab * (*(ps->st->end->nb) < m) || !ab * (*(ps->st->end->nb) > m || ps->i == 1))
+		if ((ab && (*(ps->st->end->nb) < m)) || (!ab && *(ps->st->end->nb)) > m || ps->i == 1)
 		{
 			ps->st->end->chunk = ps->chunk;
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
@@ -54,7 +54,7 @@ static void		ft_ps_step_f2(t_ps *ps, int m, int ab)
 			ft_printf("\e[38;5;251mмедиана: %-3d; ps->i: %-3d; ab: %-3c", m, ps->i, ab ? 'a' : 'b');
 			usleep(ps->s);
 		}
-		else if ((((!ab && *(ps->st->end->nb) > m)) || (ab * (ps->st->count > 2) && ps->st->end->chunk)) && ps->i > 0)
+		else if (((!ab && *(ps->st->end->nb) > m) || (ab && (ps->st->count > 2) && ps->st->end->chunk)) && ps->i > 0)
 		{
 			ps->st->end->chunk = ab ? ps->st->end->chunk : ps->chunk;
 			ft_add_cmd(ps, ab ? "ra\n" : "pa\n");
@@ -77,9 +77,9 @@ static void		ft_ps_step_f2(t_ps *ps, int m, int ab)
 static void		ft_ps_step_f(t_ps *ps, int m, int ab)
 {
 	++ps->chunk;
-	while (ab * (ps->st->end && ps->i > 0 && (ab * (ps->st->count > 2))
+	while ((ab && ps->st->end && ps->i > 0 && (ab && (ps->st->count > 2))
 		&& *(ps->st->end->nb) < m) ||
-			!ab * (ps->st->end && ps->i > 0 && *(ps->st->end->nb) > m))
+			(!ab && ps->st->end && ps->i > 0 && *(ps->st->end->nb) > m))
 	{
 //		ft_check_duble(ps, ps->st, ps->st->end, 0);
 		ps->st->end->chunk = ps->chunk;
@@ -89,7 +89,7 @@ static void		ft_ps_step_f(t_ps *ps, int m, int ab)
 		ft_printf("\e[38;5;251mмедиана: %-3d; (f)ps->i: %-3d; ab: %-3c", m, ps->i, ps->st == ps->a ? 'a' : 'b');
 		usleep(ps->s);
 	}
-	while (ps->st->start && ps->i > 0 && ab * ps->st->count > 2 && ((ab * (*(ps->st->start->nb) < m) && ps->st->end->chunk) || !ab * (*(ps->st->start->nb) > m)))
+	while (ps->st->start && ps->i > 0 && ab && ps->st->count > 2 && ((ab && (*(ps->st->start->nb) < m) && ps->st->end->chunk) || (!ab && *(ps->st->start->nb) > m)))
 	{
 		ft_add_cmd(ps, ab ? "rra\n" : "rrb\n");
 		ft_put_cmd(ps, ps->cmds, 1, 255);
@@ -113,9 +113,9 @@ void	ft_ps_swap_ab(t_ps *ps, int m)
 		m = ft_ps_get_med(ps, 2);
 		if (ft_check_duble(ps, ps->st, ps->st->end, 0))
 			m = ft_ps_get_med(ps, 2);
-		ps->i = ++ps->i / 2;
+		ps->i = (ps->i + 1) / 2;
 		ft_ps_step_f(ps, m, ps->st == ps->a);
-		if ((ps->st == ps->a) * (ps->a->count < 3) || !(ps->st == ps->a) * !ps->b->count)
+		if ((ps->st == ps->a && ps->a->count < 3) || (!(ps->st == ps->a) && !ps->b->count))
 			ps->st = ps->st == ps->a ? ps->b : ps->a;
 	}
 }
