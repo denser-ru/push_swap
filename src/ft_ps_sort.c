@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 12:32:24 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 19:10:00 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/25 15:33:54 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 	int		i;
 
 	i = 0;
-	while (sw)
+	while (sw && sw->chunk)
 	{
 		sort[i] = *(sw->nb);
 		sw = sw->prev;
