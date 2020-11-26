@@ -46,8 +46,9 @@ void 		ft_ps_check_zero(t_ps *ps)
 
 void		ft_ps_check_sorted(t_ps *ps)
 {
-	if (ps->a->end && *(ps->a->end->nb) == *(ps->sorted) && ps->a->end->chunk > 2 &&
-		(*(ps->a->end->nb) == *(ps->sort2) || !ps->a->start->chunk))
+	if (ps->st == ps->a && ps->a->end && *(ps->a->end->nb) == *(ps->sorted) &&
+		ps->a->end->chunk >	2 && (*(ps->a->end->nb) == *(ps->sort2) ||
+		!ps->a->start->chunk))
 	{
 		ps->a->end->chunk = 0;
 		ft_add_cmd(ps, "ra\n");
@@ -57,6 +58,20 @@ void		ft_ps_check_sorted(t_ps *ps)
 		ft_put_cmd(ps, ps->cmds, 1, 255);
 		usleep(ps->s);
 	}
+	if (ps->st == ps->b && ps->b->start && *(ps->b->start->nb) == *(ps->sorted)
+		&& (!ps->a->start->chunk || *(ps->b->start->nb) == *(ps->sort2)))
+	{
+		ps->b->start->chunk = 0;
+		ft_add_cmd(ps, "rrb\n");
+		ft_add_cmd(ps, "pa\n");
+		ft_add_cmd(ps, "ra\n");
+		--ps->i;
+		if (ps->sorted - ps->sort2 < ps->a->count + ps->b->count)
+			++ps->sorted;
+		ft_put_cmd(ps, ps->cmds, 1, 255);
+		usleep(ps->s);
+	}
+	ft_lst_issorted(ps);
 }
 
 int			ft_check_duble(t_ps *ps, t_stack *st, t_swap *sw, int i)
