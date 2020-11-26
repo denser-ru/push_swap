@@ -24,7 +24,8 @@ void	ft_ps_check_chunk(t_ps *ps, t_swap *sw)
 		return ;
 	while (sw && sw->next)
 	{
-		if (*(sw->next->nb) == sw->s)
+		if (*(sw->next->nb) == sw->s && *(sw->nb) !=
+				ps->sort2[ps->a->count + ps->b->count - 1])
 			sw->chunk = 0;
 		else
 			return ;
@@ -32,8 +33,35 @@ void	ft_ps_check_chunk(t_ps *ps, t_swap *sw)
 	}
 }
 
+void 		ft_ps_check_zero(t_ps *ps)
+{
+	if (ps->st == ps->a && ps->st->end && !ps->st->end->chunk)
+	{
+		ft_add_cmd(ps, "ra\n");
+		--ps->i;
+		ft_put_cmd(ps, ps->cmds, 1, 255);
+		usleep(ps->s);
+	}
+}
+
+void		ft_ps_check_sorted(t_ps *ps)
+{
+	if (ps->a->end && *(ps->a->end->nb) == *(ps->sorted) && ps->a->end->chunk > 2 &&
+		(*(ps->a->end->nb) == *(ps->sort2) || !ps->a->start->chunk))
+	{
+		ps->a->end->chunk = 0;
+		ft_add_cmd(ps, "ra\n");
+		--ps->i;
+		if (ps->sorted - ps->sort2 < ps->a->count + ps->b->count)
+			++ps->sorted;
+		ft_put_cmd(ps, ps->cmds, 1, 255);
+		usleep(ps->s);
+	}
+}
+
 int			ft_check_duble(t_ps *ps, t_stack *st, t_swap *sw, int i)
 {
+	ft_ps_check_sorted(ps);
 	if (!st->end || !st->end->prev)
 		return (0);
 	while (sw)
@@ -45,7 +73,8 @@ int			ft_check_duble(t_ps *ps, t_stack *st, t_swap *sw, int i)
 	}
 	if (i > 2)
 		return (0);
-	if ((ps->st == ps->a && (*(st->end->nb) > *(st->end->prev->nb))) ||
+	if ((ps->st == ps->a && (*(st->end->nb) > *(st->end->prev->nb)) &&
+			ps->st->end->prev->chunk) ||
 			((ps->st == ps->b) && (*(st->end->nb) < *(st->end->prev->nb))))
 	{
 		ft_add_cmd(ps, ps->st == ps->a ? "sa\n" : "sb\n");
@@ -61,8 +90,10 @@ static void		ft_ps_step_f2(t_ps *ps, int m, int ab)
 	while (ps->st->end && ps->i > 0 && ((!ab && ps->b->count) || (ab && (ps->st->count > 2))))
 	{
 		ft_check_duble(ps, ps->st, ps->st->end, 0);
-		if ((ab && (*(ps->st->end->nb) < m)) || (!ab && *(ps->st->end->nb)) > m || ps->i == 1)
+		if ((ab && (*(ps->st->end->nb) < m)) ||
+			(!ab && *(ps->st->end->nb)) > m || ps->i == 1)
 		{
+			ft_ps_check_zero(ps);
 			ps->st->end->chunk = ps->chunk;
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 			ft_put_cmd(ps, ps->cmds, 1, 255);
@@ -70,7 +101,7 @@ static void		ft_ps_step_f2(t_ps *ps, int m, int ab)
 			ft_printf("\e[38;5;251mмедиана: %-3d; (f2.1)ps->i: %-3d; ab: %-3c", m, ps->i, ab ? 'a' : 'b');
 			usleep(ps->s);
 		}
-		else if (((!ab && *(ps->st->end->nb) > m) || (ab && (ps->st->count > 2) && ps->st->end->chunk)) && ps->i > 0)
+		else if (((!ab && *(ps->st->end->nb) > m) || (ab && (ps->st->count > 2))) && ps->i > 0)
 		{
 			ps->st->end->chunk = ab ? ps->st->end->chunk : ps->chunk;
 			ft_add_cmd(ps, ab ? "ra\n" : "pa\n");
@@ -94,10 +125,11 @@ static void		ft_ps_step_f2(t_ps *ps, int m, int ab)
 static void		ft_ps_step_f(t_ps *ps, int m, int ab)
 {
 	++ps->chunk;
-	while ((ab && ps->st->end && ps->i > 0 && (ab && (ps->st->count > 2))
+	while ((ab && ps->st->end && ps->i > 0 && (ps->st->count > 2)
 		&& *(ps->st->end->nb) < m) ||
 			(!ab && ps->st->end && ps->i > 0 && *(ps->st->end->nb) > m))
 	{
+		ft_ps_check_zero(ps);
 		ft_check_duble(ps, ps->st, ps->st->end, 0);
 		ps->st->end->chunk = ps->chunk;
 		ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
@@ -106,7 +138,7 @@ static void		ft_ps_step_f(t_ps *ps, int m, int ab)
 		ft_printf("\e[38;5;251mмедиана: %-3d; (f1.1)ps->i: %-3d; ab: %-3c", m, ps->i, ps->st == ps->a ? 'a' : 'b');
 		usleep(ps->s);
 	}
-	while (ps->st->start && ps->i > 0 && ((ab && ps->st->count > 2 && (*(ps->st->start->nb) < m) && ps->st->end->chunk) || (!ab && *(ps->st->start->nb) > m)))
+	while (ps->st->start && ps->i > 0 && ((ab && ps->st->count > 2 && (*(ps->st->start->nb) < m) && ps->st->start->chunk) || (!ab && *(ps->st->start->nb) > m)))
 	{
 		ft_check_duble(ps, ps->st, ps->st->end, 0);
 		ft_add_cmd(ps, ab ? "rra\n" : "rrb\n");

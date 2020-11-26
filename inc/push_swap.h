@@ -41,6 +41,7 @@ typedef struct		s_ps
 	size_t			nb_size;
 	int				*sort;
 	int 			*sort2;
+	int 			*sorted;
 	int				end;
 	t_stack			*a;
 	t_stack			*b;
@@ -48,7 +49,6 @@ typedef struct		s_ps
 	int				i;
 	t_list			*cmds;
 	int				count;
-	int 			isread;
 	int 			chunk;
 	int 			s;
 	t_frame			*f;
