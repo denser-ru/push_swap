@@ -79,6 +79,7 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 //	ft_print_nb_arr(ps->sort2, ps->nb_size);
 //	exit(0);
 	ps->sorted = ps->sort2;
+	ps->end = ps->a->count - 1;
 	ps->a->start = ft_lstsw_new(nb++);
 	new = ps->a->start;
 	ps->s = 300000;

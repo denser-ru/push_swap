@@ -60,6 +60,19 @@ void		ft_ps_check_sorted(t_ps *ps)
 		ft_put_cmd(ps, ps->cmds, 1, 255);
 		usleep(ps->s);
 	}
+//	ft_ps_check_chunk_sort(ps);
+	if (ps->st == ps->b && ps->b->end && *(ps->b->end->nb) == *(ps->sorted)
+		&& (!ps->a->end->chunk || *(ps->b->end->nb) == *(ps->sort2)))
+	{
+		ps->b->end->chunk = 0;
+		ft_add_cmd(ps, "pa\n");
+		ft_add_cmd(ps, "ra\n");
+		--ps->i;
+		if (ps->sorted - ps->sort2 < ps->a->count + ps->b->count)
+			++ps->sorted;
+		ft_put_cmd(ps, ps->cmds, 1, 255);
+		usleep(ps->s);
+	}
 		if (ps->st == ps->b && ps->b->end && *(ps->b->end->nb) == *(ps->sorted)
 		&& (!ps->a->end->chunk || *(ps->b->end->nb) == *(ps->sort2)))
 	{
