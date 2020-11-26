@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:25:07 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 18:31:05 by cayako           ###   ########.fr       */
+/*   Updated: 2020/11/26 19:23:06 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void 			ft_ps_nb_link(t_ps *ps, t_swap *sw, int i)
 	{
 		while (sw && ps->sort2[i] != *(sw->nb))
 			sw = sw->prev;
-		sw->s = i > 0 ? ps->sort2[i - 1] : ps->sort2[i];
-		sw->l = i < ps->a->count ? ps->sort2[i + 1] : ps->sort2[i];
+		sw->s = i > 0 ? ps->sort2[i - 1] : ps->sort2[ps->a->count - 1];
+		sw->l = i < ps->a->count - 1 ? ps->sort2[i + 1] : ps->sort2[0];
 		++i;
 		sw = ps->a->end;
 	}
