@@ -50,6 +50,7 @@ typedef struct		s_ps
 	t_list			*cmds;
 	int				count;
 	int 			chunk;
+	int 			chunk_count;
 	int 			s;
 	t_frame			*f;
 }					t_ps;
@@ -85,6 +86,7 @@ void				ft_ps_rr(t_ps *ps);
 void				ft_ps_ss(t_ps *ps);
 
 int					ft_push_swap(t_ps *ps, int mediana, int s);
+int 				ft_ps_chunk_count(t_swap *sw, int *sort, int i);
 int					ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort);
 int					ft_lst_issorted(t_ps *ps);
 int					ft_check_duble(t_ps *ps, t_stack *st, t_swap *sw, int i);

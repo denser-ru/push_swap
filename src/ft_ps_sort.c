@@ -39,11 +39,8 @@ int				*ft_sort_nb_arr(int *nb, size_t size)
 	return (nb);
 }
 
-int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
+int 			ft_ps_chunk_count(t_swap *sw, int *sort, int i)
 {
-	int		i;
-
-	i = 0;
 	while (sw && sw->chunk)
 	{
 		sort[i] = *(sw->nb);
@@ -52,11 +49,17 @@ int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 		if (sw && sw->next->chunk != sw->chunk)
 			break ;
 	}
-	ps->i = i;
-	ft_sort_nb_arr(ps->sort, i);
+	return (i);
+}
+
+int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
+{
+	ps->i = ft_ps_chunk_count(sw, sort, 0);
+	ps->chunk_count = ps->i;
+	ft_sort_nb_arr(ps->sort, ps->i);
 	GOTOXY(54, 30);
-	ft_printf("\e[38;5;251mмедиана: %-3d; ps->i: %-3d; ab: %-3c", sort[i / d], ps->i, ps->st == ps->a ? 'a' : 'b');
-	return (sort[i / d]);
+	ft_printf("\e[38;5;251mмедиана: %-3d; ps->i: %-3d; ab: %-3c", sort[ps->i / d], ps->i, ps->st == ps->a ? 'a' : 'b');
+	return (sort[ps->i / d]);
 }
 
 int				ft_lst_issorted(t_ps *ps)
