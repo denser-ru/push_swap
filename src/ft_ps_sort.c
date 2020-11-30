@@ -39,22 +39,21 @@ int				*ft_sort_nb_arr(int *nb, size_t size)
 	return (nb);
 }
 
-int 			ft_ps_chunk_count(t_swap *sw, int *sort, int i)
+int 			ft_ps_chunk_count(t_swap *sw, int *sort, int chunk, int i)
 {
 	while (sw && sw->chunk)
 	{
 		sort[i] = *(sw->nb);
 		sw = sw->prev;
-		++i;
-		if (sw && sw->next->chunk != sw->chunk)
-			break ;
+		if (sw && sw->next->chunk == chunk)
+			++i;
 	}
 	return (i);
 }
 
 int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 {
-	ps->i = ft_ps_chunk_count(sw, sort, 0);
+	ps->i = ft_ps_chunk_count(sw, sort, sw->chunk, 0);
 	ps->chunk_count = ps->i;
 	ft_sort_nb_arr(ps->sort, ps->i);
 	GOTOXY(54, 30);
