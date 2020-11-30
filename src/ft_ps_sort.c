@@ -48,7 +48,7 @@ int 			ft_ps_chunk_count(t_swap *sw, int *sort, int chunk, int i)
 		if (sw && sw->next->chunk == chunk)
 			++i;
 	}
-	return (i);
+	return (++i);
 }
 
 int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)

@@ -40,7 +40,7 @@ void	ft_ps_check_chunk(t_ps *ps, t_swap *sw)
 
 void	ft_ps_step_f2(t_ps *ps, int m, int ab)
 {
-	while (ps->i && ps->st->end && ps->st->count > 2 && ps->chunk_count > 2)
+	while (ps->i && ps->st->end && ps->st->end->chunk && ((ab && ps->st->count > 2) || !ab))
 	{
 		if ((ab && *(ps->st->end->nb) > m) || (!ab && *(ps->st->end->nb) < m))
 		{
@@ -48,7 +48,7 @@ void	ft_ps_step_f2(t_ps *ps, int m, int ab)
 			ft_put_cmd(ps, ps->cmds, 1, 255);
 			usleep(ps->s);
 			GOTOXY(54, 30);
-			ft_printf("\e[38;5;251mмедиана: %-3d; (f1.1)ps->i: %-3d; ab: %-3c",
+			ft_printf("\e[38;5;251mмедиана: %-3d; (f2.1)ps->i: %-3d; ab: %-3c",
 					  m, ps->i, ps->st == ps->a ? 'a' : 'b');
 		}
 		else
@@ -58,7 +58,7 @@ void	ft_ps_step_f2(t_ps *ps, int m, int ab)
 			ft_put_cmd(ps, ps->cmds, 1, 255);
 			usleep(ps->s);
 			GOTOXY(54, 30);
-			ft_printf("\e[38;5;251mмедиана: %-3d; (f1.2)ps->i: %-3d; ab: %-3c",
+			ft_printf("\e[38;5;251mмедиана: %-3d; (f2.2)ps->i: %-3d; ab: %-3c",
 					  m, ps->i, ps->st == ps->a ? 'a' : 'b');
 		}
 	}
@@ -66,7 +66,7 @@ void	ft_ps_step_f2(t_ps *ps, int m, int ab)
 
 void	ft_ps_step_f(t_ps *ps, int m, int ab)
 {
-		while (ps->i && ps->st->end && ps->st->count > 2 && ps->chunk_count > 2 && ((ab && *(ps->st->end->nb) < m) || (!ab && *(ps->st->end->nb) > m)))
+		while (ps->i && ps->st->end && ps->st->end->chunk && ((ab && ps->st->count > 2 && *(ps->st->end->nb) < m) || (!ab && *(ps->st->end->nb) > m)))
 		{
 			ps->st->end->chunk = ps->chunk;
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
@@ -75,7 +75,7 @@ void	ft_ps_step_f(t_ps *ps, int m, int ab)
 			GOTOXY(54, 30);
 			ft_printf("\e[38;5;251mмедиана: %-3d; (f1.1)ps->i: %-3d; ab: %-3c", m, ps->i, ps->st == ps->a ? 'a' : 'b');
 		}
-		while (ps->i && ps->st->start && ps->st->count > 2 && ps->chunk_count > 2 && ((ab && *(ps->st->start->nb) < m) || (!ab && *(ps->st->start->nb) > m)))
+		while (ps->i && ps->st->start && ps->st->end->chunk && ps->st->count > 2 && ((ab && *(ps->st->start->nb) < m) || (!ab && *(ps->st->start->nb) > m)))
 		{
 			ft_add_cmd(ps, ab ? "rra\n" : "rrb\n");
 			ft_put_cmd(ps, ps->cmds, 1, 255);
@@ -125,12 +125,14 @@ void 	ft_ps_check_tail(t_ps *ps, int ab)
 void	ft_ps_swap_ab2(t_ps *ps, int m)
 {
 	ps->st = ps->b;
-	while (!ft_lst_issorted(ps))
+	while (!ft_lst_issorted(ps) && ps->st->count)
 	{
-		ft_ps_check_tail(ps, ps->st == ps->a);
+//		ft_ps_check_tail(ps, ps->st == ps->a);
 		ft_ps_check_chunk(ps, ps->st->start);
 		m = ft_ps_get_med(ps, 2);
 		ps->i = (ps->i + 1) / 2;
+		++ps->chunk;
+		ft_ps_step_f(ps, m, ps->st == ps->a);
 		ft_ps_step_f2(ps, m, ps->st == ps->a);
 		ps->st = ps->st == ps->a ? ps->b : ps->a;
 	}
@@ -144,6 +146,8 @@ void	ft_ps_swap_ab(t_ps *ps, int m)
 		m = ft_ps_get_med(ps, 2);
 		ps->i = (ps->i + 1) / 2;
 		++ps->chunk;
+		GOTOXY(54, 30);
+		ft_printf("\e[38;5;251mмедиана: %-3d; (f1.2)ps->i: %-3d; ab: %-3c; ch:%-2d", m, ps->i, ps->st == ps->a ? 'a' : 'b', ps->chunk_count);
 		ft_ps_step_f(ps, m, ps->st == ps->a);
 		ft_ps_step_f2(ps, m, ps->st == ps->a);
 		ft_ps_chunk_count(ps->st->end, ps->sort, ps->st->end->chunk, 0);
@@ -159,7 +163,7 @@ int				ft_push_swap(t_ps *ps, int m, int s)
 	ft_ps_swap_ab(ps, 0);
 
 	GOTOXY(54, 30);
-	ft_printf("\e[38;5;251mмедиана: %-3d; (f1.2)ps->i: %-3d; ab: %-3c", m, ps->i, ps->st == ps->a ? 'a' : 'b');
+	ft_printf("\e[38;5;251mмедиана: %-3d; (f0)ps->i: %-3d; ab: %-3c", m, ps->i, ps->st == ps->a ? 'a' : 'b');
 
 	GOTOXY(54, 37);
 	return (0);
