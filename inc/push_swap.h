@@ -6,7 +6,7 @@
 /*   By: cayako <cayako@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 04:53:30 by cayako            #+#    #+#             */
-/*   Updated: 2020/11/16 18:59:16 by cayako           ###   ########.fr       */
+/*   Updated: 2020/12/02 23:12:20 by cayako           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		s_ps
 	int				count;
 	int 			chunk;
 	int 			chunk_count;
+	int				cur_chunk;
 	int 			s;
 	t_frame			*f;
 }					t_ps;
