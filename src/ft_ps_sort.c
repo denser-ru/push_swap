@@ -47,7 +47,7 @@ int				*ft_sort_nb_arr(int *nb, size_t size)
 
 int 			ft_ps_chunk_count(t_swap *sw, int *sort, int chunk, int i)
 {
-	while (sw && sw->chunk)
+	while (sw)
 	{
 		if (sw->chunk == chunk)
 			sort[i++] = *(sw->nb);
@@ -67,11 +67,11 @@ int				ft_ps_get_chunk(t_swap *sw, int chunk)
 	return (chunk);
 }
 
-int				ft_ps_mediana_chunk_count(t_swap *sw, int m, int i)
+int				ft_ps_mediana_chunk_count(t_swap *sw, int m, int chunk, int i)
 {
 	while (sw)
 	{
-		if (*(sw->nb) < m)
+		if (*(sw->nb) < m && sw->chunk == chunk)
 			++i;
 		sw = sw->prev;
 	}
@@ -89,10 +89,11 @@ int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 	ps->chunk_count = ps->i;
 	ft_sort_nb_arr(ps->sort, ps->i);
 	m = sort[ps->i / d];
-	ps->i = ft_ps_mediana_chunk_count(ps->st->end, m, 0);
+	ps->i = ft_ps_mediana_chunk_count(ps->st->end, m, ps->cur_chunk, 0);
+	ps->i = ps->i ? ps->i : ps->chunk_count;
 	GOTOXY(54, 30);
 	ft_printf("\e[38;5;251mмедиана: %-3d; (f2.2)ps->i: %-3d; ab: %-3c; ch:%-2d", m, ps->i, ps->st == ps->a ? 'a' : 'b', ps->chunk_count);
-		read(0, ps->sort, 1);
+//		read(0, ps->sort, 1);
 //	GOTOXY(0, 20);
 //		ft_print_nb_arr2(ps->sort, ps->nb_size);
 	return (m);
