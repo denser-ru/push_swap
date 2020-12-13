@@ -131,6 +131,8 @@ void 	ft_ps_check_duble(t_ps *ps)
 
 void	ft_ps_step_f2(t_ps *ps, int m, int ab)
 {
+	if (ab && ps->chunk_count < 3 && ps->a->end->chunk && !ps->a->start->chunk)
+		return ;
 	while (ps->i && ps->st->end && ps->st->end->chunk && ps->st->end->chunk == ps->cur_chunk && ((ab && ps->chunk_count) || !ab))
 	{
 		read(0, ps->sort, 1);
@@ -318,7 +320,7 @@ void	ft_ps_swap_ab2(t_ps *ps, int m)
 
 void	ft_ps_swap_ab(t_ps *ps, int m)
 {
-	while (ps->a->count > 2)
+	while (ps->a->count > 2 && (ps->st->end->chunk || ps->st->start->chunk))
 	{
 		ft_ps_check_duble(ps);
 		ft_ps_check_chunk(ps, ps->a->start);

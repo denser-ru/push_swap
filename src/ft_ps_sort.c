@@ -49,7 +49,7 @@ int 			ft_ps_chunk_count(t_swap *sw, int *sort, int chunk, int i)
 {
 	while (sw)
 	{
-		if (sw->chunk == chunk)
+		if (sw->chunk && sw->chunk == chunk)
 			sort[i++] = *(sw->nb);
 		sw = sw->prev;
 	}
