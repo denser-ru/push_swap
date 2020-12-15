@@ -60,9 +60,9 @@ void			ft_print_bg(t_frame *f)
 	CLRSRC();
 	ft_put_bug(0);
 	ft_put_menu(17);
-	ft_frame(ft_get_param2(ft_get_param1(f, 5, 1, 20), 32, F_WHITE, B_RED));
-	ft_frame(ft_get_param2(ft_get_param1(f, 100, 1, 20), 32, F_WHITE, B_BLUE));
-	ft_frame(ft_get_param2(ft_get_param1(f, 27, 32, 67), 2, F_WHITE, B_BLACK));
+	ft_frame(ft_get_param2(ft_get_param1(f, 5, 1, 20), F_HEIGHT, F_WHITE, B_RED));
+	ft_frame(ft_get_param2(ft_get_param1(f, 100, 1, 20), F_HEIGHT, F_WHITE, B_BLUE));
+	ft_frame(ft_get_param2(ft_get_param1(f, 27, F_HEIGHT, 67), 2, F_WHITE, B_BLACK));
 	ft_printf(ESC "[H");
 	SET_DISP_2ATR(F_BLACK, B_WHITE);
 	GOTOXY(40, 0);

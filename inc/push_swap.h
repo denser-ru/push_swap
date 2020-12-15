@@ -18,6 +18,8 @@
 # include "term.h"
 # include "ft_frame.h"
 
+# define F_HEIGHT	52
+
 typedef struct		s_swap
 {
 	int				*nb;
@@ -90,6 +92,7 @@ int					ft_push_swap(t_ps *ps, int mediana, int s);
 int 				ft_ps_chunk_count(t_swap *sw, int *sort, int chunk, int i);
 int					ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort);
 int					ft_lst_issorted(t_ps *ps);
+int					ft_ps_get_chunk(t_swap *sw, int chunk);
 int					ft_check_duble(t_ps *ps, t_stack *st, t_swap *sw, int i);
 void				ft_ps_end(t_ps *ps);
 void				ft_ps_check_chunk_sort(t_ps *ps);

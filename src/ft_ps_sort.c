@@ -91,7 +91,7 @@ int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 //		ft_print_nb_arr2(ps->sort, ps->nb_size);
 	ps->chunk_count = ps->i;
 	ft_sort_nb_arr(ps->sort, ps->i);
-	m = sort[ps->i / d - (ps->st == ps->b)];
+	m = sort[ps->i / d - (ps->i > 1 && ps->st == ps->b)];
 	ps->i = ft_ps_mediana_chunk_count(ps->st->end, m, ps->cur_chunk, ps->st == ps->a);
 //	ps->i = ps->chunk_count % 2 ? ps->i +1 : ps->i;
 	ps->i = ps->i ? ps->i : ps->chunk_count;
