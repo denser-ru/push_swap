@@ -28,7 +28,7 @@ void			ft_memfree(t_ps *ps)
 void			ft_ps_end(t_ps *ps)
 {
 	ft_memfree(ps);
-	GOTOXY(54, 35);
+	GOTOXY(54, F_HEIGHT + 3);
 	ft_putchar('\n');
 	exit (0);
 }
