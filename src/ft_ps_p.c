@@ -44,7 +44,7 @@ void			ft_ps_pa(t_ps *ps)
 	if (ps->a->end)
 		ps->a->end->next = NULL;
 	if (!ps->b->start)
-		ft_clear_line(102, 32, F_WHITE, B_BLUE);
+		ft_clear_line(102, F_HEIGHT, F_WHITE, B_BLUE);
 	ft_ps_count(ps, 1, -1);
 }
 
