@@ -65,7 +65,7 @@ void	ft_print_sw(t_swap *sw, char c)
 	n = F_HEIGHT;
 	if (!sw)
 		return ;
-	while (sw && sw->nb && n > 4)
+	while (sw && sw->nb && n > 1)
 	{
 		if (c == 'b')
 		{
