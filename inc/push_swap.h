@@ -18,7 +18,8 @@
 # include "term.h"
 # include "ft_frame.h"
 
-# define F_HEIGHT	94
+# define F_HEIGHT		94
+# define FT_DEV_STOP	6000
 
 typedef struct		s_swap
 {
