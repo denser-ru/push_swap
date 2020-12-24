@@ -168,65 +168,6 @@ void	ft_ps_step_f5(t_ps *ps, int m, int ab)
 	}
 }
 
-void	ft_ps_step_f2(t_ps *ps, int m, int ab)
-{
-//	if (ab && ps->chunk_count < 3 && ps->a->end->chunk && !ps->a->start->chunk)
-//		return ;
-	while (ps->i && ps->st->end && ps->st->end->chunk && ps->st->end->chunk == ps->cur_chunk && ((ab && ps->chunk_count > 2) || !ab))
-	{
-		if (ps->count > FT_DEV_STOP)
-			read(0, ps->sort, 1);
-		ps->chunk_count = ft_ps_chunk_count_up(ps->st->end, ps->sort, 0);
-		ft_ps_check_duble(ps);
-		ft_ps_check_chunk(ps, ps->a->start);
-		if (((ab && *(ps->st->end->nb) >= m) || (!ab && *(ps->st->end->nb) <= m)) && ps->st->count > 1 && ps->chunk_count > 1)
-		{
-//			if (!ps->st->end->chunk || ps->st->end->chunk != ps->cur_chunk)
-//				break ;
-			ft_add_cmd(ps, ab ? "ra\n" : "rb\n");
-			ft_put_cmd(ps, ps->cmds, 1, 255);
-			GOTOXY(54, 30);
-			ft_printf("\e[38;5;251mмедиана: %-3d; (f2.1)ps->i: %-3d; ab: %-3c; ch:%-2d", m, ps->i, ps->st == ps->a ? 'a' : 'b', ps->chunk_count);
-			usleep(ps->s);
-		}
-		else if (ps->st->end->chunk)
-		{
-			ft_ps_check_chunk(ps, ps->a->start);
-			ft_ps_check_duble(ps);
-			if (!ps->st->end->chunk || ps->st->end->chunk != ps->cur_chunk || (ab && ps->chunk_count < 3))
-				break ;
-			ps->st->end->chunk = ab ? ps->chunk : 1;
-			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
-			ft_ps_check_duble(ps);
-			ft_ps_check_chunk(ps, ps->a->start);
-			ft_put_cmd(ps, ps->cmds, 1, 255);
-			GOTOXY(54, 30);
-			ft_printf("\e[38;5;251mмедиана: %-3d; (f2.2)ps->i: %-3d; ab: %-3c; ch:%-2d", m, ps->i, ps->st == ps->a ? 'a' : 'b', ps->chunk_count);
-			usleep(ps->s);
-		}
-//		if (ab && ps->chunk_count < 3)
-//			break ;
-	}
-//	if (ab && ps->a->count > 2 && ps->chunk_count < 3 && ps->a->start->chunk && !ps->a->end->chunk)
-//	{
-//		read(0, ps->sort, 1);
-//		ft_ps_check_duble(ps);
-//		ft_ps_check_chunk(ps, ps->a->start);
-//		ft_add_cmd(ps,"rra\n");
-//		ft_put_cmd(ps, ps->cmds, 1, 255);
-//		usleep(ps->s);
-//		if (ps->a->start->chunk)
-//		{
-//			read(0, ps->sort, 1);
-//			ft_ps_check_duble(ps);
-//			ft_ps_check_chunk(ps, ps->a->start);
-//			ft_add_cmd(ps,"rra\n");
-//			ft_put_cmd(ps, ps->cmds, 1, 255);
-//			usleep(ps->s);
-//		}
-//	}
-}
-
 void	ft_ps_step_f(t_ps *ps, int m, int ab)
 {
 		while (ps->i && ps->st->end && ps->st->end->chunk && ps->st->end->chunk == ps->cur_chunk &&
@@ -268,6 +209,48 @@ void	ft_ps_step_f(t_ps *ps, int m, int ab)
 			ft_printf("\e[38;5;251mмедиана: %-3d; (f1.2)ps->i: %-3d; ab: %-3c; ch:%-2d", m, ps->i, ps->st == ps->a ? 'a' : 'b', ps->chunk_count);
 			usleep(ps->s);
 		}
+}
+
+
+void	ft_ps_step_f2(t_ps *ps, int m, int ab)
+{
+//	if (ab && ps->chunk_count < 3 && ps->a->end->chunk && !ps->a->start->chunk)
+//		return ;
+	while (ps->i && ps->st->end && ps->st->end->chunk && ps->st->end->chunk == ps->cur_chunk && ((ab && ps->chunk_count > 2) || !ab))
+	{
+		if (ps->count > FT_DEV_STOP)
+			read(0, ps->sort, 1);
+		ps->chunk_count = ft_ps_chunk_count_up(ps->st->end, ps->sort, 0);
+		ft_ps_check_duble(ps);
+		ft_ps_check_chunk(ps, ps->a->start);
+		if (((ab && *(ps->st->end->nb) >= m) || (!ab && *(ps->st->end->nb) <= m)) && ps->st->count > 1 && ps->chunk_count > 1)
+		{
+//			if (!ps->st->end->chunk || ps->st->end->chunk != ps->cur_chunk)
+//				break ;
+			ft_add_cmd(ps, ab ? "ra\n" : "rb\n");
+			ft_put_cmd(ps, ps->cmds, 1, 255);
+			GOTOXY(54, 30);
+			ft_printf("\e[38;5;251mмедиана: %-3d; (f2.1)ps->i: %-3d; ab: %-3c; ch:%-2d", m, ps->i, ps->st == ps->a ? 'a' : 'b', ps->chunk_count);
+			usleep(ps->s);
+		}
+		else if (ps->st->end->chunk)
+		{
+			ft_ps_check_chunk(ps, ps->a->start);
+			ft_ps_check_duble(ps);
+			if (!ps->st->end->chunk || ps->st->end->chunk != ps->cur_chunk || (ab && ps->chunk_count < 3))
+				break ;
+			ps->st->end->chunk = ab ? ps->chunk : 1;
+			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
+			ft_ps_check_duble(ps);
+			ft_ps_check_chunk(ps, ps->a->start);
+			ft_put_cmd(ps, ps->cmds, 1, 255);
+			GOTOXY(54, 30);
+			ft_printf("\e[38;5;251mмедиана: %-3d; (f2.2)ps->i: %-3d; ab: %-3c; ch:%-2d", m, ps->i, ps->st == ps->a ? 'a' : 'b', ps->chunk_count);
+			usleep(ps->s);
+		}
+//		if (ab && ps->chunk_count < 3)
+//			break ;
+	}
 }
 
 void	ft_ps_step_f3(t_ps *ps, int m, int ab)
