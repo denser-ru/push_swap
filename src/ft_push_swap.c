@@ -237,8 +237,8 @@ void	ft_ps_step_f2(t_ps *ps, int m, int ab)
 		{
 			ft_ps_check_chunk(ps, ps->a->start);
 			ft_ps_check_duble(ps);
-			if (!ps->st->end->chunk || ps->st->end->chunk != ps->cur_chunk || (ab && ps->chunk_count < 3))
-				break ;
+//			if (!ps->st->end->chunk || ps->st->end->chunk != ps->cur_chunk || (ab && ps->chunk_count < 3))
+//				break ;
 			ps->st->end->chunk = ab ? ps->chunk : 1;
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 			ft_ps_check_duble(ps);
