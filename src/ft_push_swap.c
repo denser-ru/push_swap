@@ -323,7 +323,7 @@ void	ft_ps_swap_ab2(t_ps *ps, int m)
 //		ps->cur_chunk = ft_ps_get_chunk(ps->st->end, 0);
 //		ps->chunk_count = ft_ps_chunk_count(ps->st->end, ps->sort, ps->cur_chunk, 0);
 //		if ((ps->st == ps->a && ps->chunk_count < 3 && !ps->a->start->chunk) || (ps->st == ps->b && !ps->i))
-		if ((ps->st == ps->a && ps->chunk_count < 3 && !ps->a->start->chunk) || (ps->st == ps->b && (ps->chunk_count > 2 || !ps->chunk_count) && ft_ps_chunk_count(ps->st->end, ps->sort, ps->cur_chunk, 0)))
+		if ((ps->st == ps->a && ps->chunk_count < 3 && !ps->a->start->chunk) || (ps->st == ps->b && (ps->chunk_count > 2) && ft_ps_chunk_count(ps->st->end, ps->sort, ps->cur_chunk, 0)) || (ps->st == ps->b && !ps->chunk_count))
 		{
 //			GOTOXY(44, 30);
 //			ft_printf("\e[38;5;251mмедиана: %-3d; (>< )ps->i: %-3d; ab: %-3c; ch:%-3d с_ch:%-3d", m, ps->i, ps->st == ps->a ? 'a' : 'b', ps->chunk_count, ps->cur_chunk);
