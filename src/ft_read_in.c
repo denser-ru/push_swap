@@ -44,7 +44,7 @@ int		ft_ft_read_in(t_ps *ps, char *buf)
 		if (!read(0, buf, 4))
 			return (0);
 		if (ft_isdigit(buf[0]))
-			return (ft_push_swap(ps, 0, ft_atoi(buf)));
+			return (ft_push_swap(ps, ft_atoi(buf)));
 		if (!ft_strcmp(buf, "exit"))
 			return (0);
 		if (!(ft_add_cmd(ps, buf)))

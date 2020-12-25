@@ -19,7 +19,6 @@
 # include "ft_frame.h"
 
 # define F_HEIGHT		94
-# define FT_DEV_STOP	8000
 
 typedef struct		s_swap
 {
@@ -89,7 +88,7 @@ void				ft_ps_rrr(t_ps *ps);
 void				ft_ps_rr(t_ps *ps);
 void				ft_ps_ss(t_ps *ps);
 
-int					ft_push_swap(t_ps *ps, int mediana, int s);
+int					ft_push_swap(t_ps *ps, int s);
 int 				ft_ps_chunk_count(t_swap *sw, int *sort, int chunk, int i);
 int					ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t i, int *sort);
 int					ft_lst_issorted(t_ps *ps);
