@@ -264,7 +264,7 @@ void	ft_ps_step_f3(t_ps *ps, int m, int ab)
 			read(0, ps->sort, 1);
 		ft_ps_check_duble(ps);
 		ft_ps_check_chunk(ps, ps->st->start);
-		if ((ab && *(ps->a->start->nb) > m) || (!ab && *(ps->b->start->nb) <= m))
+		if ((ab && ps->chunk_count < 3) || (ab && *(ps->a->start->nb) > m) || (!ab && *(ps->b->start->nb) <= m))
 		{
 			if (!ps->st->start->chunk)
 				break ;
