@@ -57,8 +57,7 @@ void 	ft_ps_check_duble(t_ps *ps)
 		ps->a->end->prev->chunk = ps->a->end->chunk;
 		ps->a->end->chunk = chunk;
 		ft_add_cmd(ps, "sa\n");
-		ft_put_cmd(ps, ps->cmds, 1, 255);
-		usleep(ps->s);
+		ft_put_cmd(ps, ps->cmds, 0, 255);
 	}
 	if (ps->b->end && ps->b->end->prev && ps->b->end->l == *(ps->b->end->prev->nb) && ps->b->end->prev->chunk == ps->b->end->chunk)
 	{
@@ -66,8 +65,7 @@ void 	ft_ps_check_duble(t_ps *ps)
 		ps->b->end->prev->chunk = ps->b->end->chunk;
 		ps->b->end->chunk = chunk;
 		ft_add_cmd(ps, "sb\n");
-		ft_put_cmd(ps, ps->cmds, 1, 255);
-		usleep(ps->s);
+		ft_put_cmd(ps, ps->cmds, 0, 255);
 	}
 }
 
@@ -84,7 +82,7 @@ void	ft_ps_step_f(t_ps *ps, int m, int ab)
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 			ft_ps_check_duble(ps);
 			ft_ps_check_chunk(ps, ps->a->start);
-			ft_put_cmd(ps, ps->cmds, 1, 255);
+			ft_put_cmd(ps, ps->cmds, 0, 255);
 			ft_ps_check_chunk(ps, ps->a->start);
 		}
 		while (ps->i && ps->st->start && ps->st->start->chunk && ps->st->start->chunk == ps->cur_chunk && ps->st->count > 1 && ((ab && *(ps->st->start->nb) < m) || (!ab && *(ps->st->start->nb) >= m)))
@@ -92,12 +90,12 @@ void	ft_ps_step_f(t_ps *ps, int m, int ab)
 			ft_ps_check_duble(ps);
 			ft_ps_check_chunk(ps, ps->a->start);
 			ft_add_cmd(ps, ab ? "rra\n" : "rrb\n");
-			ft_put_cmd(ps, ps->cmds, 1, 255);
+			ft_put_cmd(ps, ps->cmds, 0, 255);
 			ps->st->end->chunk = ab ? ps->chunk : 1;
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 			ft_ps_check_duble(ps);
 			ft_ps_check_chunk(ps, ps->a->start);
-			ft_put_cmd(ps, ps->cmds, 1, 255);
+			ft_put_cmd(ps, ps->cmds, 0, 255);
 		}
 }
 
@@ -112,7 +110,7 @@ void	ft_ps_step_f2(t_ps *ps, int m, int ab)
 		if (((ab && *(ps->st->end->nb) >= m) || (!ab && *(ps->st->end->nb) <= m)) && ps->st->count > 1 && ps->chunk_count > 1)
 		{
 			ft_add_cmd(ps, ab ? "ra\n" : "rb\n");
-			ft_put_cmd(ps, ps->cmds, 1, 255);
+			ft_put_cmd(ps, ps->cmds, 0, 255);
 		}
 		else if (ps->st->end->chunk)
 		{
@@ -122,7 +120,7 @@ void	ft_ps_step_f2(t_ps *ps, int m, int ab)
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 			ft_ps_check_duble(ps);
 			ft_ps_check_chunk(ps, ps->a->start);
-			ft_put_cmd(ps, ps->cmds, 1, 255);
+			ft_put_cmd(ps, ps->cmds, 0, 255);
 		}
 	}
 }
@@ -139,7 +137,7 @@ void	ft_ps_step_f3(t_ps *ps, int m, int ab)
 			if (!ps->st->start->chunk)
 				break ;
 			ft_add_cmd(ps, ab ? "rra\n" : "rrb\n");
-			ft_put_cmd(ps, ps->cmds, 1, 255);
+			ft_put_cmd(ps, ps->cmds, 0, 255);
 		}
 		else if (ps->st->start->chunk)
 		{
@@ -147,10 +145,10 @@ void	ft_ps_step_f3(t_ps *ps, int m, int ab)
 			if (!ps->st->start->chunk)
 				break ;
 			ft_add_cmd(ps, ab ? "rra\n" : "rrb\n");
-			ft_put_cmd(ps, ps->cmds, 1, 255);
+			ft_put_cmd(ps, ps->cmds, 0, 255);
 			ps->st->end->chunk = ab ? ps->chunk : 1;
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
-			ft_put_cmd(ps, ps->cmds, 1, 255);
+			ft_put_cmd(ps, ps->cmds, 0, 255);
 		}
 	}
 }

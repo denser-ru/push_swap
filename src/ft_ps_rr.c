@@ -25,7 +25,8 @@ void	ft_ps_ra(t_ps *ps)
 	ps->a->start->prev = ps->a->end;
 	ps->a->end = end;
 	ps->a->start = ps->a->start->prev;
-	ft_print_sw(ps->a->start, 'a');
+	if (FT_DEV)
+		ft_print_sw(ps->a->start, 'a');
 }
 
 void	ft_ps_rb(t_ps *ps)
@@ -41,7 +42,8 @@ void	ft_ps_rb(t_ps *ps)
 	ps->b->start->prev = ps->b->end;
 	ps->b->end = end;
 	ps->b->start = ps->b->start->prev;
-	ft_print_sw(ps->b->start, 'b');
+	if (FT_DEV)
+		ft_print_sw(ps->b->start, 'b');
 }
 
 void	ft_ps_rra(t_ps *ps)
@@ -57,7 +59,8 @@ void	ft_ps_rra(t_ps *ps)
 	ps->a->end->next = ps->a->start;
 	ps->a->start = start;
 	ps->a->end = ps->a->end->next;
-	ft_print_sw(ps->a->start, 'a');
+	if (FT_DEV)
+		ft_print_sw(ps->a->start, 'a');
 }
 
 void	ft_ps_rrb(t_ps *ps)
@@ -73,7 +76,8 @@ void	ft_ps_rrb(t_ps *ps)
 	ps->b->end->next = ps->b->start;
 	ps->b->start = start;
 	ps->b->end = ps->b->end->next;
-	ft_print_sw(ps->b->start, 'b');
+	if (FT_DEV)
+		ft_print_sw(ps->b->start, 'b');
 }
 
 void	ft_ps_rrr(t_ps *ps)

@@ -75,9 +75,6 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	ps->nb = nb;
 	ft_sort_nb_arr(ps->sort, ps->a->count);
 	ft_ps_cp_sort2(ps->sort2, ps->sort, ps->a->count);
-//	ft_print_nb_arr(ps->sort, ps->nb_size);
-//	ft_print_nb_arr(ps->sort2, ps->nb_size);
-//	exit(0);
 	ps->sorted = ps->sort2;
 	ps->end = ps->a->count - 1;
 	ps->a->start = ft_lstsw_new(nb++);
@@ -108,10 +105,15 @@ int				main(int argc, char **argv)
 	ps.b = &b;
 	ps.f = &f;
 	ft_init_ps(&ps, argc, argv);
-	ft_print_bg(&f);
-	ft_print_sw(a.start, 'a');
-	if (ft_ft_read_in(&ps, buf))
+	if (FT_DEV)
+	{
+		ft_print_bg(&f);
+		ft_print_sw(a.start, 'a');
+	}
+	if (FT_DEV && ft_ft_read_in(&ps, buf))
 		return (1);
+	else
+		ft_push_swap(&ps, 0);
 	ft_putchar('\n');
 	return (0);
 }

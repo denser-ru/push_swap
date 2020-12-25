@@ -25,10 +25,25 @@ void			ft_memfree(t_ps *ps)
 	ft_lst_swaps_del(ps->a->start);
 }
 
+void 			ft_ps_print_sw(t_list *cmd)
+{
+	while (cmd)
+	{
+		ft_putnstr(cmd->content, cmd->content_size);
+		ft_putchar('\n');
+		cmd = cmd->next;
+	}
+}
+
 void			ft_ps_end(t_ps *ps)
 {
 	ft_memfree(ps);
-	GOTOXY(54, F_HEIGHT + 3);
-	ft_putchar('\n');
+	if (FT_DEV)
+	{
+		GOTOXY(54, F_HEIGHT + 3);
+		ft_putchar('\n');
+	}
+	else
+		ft_ps_print_sw(ps->cmds);
 	exit (0);
 }

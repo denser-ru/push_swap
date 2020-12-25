@@ -14,20 +14,23 @@
 
 void	ft_put_cmd(t_ps *ps, t_list *cmd, int i, int c)
 {
-	(void)c;
-	GOTOXY(30, F_HEIGHT + 1);
-	ft_printf(ESC "[40;37m[ %d ] команды: ", (ps->count)++);
-	while (cmd && i < 43)
+	if (FT_DEV)
 	{
-		GOTOXY(43 + i, F_HEIGHT + 1);
-		ft_printf(ESC "[38;5;%dm\e[40m", c);
-		c -= c > 249 ? 1 : 2;
-		ft_putchar(' ');
-		ft_putnstr(cmd->content, cmd->content_size);
-		i += cmd->content_size + 1;
-		cmd = cmd->next;
+		GOTOXY(30, F_HEIGHT + 1);
+		ft_printf(ESC "[40;37m[ %d ] команды: ", ps->count);
+		while (cmd && i < 43)
+		{
+			GOTOXY(43 + i, F_HEIGHT + 1);
+			ft_printf(ESC "[38;5;%dm\e[40m", c);
+			c -= c > 249 ? 1 : 2;
+			ft_putchar(' ');
+			ft_putnstr(cmd->content, cmd->content_size);
+			i += cmd->content_size + 1;
+			cmd = cmd->next;
+		}
+		GOTOXY(43, F_HEIGHT + 3);
 	}
-	GOTOXY(43, F_HEIGHT + 3);
+	(ps->count)++;
 }
 
 int		ft_ft_read_in(t_ps *ps, char *buf)
