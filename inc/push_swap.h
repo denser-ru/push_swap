@@ -59,6 +59,7 @@ typedef struct		s_ps
 	t_frame			*f;
 	int 			gui;
 	int				wait;
+	int 			fix;
 }					t_ps;
 
 t_swap				*ft_lstsw_new(int *nb);
@@ -102,5 +103,7 @@ void				ft_ps_check_chunk_sort(t_ps *ps);
 
 int 				ft_ps_fix(t_ps *ps, t_list *cmd, int i);
 void				ft_lst_swaps_del(t_swap *sw);
+
+int 				ft_ps_ckeck_argv(int i, char **argv);
 
 #endif

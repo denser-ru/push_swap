@@ -68,6 +68,7 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	t_swap	*new;
 	int		*nb;
 
+	ft_ps_ckeck_argv(--argc, ++argv);
 	ft_bzero(ps->a, sizeof(t_stack));
 	ft_bzero(ps->b, sizeof(t_stack));
 	ps->st = ps->a;

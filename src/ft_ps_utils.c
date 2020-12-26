@@ -107,5 +107,6 @@ int 		ft_ps_fix(t_ps *ps, t_list *cmd, int i)
 		cmd = cmd->next;
 		++i;
 	}
+	ps->fix = 1;
 	return (i);
 }

@@ -30,7 +30,7 @@ void	ft_ps_sa(t_ps *ps)
 	else
 		ps->a->start = c;
 	c->next = ps->a->end;
-	if (FT_DEV || ps->gui)
+	if (FT_DEV || (ps->gui && ps->fix))
 		ft_print_sw(ps->a->start, 'a');
 }
 
@@ -52,7 +52,7 @@ void	ft_ps_sb(t_ps *ps)
 	else
 		ps->b->start = c;
 	c->next = ps->b->end;
-	if (FT_DEV || ps->gui)
+	if (FT_DEV || (ps->gui && ps->fix))
 		ft_print_sw(ps->b->start, 'b');
 }
 
