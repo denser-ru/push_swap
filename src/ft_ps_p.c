@@ -17,7 +17,7 @@ static	void	ft_ps_count(t_ps *ps, int a, int b)
 	--ps->i;
 	ps->a->count += a;
 	ps->b->count += b;
-	if (FT_DEV)
+	if (FT_DEV || ps->gui)
 	{
 		ft_print_sw(ps->b->start, 'b');
 		ft_print_sw(ps->a->start, 'a');
@@ -46,7 +46,7 @@ void			ft_ps_pa(t_ps *ps)
 	}
 	if (ps->a->end)
 		ps->a->end->next = NULL;
-	if (!ps->b->start && FT_DEV)
+	if (!ps->b->start && (FT_DEV || ps->gui))
 		ft_clear_line(102, F_HEIGHT, F_WHITE, B_BLUE);
 	ft_ps_count(ps, 1, -1);
 }
@@ -73,7 +73,7 @@ void			ft_ps_pb(t_ps *ps)
 	}
 	if (ps->b->end)
 		ps->b->end->next = NULL;
-	if (!ps->a->start)
+	if (!ps->a->start && (FT_DEV || ps->gui))
 		ft_clear_line(7, 32, F_WHITE, B_RED);
 	ft_ps_count(ps, -1, 1);
 }

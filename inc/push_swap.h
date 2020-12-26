@@ -18,7 +18,7 @@
 # include "term.h"
 # include "ft_frame.h"
 
-# define F_HEIGHT		94
+# define F_HEIGHT		52
 # define FT_DEV			0
 
 typedef struct		s_swap
@@ -57,6 +57,7 @@ typedef struct		s_ps
 	int				cur_chunk;
 	int 			s;
 	t_frame			*f;
+	int 			gui;
 }					t_ps;
 
 t_swap				*ft_lstsw_new(int *nb);
@@ -97,5 +98,7 @@ int					ft_ps_get_chunk(t_swap *sw, int chunk);
 int					ft_check_duble(t_ps *ps, t_stack *st, t_swap *sw, int i);
 void				ft_ps_end(t_ps *ps);
 void				ft_ps_check_chunk_sort(t_ps *ps);
+
+void				ft_lst_swaps_del(t_swap *sw);
 
 #endif

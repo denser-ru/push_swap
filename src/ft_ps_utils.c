@@ -74,3 +74,4 @@ void		ft_print_nb(int nb, int y, char c)
 	}
 	ft_printf("%-16d", nb);
 }
+

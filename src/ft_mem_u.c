@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void		ft_lst_swaps_del(t_swap *sw)
+void		ft_lst_swaps_del(t_swap *sw)
 {
 	if (sw->next)
 		ft_lst_swaps_del(sw->next);
@@ -43,7 +43,9 @@ void			ft_ps_end(t_ps *ps)
 		GOTOXY(54, F_HEIGHT + 3);
 		ft_putchar('\n');
 	}
-	else
+	else if (!ps->gui)
 		ft_ps_print_sw(ps->cmds);
+	else
+		ft_ps_move(ps, ps->s);
 	exit (0);
 }

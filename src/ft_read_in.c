@@ -14,7 +14,7 @@
 
 void	ft_put_cmd(t_ps *ps, t_list *cmd, int i, int c)
 {
-	if (FT_DEV)
+	if (FT_DEV || ps->gui)
 	{
 		GOTOXY(30, F_HEIGHT + 1);
 		ft_printf(ESC "[40;37m[ %d ] команды: ", ps->count);
@@ -80,7 +80,10 @@ void	ft_print_sw(t_swap *sw, char c)
 			ft_clear_line(7, n - 1, F_WHITE, B_RED);
 			GOTOXY(7, n--);
 		}
-		ft_printf("\e[38;5;%dm%-12d %2d", 262 , *(sw->nb), sw->chunk);
+		if (sw->nb && FT_DEV)
+			ft_printf("\e[38;5;%dm%-12d %2d", 262 , *(sw->nb), sw->chunk);
+		else if (sw->nb)
+			ft_printf("\e[38;5;%dm%-16d", 262 , *(sw->nb));
 		sw = sw->next;
 	}
 }

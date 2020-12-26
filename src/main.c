@@ -80,6 +80,7 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	ps->a->start = ft_lstsw_new(nb++);
 	new = ps->a->start;
 	ps->s = 300000;
+	ps->gui = 1;
 	ps->cmds = (t_list*)NULL;
 	while (--argc)
 	{
@@ -105,6 +106,8 @@ int				main(int argc, char **argv)
 	ps.b = &b;
 	ps.f = &f;
 	ft_init_ps(&ps, argc, argv);
+//	if (!ft_strcmp(argv[1], "-g"))
+//		ps.gui = 1;
 	if (FT_DEV)
 	{
 		ft_print_bg(&f);
