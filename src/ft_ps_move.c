@@ -87,7 +87,12 @@ void 	ft_ps_print_stacks(t_ps *ps, t_list *cmd, int s)
 //	GOTOXY(54, F_HEIGHT - 2);
 //	ft_printf("\e[38;5;251mps->i: %-3d", ps->i);
 	GOTOXY(27, F_HEIGHT + 3);
-	read(0, ps->sort, 1);
+	if (!ps->wait)
+		read(0, ps->sort, 4);
+
+	if(ft_isdigit((char)ps->sort[0]))
+		ps->wait = ft_atoi((char*)ps->sort) * 1000;
+	s = ps->wait;
 	usleep(s);
 }
 void 	ft_ps_move(t_ps *ps, int s)

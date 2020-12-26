@@ -83,7 +83,6 @@ void	ft_ps_step_f(t_ps *ps, int m, int ab)
 			ft_ps_check_duble(ps);
 			ft_ps_check_chunk(ps, ps->a->start);
 			ft_put_cmd(ps, ps->cmds, 0, 255);
-			ft_ps_check_chunk(ps, ps->a->start);
 		}
 		while (ps->i && ps->st->start && ps->st->start->chunk && ps->st->start->chunk == ps->cur_chunk && ps->st->count > 1 && ((ab && *(ps->st->start->nb) < m) || (!ab && *(ps->st->start->nb) >= m)))
 		{
@@ -131,7 +130,7 @@ void	ft_ps_step_f3(t_ps *ps, int m, int ab)
 		ps->a->count > 2) || (!ab && ps->b->start->chunk >= ps->b->end->chunk)))
 	{
 		ft_ps_check_duble(ps);
-		ft_ps_check_chunk(ps, ps->st->start);
+		ft_ps_check_chunk(ps, ps->a->start);
 		if ((ab && ps->chunk_count < 3) || (ab && *(ps->a->start->nb) > m) || (!ab && *(ps->b->start->nb) <= m))
 		{
 			if (!ps->st->start->chunk)

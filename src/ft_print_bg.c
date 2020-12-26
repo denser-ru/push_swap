@@ -52,6 +52,10 @@ static void		ft_put_menu(int i)
 	++i;
 	ft_printf(ESC "[%d;%dH\trra ⇡\t\t⇡ rrb", i++, 42);
 	ft_printf(ESC "[%d;%dH\t   rrr: rra + rrb", i, 42);
+	i += 3;
+	ft_printf(ESC "[%d;%dH     0 или \"\" - ожидание ввода", i, 42);
+	i += 2;
+	ft_printf(ESC "[%d;%dHот 1 до 1000 - задержка в миллисекундах", i, 42);
 }
 
 void			ft_print_bg(t_frame *f)

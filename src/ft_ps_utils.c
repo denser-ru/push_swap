@@ -77,15 +77,14 @@ void		ft_print_nb(int nb, int y, char c)
 
 int 		ft_ps_find_bug(char *s1, char *s2, int i)
 {
-	const char	*cmd[14] = {"pb", "pa",
-						   "pb", "pa",
+	const char	*cmd[12] = {"pb", "pa",
 						   "pa", "pb",
 						   "ra", "rra",
 						   "rra", "ra",
 						   "rb", "rrb",
 						   "rrb", "rb"
 	};
-	while (i < 14)
+	while (i < 12)
 	{
 		if (!ft_strcmp(s1, cmd[i]) && !ft_strcmp(s2, cmd[i + 1]))
 			return (1);

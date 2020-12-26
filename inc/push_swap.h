@@ -58,6 +58,7 @@ typedef struct		s_ps
 	int 			s;
 	t_frame			*f;
 	int 			gui;
+	int				wait;
 }					t_ps;
 
 t_swap				*ft_lstsw_new(int *nb);
