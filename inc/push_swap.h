@@ -99,6 +99,7 @@ int					ft_check_duble(t_ps *ps, t_stack *st, t_swap *sw, int i);
 void				ft_ps_end(t_ps *ps);
 void				ft_ps_check_chunk_sort(t_ps *ps);
 
+int 				ft_ps_fix(t_ps *ps, t_list *cmd, int i);
 void				ft_lst_swaps_del(t_swap *sw);
 
 #endif

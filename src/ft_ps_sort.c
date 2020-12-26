@@ -108,6 +108,7 @@ int				ft_lst_issorted(t_ps *ps)
 			return (0);
 		cur = cur->next;
 	}
-		ft_ps_end(ps);
+	ft_ps_fix(ps, ps->cmds, 0);
+	ft_ps_end(ps);
 	return (0);
 }

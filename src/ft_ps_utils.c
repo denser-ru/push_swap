@@ -75,3 +75,38 @@ void		ft_print_nb(int nb, int y, char c)
 	ft_printf("%-16d", nb);
 }
 
+int 		ft_ps_find_bug(char *s1, char *s2, int i)
+{
+	const char	*cmd[14] = {"pb", "pa",
+						   "pb", "pa",
+						   "pa", "pb",
+						   "ra", "rra",
+						   "rra", "ra",
+						   "rb", "rrb",
+						   "rrb", "rb"
+	};
+	while (i < 14)
+	{
+		if (!ft_strcmp(s1, cmd[i]) && !ft_strcmp(s2, cmd[i + 1]))
+			return (1);
+		i += 2;
+	}
+	return (0);
+}
+
+int 		ft_ps_fix(t_ps *ps, t_list *cmd, int i)
+{
+	while (cmd)
+	{
+		if (cmd->next && ft_ps_find_bug(cmd->content, cmd->next->content, 0))
+		{
+			ft_lstcut(&(ps->cmds), cmd, ft_lstdelcontent);
+			ft_lstcut(&(ps->cmds), cmd->next, ft_lstdelcontent);
+			ps->count -= 2;
+			cmd = ps->cmds;
+		}
+		cmd = cmd->next;
+		++i;
+	}
+	return (i);
+}
