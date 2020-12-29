@@ -17,7 +17,12 @@ void		ft_print_nb_arr(int *arr, size_t size)
 {
 	ft_putnendl("ok", 2);
 	while (size--)
-		ft_printf("nb[%d]: %d\n", size, arr[size]);
+	{
+		ft_putnbr(arr[size]);
+		ft_putchar(' ');
+	}
+//		ft_printf("nb[%d]: %d ", size, arr[size]);
+	ft_putchar('\n');
 }
 
 static int		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
@@ -68,7 +73,7 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	t_swap	*new;
 	int		*nb;
 
-	ft_ps_ckeck_argv(--argc, ++argv);
+	ft_ps_ckeck_argv(argc - 1, argv + 1);
 	ft_bzero(ps->a, sizeof(t_stack));
 	ft_bzero(ps->b, sizeof(t_stack));
 	ps->st = ps->a;

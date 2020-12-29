@@ -17,7 +17,7 @@ int 	ft_ps_ckeck_argv(int i, char **argv)
 	char 	*arg;
 
 	args = argv;
-	while (--i)
+	while (i--)
 	{
 		if (!(**args == '-' || **args == '+' || ft_isdigit(**args)))
 			ft_ps_err(1);
@@ -31,6 +31,5 @@ int 	ft_ps_ckeck_argv(int i, char **argv)
 		}
 		++args;
 	}
-	ft_putendl(*argv);
-	return (3);
+	return (0);
 }

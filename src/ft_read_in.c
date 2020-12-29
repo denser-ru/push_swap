@@ -31,6 +31,10 @@ void	ft_put_cmd(t_ps *ps, t_list *cmd, int i, int c)
 		GOTOXY(43, F_HEIGHT + 3);
 	}
 	(ps->count)++;
+	if (FT_DEV)
+		usleep(ps->s);
+	if (FT_DEV && !ps->s)
+		read(0, ps->sort, 1);
 }
 
 int		ft_ft_read_in(t_ps *ps, char *buf)
