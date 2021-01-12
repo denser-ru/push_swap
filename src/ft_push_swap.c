@@ -30,8 +30,20 @@ int 			ft_ps_chunk_count_up(t_swap *sw, int *sort, int i)
 	return (i);
 }
 
-void	ft_ps_check_chunk(t_ps *ps, t_swap *sw)
+void 	ft_ps_dev(t_ps *ps, int m, char *dev)
 {
+
+	GOTOXY(44, 30);
+	SET_DISP_2ATR(F_WHITE, B_BLACK);
+	ft_printf("\e[38;5;251mмедиана: %-3d; (%s)ps->i: %-3d; ab: %-3c", m, dev, ps->i, ps->st == ps->a ? 'a' : 'b');
+	GOTOXY(54, F_HEIGHT + 3);
+	usleep(ps->s);
+}
+
+void	ft_ps_check_chunk(t_ps *ps, t_swap *sw, int m, char *dev)
+{
+	if (FT_DEV)
+		ft_ps_dev(ps, m, dev);
 	if (*(sw->nb) != ps->sort2[ps->a->count + ps->b->count - 1])
 		return ;
 	while (sw && sw->next)
@@ -75,25 +87,25 @@ void	ft_ps_step_f(t_ps *ps, int m, int ab)
 			((ab && ps->st->count > 2 && *(ps->st->end->nb) < m) || (!ab && *(ps->st->end->nb) > m)) && ((ab && ps->chunk_count > 1) || !ab))
 		{
 			ft_ps_check_duble(ps);
-			ft_ps_check_chunk(ps, ps->a->start);
+			ft_ps_check_chunk(ps, ps->a->start, m, "f1.1");
 			ps->st->end->chunk = ab ? ps->chunk : 1;
 			if (!ps->st->end->chunk)
 				break ;
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 			ft_ps_check_duble(ps);
-			ft_ps_check_chunk(ps, ps->a->start);
+			ft_ps_check_chunk(ps, ps->a->start, m, "f1.1");
 			ft_put_cmd(ps, ps->cmds, 0, 255);
 		}
 		while (ps->i && ps->st->start && ps->st->start->chunk && ps->st->start->chunk == ps->cur_chunk && ps->st->count > 1 && ((ab && *(ps->st->start->nb) < m) || (!ab && *(ps->st->start->nb) >= m)))
 		{
 			ft_ps_check_duble(ps);
-			ft_ps_check_chunk(ps, ps->a->start);
+			ft_ps_check_chunk(ps, ps->a->start, m, "f1.2");
 			ft_add_cmd(ps, ab ? "rra\n" : "rrb\n");
 			ft_put_cmd(ps, ps->cmds, 0, 255);
 			ps->st->end->chunk = ab ? ps->chunk : 1;
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 			ft_ps_check_duble(ps);
-			ft_ps_check_chunk(ps, ps->a->start);
+			ft_ps_check_chunk(ps, ps->a->start, m, "f1.2");
 			ft_put_cmd(ps, ps->cmds, 0, 255);
 		}
 }
@@ -105,20 +117,20 @@ void	ft_ps_step_f2(t_ps *ps, int m, int ab)
 	{
 		ps->chunk_count = ft_ps_chunk_count_up(ps->st->end, ps->sort, 0);
 		ft_ps_check_duble(ps);
-		ft_ps_check_chunk(ps, ps->a->start);
+		ft_ps_check_chunk(ps, ps->a->start, m, "f2.1");
 		if (((ab && *(ps->st->end->nb) >= m) || (!ab && *(ps->st->end->nb) <= m)) && ps->st->count > 1 && ps->chunk_count > 1)
 		{
 			ft_add_cmd(ps, ab ? "ra\n" : "rb\n");
 			ft_put_cmd(ps, ps->cmds, 0, 255);
 		}
-		else if (ps->st->end->chunk)
+		else if (ps->st->end->chunk && (!ab || (ab && ps->st->count > 1 && ps->chunk_count > 1)))
 		{
-			ft_ps_check_chunk(ps, ps->a->start);
+			ft_ps_check_chunk(ps, ps->a->start, m, "f2.2");
 			ft_ps_check_duble(ps);
 			ps->st->end->chunk = ab ? ps->chunk : 1;
 			ft_add_cmd(ps, ab ? "pb\n" : "pa\n");
 			ft_ps_check_duble(ps);
-			ft_ps_check_chunk(ps, ps->a->start);
+			ft_ps_check_chunk(ps, ps->a->start, m, "f2.2");
 			ft_put_cmd(ps, ps->cmds, 0, 255);
 		}
 	}
@@ -130,7 +142,7 @@ void	ft_ps_step_f3(t_ps *ps, int m, int ab)
 		ps->a->count > 2) || (!ab && ps->b->start->chunk >= ps->b->end->chunk)))
 	{
 		ft_ps_check_duble(ps);
-		ft_ps_check_chunk(ps, ps->a->start);
+		ft_ps_check_chunk(ps, ps->a->start, m, "f3.1");
 		if ((ab && ps->chunk_count < 3) || (ab && *(ps->a->start->nb) > m) || (!ab && *(ps->b->start->nb) <= m))
 		{
 			if (!ps->st->start->chunk)
@@ -140,7 +152,7 @@ void	ft_ps_step_f3(t_ps *ps, int m, int ab)
 		}
 		else if (ps->st->start->chunk)
 		{
-			ft_ps_check_chunk(ps, ps->a->start);
+			ft_ps_check_chunk(ps, ps->a->start, m, "f3.2");
 			if (!ps->st->start->chunk)
 				break ;
 			ft_add_cmd(ps, ab ? "rra\n" : "rrb\n");
@@ -158,7 +170,7 @@ void	ft_ps_swap_ab2(t_ps *ps, int m)
 	while (!ft_lst_issorted(ps))
 	{
 		ft_ps_check_duble(ps);
-		ft_ps_check_chunk(ps, ps->a->start);
+		ft_ps_check_chunk(ps, ps->a->start, m, "f2.0");
 		m = ft_ps_get_med(ps, 2);
 		++ps->chunk;
 		ft_ps_step_f(ps, m, ps->st == ps->a);
@@ -172,7 +184,9 @@ void	ft_ps_swap_ab2(t_ps *ps, int m)
 			ps->chunk_count = ft_ps_chunk_count_up(ps->st->end, ps->sort, 0);
 			ft_ps_step_f3(ps, m, ps->st == ps->a);
 		}
-		if ((ps->st == ps->a && ps->chunk_count < 3 && !ps->a->start->chunk) || (ps->st == ps->b && (ps->chunk_count > 2) && ft_ps_chunk_count(ps->st->end, ps->sort, ps->cur_chunk, 0)) || (ps->st == ps->b && !ps->chunk_count))
+		if ((ps->st == ps->a && ps->chunk_count < 3 && !ps->a->start->chunk) ||
+			(ps->st == ps->b && (ps->chunk_count > 2) && ft_ps_chunk_count(ps->st->end, ps->sort, ps->cur_chunk, 0)) ||
+			(ps->st == ps->b && !ps->chunk_count))
 		{
 			ps->st = ps->st == ps->a ? ps->b : ps->a;
 		}
@@ -186,7 +200,9 @@ void	ft_ps_swap_ab(t_ps *ps, int m)
 	while (ps->a->count > 2 && (ps->st->end->chunk || ps->st->start->chunk))
 	{
 		ft_ps_check_duble(ps);
-		ft_ps_check_chunk(ps, ps->a->start);
+		ft_ps_check_chunk(ps, ps->a->start, m, "f1.0");
+		if (*(ps->a->end->nb) == m && ps->i == 1)
+			break ;
 		m = ft_ps_get_med(ps, 2);
 		++ps->chunk;
 		ft_ps_step_f(ps, m, ps->st == ps->a);

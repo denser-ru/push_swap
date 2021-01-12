@@ -19,7 +19,7 @@
 # include "ft_frame.h"
 
 # define F_HEIGHT		100
-# define FT_DEV			1
+# define FT_DEV			0
 
 typedef struct		s_swap
 {
