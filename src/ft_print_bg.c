@@ -56,6 +56,9 @@ static void		ft_put_menu(int i)
 	ft_printf(ESC "[%d;%dH     0 или \"\" - ожидание ввода", i, 42);
 	i += 2;
 	ft_printf(ESC "[%d;%dHот 1 до 1000 - задержка в миллисекундах", i, 42);
+	SET_DISP_2ATR(F_WHITE, B_BLACK);
+	GOTOXY(10, F_HEIGHT + 3);
+	ft_printf("ведите команду: ");
 }
 
 void			ft_print_bg(t_frame *f)

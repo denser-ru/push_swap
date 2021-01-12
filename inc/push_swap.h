@@ -19,7 +19,7 @@
 # include "ft_frame.h"
 
 # define F_HEIGHT		100
-# define FT_DEV			0
+# define FT_DEV			1
 
 typedef struct		s_swap
 {
@@ -104,6 +104,8 @@ void				ft_ps_check_chunk_sort(t_ps *ps);
 int 				ft_ps_fix(t_ps *ps, t_list *cmd, int i);
 void				ft_lst_swaps_del(t_swap *sw);
 
-int 				ft_ps_ckeck_argv(int i, char **argv);
+int 				ft_ps_ckeck_argv(t_ps *ps, int i, char **argv);
+void 				ft_ps_check_uniq(t_ps *ps);
+void				ft_memfree(t_ps *ps);
 
 #endif

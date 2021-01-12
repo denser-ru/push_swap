@@ -75,7 +75,7 @@ void		ft_print_nb(int nb, int y, char c)
 	ft_printf("%-16d", nb);
 }
 
-int 		ft_ps_find_bug(char *s1, char *s2, int i)
+int 		ft_ps_find_bug(t_list *l1, t_list *l2, int i)
 {
 	const char	*cmd[12] = {"pb", "pa",
 						   "pa", "pb",
@@ -86,7 +86,7 @@ int 		ft_ps_find_bug(char *s1, char *s2, int i)
 	};
 	while (i < 12)
 	{
-		if (!ft_strcmp(s1, cmd[i]) && !ft_strcmp(s2, cmd[i + 1]))
+		if (!ft_strncmp(l1->content, cmd[i], l1->content_size) && !ft_strncmp(l2->content, cmd[i + 1], l2->content_size))
 			return (1);
 		i += 2;
 	}
@@ -97,15 +97,16 @@ int 		ft_ps_fix(t_ps *ps, t_list *cmd, int i)
 {
 	while (cmd)
 	{
-		if (cmd->next && ft_ps_find_bug(cmd->content, cmd->next->content, 0))
+		if (cmd->next && ft_ps_find_bug(cmd, cmd->next, 0))
 		{
-			ft_lstcut(&(ps->cmds), cmd, ft_lstdelcontent);
 			ft_lstcut(&(ps->cmds), cmd->next, ft_lstdelcontent);
+			ft_lstcut(&(ps->cmds), cmd, ft_lstdelcontent);
 			ps->count -= 2;
 			cmd = ps->cmds;
+			++i;
 		}
-		cmd = cmd->next;
-		++i;
+		else
+			cmd = cmd->next;
 	}
 	ps->fix = 1;
 	return (i);

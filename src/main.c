@@ -73,13 +73,14 @@ static void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	t_swap	*new;
 	int		*nb;
 
-	ft_ps_ckeck_argv(argc - 1, argv + 1);
 	ft_bzero(ps->a, sizeof(t_stack));
 	ft_bzero(ps->b, sizeof(t_stack));
+	ft_ps_ckeck_argv(ps, argc - 1, argv + 1);
 	ps->st = ps->a;
 	nb = ft_create_nbarr(ps, argc--, argv);
 	ps->nb = nb;
 	ft_sort_nb_arr(ps->sort, ps->a->count);
+	ft_ps_check_uniq(ps);
 	ft_ps_cp_sort2(ps->sort2, ps->sort, ps->a->count);
 	ps->sorted = ps->sort2;
 	ps->end = ps->a->count - 1;

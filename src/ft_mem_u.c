@@ -22,7 +22,15 @@ void		ft_lst_swaps_del(t_swap *sw)
 
 void			ft_memfree(t_ps *ps)
 {
-	ft_lst_swaps_del(ps->a->start);
+	if (ps->a->start)
+		ft_lst_swaps_del(ps->a->start);
+	ft_lstdel(&(ps->cmds), ft_lstdelcontent);
+	free(ps->nb);
+	ps->nb = NULL;
+	free(ps->sort);
+	ps->sort = NULL;
+	free(ps->sort2);
+	ps->sort2 = NULL;
 }
 
 void 			ft_ps_print_sw(t_list *cmd)
@@ -37,7 +45,6 @@ void 			ft_ps_print_sw(t_list *cmd)
 
 void			ft_ps_end(t_ps *ps)
 {
-	ft_memfree(ps);
 	if (FT_DEV)
 	{
 		GOTOXY(54, F_HEIGHT + 3);
@@ -47,5 +54,6 @@ void			ft_ps_end(t_ps *ps)
 		ft_ps_print_sw(ps->cmds);
 	else
 		ft_ps_move(ps, ps->s);
+	ft_memfree(ps);
 	exit (0);
 }

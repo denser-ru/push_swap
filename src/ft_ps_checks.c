@@ -4,14 +4,30 @@
 
 #include "push_swap.h"
 
-void	ft_ps_err(int err)
+void	ft_ps_err(t_ps *ps, int err)
 {
 	(void)err;
+	ft_memfree(ps);
 	ft_putendl_fd("Error", 2);
 	exit(err);
 }
 
-int 	ft_ps_ckeck_argv(int i, char **argv)
+void 	ft_ps_check_uniq(t_ps *ps)
+{
+	int 	*nb;
+	int 	i;
+
+	nb = ps->sort;
+	i = ps->a->count;
+	while (--i)
+	{
+		if (*nb == *(nb + 1))
+			ft_ps_err(ps, 3);
+		++nb;
+	}
+}
+
+int 	ft_ps_ckeck_argv(t_ps *ps, int i, char **argv)
 {
 	char 	**args;
 	char 	*arg;
@@ -20,13 +36,13 @@ int 	ft_ps_ckeck_argv(int i, char **argv)
 	while (i--)
 	{
 		if (!(**args == '-' || **args == '+' || ft_isdigit(**args)))
-			ft_ps_err(1);
+			ft_ps_err(ps, 1);
 		arg = *args;
 		++arg;
 		while (*arg)
 		{
 			if (!ft_isdigit(*arg))
-				ft_ps_err(2);
+				ft_ps_err(ps, 2);
 			++arg;
 		}
 		++args;

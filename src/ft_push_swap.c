@@ -221,6 +221,7 @@ int				ft_push_swap(t_ps *ps, int s)
 	ps->s *= s;
 	++ps->chunk;
 	ft_ps_swap_ab(ps, 0);
-	GOTOXY(54, 37);
+	GOTOXY(54, F_HEIGHT + 3);
+	ft_putchar('\n');
 	return (0);
 }

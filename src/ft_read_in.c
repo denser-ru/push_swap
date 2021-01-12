@@ -90,4 +90,5 @@ void	ft_print_sw(t_swap *sw, char c)
 			ft_printf("\e[38;5;%dm%-16d", 262 , *(sw->nb));
 		sw = sw->next;
 	}
+	SET_DISP_2ATR(F_WHITE, B_BLACK);
 }
