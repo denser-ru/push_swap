@@ -60,21 +60,6 @@ int			ft_add_cmd(t_ps *ps, char *buf)
 	exit(1);
 }
 
-void		ft_print_nb(int nb, int y, char c)
-{
-	if (c == 'a')
-	{
-		SET_DISP_2ATR(F_WHITE, B_RED);
-		GOTOXY(7, y);
-	}
-	else
-	{
-		SET_DISP_2ATR(F_WHITE, B_BLUE);
-		GOTOXY(102, y);
-	}
-	ft_printf("%-16d", nb);
-}
-
 int 		ft_ps_find_bug(t_list *l1, t_list *l2, int i)
 {
 	const char	*cmd[12] = {"pb", "pa",

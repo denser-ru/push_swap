@@ -45,15 +45,17 @@ void 			ft_ps_print_sw(t_list *cmd)
 
 void			ft_ps_end(t_ps *ps)
 {
-	if (FT_DEV)
+	if (FT_DEV && !ps->checker)
 	{
 		GOTOXY(54, F_HEIGHT + 3);
 		ft_putchar('\n');
 	}
-	else if (!ps->gui)
+	else if (!ps->gui && !ps->checker)
 		ft_ps_print_sw(ps->cmds);
-	else
+	else if (!FT_DEV && ps->gui && !ps->checker)
 		ft_ps_move(ps, ps->s);
+	if (ps->checker)
+		ft_printf("OK\n");
 	ft_memfree(ps);
 	exit (0);
 }

@@ -96,13 +96,13 @@ add_executable(push_swap
         libft/ft_tolower.c
         libft/ft_toupper.c
         libft/libft.h
-        src/main.c
+        src/push_swap.c
         src/ft_frame.c
         src/ft_lst_swaps.c
         src/ft_mem_u.c src/ft_read_in.c
         src/ft_print_bg.c
         src/ft_ps_utils.c
-        src/ft_ps_utils.c
+        src/ft_ps_init.c
         src/ft_ps_ss.c
         src/ft_ps_p.c
         src/ft_ps_rr.c

@@ -12,13 +12,6 @@
 
 #include "push_swap.h"
 
-void		ft_print_nb_arr2(int *arr, size_t size)
-{
-	ft_putnendl("ok", 2);
-	while (size--)
-		ft_printf("nb[%d]: %-3d\n", size, arr[size]);
-}
-
 static void		ft_swap_nb(int *a, int *b)
 {
 	int		i;
@@ -110,5 +103,5 @@ int				ft_lst_issorted(t_ps *ps)
 	}
 	ft_ps_fix(ps, ps->cmds, 0);
 	ft_ps_end(ps);
-	return (0);
+	return (1);
 }

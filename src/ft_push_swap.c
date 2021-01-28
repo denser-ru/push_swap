@@ -218,7 +218,7 @@ void	ft_ps_swap_ab(t_ps *ps, int m)
 
 int				ft_push_swap(t_ps *ps, int s)
 {
-	ps->s *= s;
+	ps->s = s * 1000;
 	++ps->chunk;
 	ft_ps_swap_ab(ps, 0);
 	GOTOXY(54, F_HEIGHT + 3);

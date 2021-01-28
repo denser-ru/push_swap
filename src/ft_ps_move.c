@@ -37,7 +37,6 @@ void	ft_ps_nb_list_reset(t_ps *ps, int s)
 	nb = ps->nb;
 	if (ps->a->start)
 	{
-
 		if (ps->b->start)
 			ft_ps_swaps_split(ps);
 	}
@@ -60,8 +59,6 @@ void	ft_ps_nb_list_reset2(t_ps *ps, int *nb, int i)
 {
 	t_swap	*new;
 
-//	ft_lst_swaps_del(ps->a->start);
-//	ft_lst_swaps_del(ps->b->start);
 	ps->a->start = ft_lstsw_new(nb++);
 	ps->b->start = NULL;
 	ps->b->end = NULL;
@@ -84,8 +81,6 @@ void 	ft_ps_print_stacks(t_ps *ps, t_list *cmd, int s)
 		ft_do_cmd(ps, cmd->content);
 		ft_put_cmd(ps, cmd, 1, 255);
 	}
-//	GOTOXY(54, F_HEIGHT - 2);
-//	ft_printf("\e[38;5;251mps->i: %-3d", ps->i);
 	GOTOXY(27, F_HEIGHT + 3);
 	if (!ps->wait)
 		read(0, ps->sort, 4);

@@ -18,8 +18,8 @@
 # include "term.h"
 # include "ft_frame.h"
 
-# define F_HEIGHT		100
-# define FT_DEV			1
+# define F_HEIGHT		52
+# define FT_DEV			0
 
 typedef struct		s_swap
 {
@@ -60,7 +60,10 @@ typedef struct		s_ps
 	int 			gui;
 	int				wait;
 	int 			fix;
+	int 			checker;
 }					t_ps;
+
+void				ft_init_ps(t_ps *ps, int argc, char **argv);
 
 t_swap				*ft_lstsw_new(int *nb);
 t_swap				*ft_lstsw_add(t_swap *prev, int *nb);
@@ -69,7 +72,7 @@ void 				ft_ps_move(t_ps *ps, int s);
 t_frame				*ft_get_param1(t_frame *f, int x, int y, int w);
 t_frame				*ft_get_param2(t_frame *f, int h, int fg, int bg);
 int					ft_ft_read_args(t_ps *ps, int argc, char **argv);
-int					ft_ft_read_in(t_ps *ps, char *buf);
+int					ft_ps_read_in(t_ps *ps, char *buf);
 
 void				ft_print_bg(t_frame *f);
 void				ft_print_sw(t_swap *sw, char c);
