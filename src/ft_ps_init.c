@@ -4,6 +4,17 @@
 
 #include "push_swap.h"
 
+static int      ft_atr_to_nbarr(int **nb, int argc, char *arg)
+{
+    t_list *nblst;
+    int     len;
+
+    nblst = ft_lststrsplit(arg, ' ');
+    len = ft_lstsize(nblst);
+    *nb = (int*)malloc(sizeof(int) * (argc + len));
+    //// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
+
 static int		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 {
 	int		*nb;
