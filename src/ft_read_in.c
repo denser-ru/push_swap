@@ -35,7 +35,6 @@ void	ft_put_cmd(t_ps *ps, t_list *cmd, int i, int c)
 		usleep(ps->s);
 	if (FT_DEV && !ps->s)
 		read(0, ps->sort, 1);
-	ft_lst_issorted(ps);
 }
 
 int		ft_ps_read_in(t_ps *ps, char *buf)

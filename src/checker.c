@@ -21,6 +21,14 @@ static int		ft_ps_read_in_txt(t_ps *ps, char *buf)
 	}
 }
 
+static void     ft_check_sorted(t_ps *ps)
+{
+    if (ft_lst_issorted(ps))
+        ft_printf("OK\n");
+    else
+        ft_printf("KO\n");
+}
+
 int				main(int argc, char **argv)
 {
 	t_ps	ps;
@@ -44,7 +52,9 @@ int				main(int argc, char **argv)
 		ft_print_bg(&f);
 		ft_print_sw(a.start, 'a');
 		ft_ps_read_in(&ps, buf);
-	} else
-		ft_ps_read_in_txt(&ps, buf);
+	}
+    else
+        ft_ps_read_in_txt(&ps, buf);
+    ft_check_sorted(&ps);
 	return (0);
 }

@@ -4,7 +4,7 @@
 
 #include "push_swap.h"
 
-void	ft_ps_err(t_ps *ps, int err)
+void	    ft_ps_err(t_ps *ps, int err)
 {
 	(void)err;
 	ft_memfree(ps);
@@ -12,7 +12,7 @@ void	ft_ps_err(t_ps *ps, int err)
 	exit(err);
 }
 
-void 	ft_ps_check_uniq(t_ps *ps)
+void 	    ft_ps_check_uniq(t_ps *ps)
 {
 	int 	*nb;
 	int 	i;
@@ -27,7 +27,18 @@ void 	ft_ps_check_uniq(t_ps *ps)
 	}
 }
 
-int 	ft_ps_ckeck_argv(t_ps *ps, int i, char **argv)
+static void  ft_ps_ckeck_arg(t_ps *ps, char *arg, int n)
+{
+    (void)n;
+    if (ft_strlen(arg) > 11)
+        ft_ps_err(ps, 3);
+    if ((*arg == '-' && ft_atoi(arg) > 0) || (ft_isdigit(*arg) && ft_atoi(arg) < 0))
+        ft_ps_err(ps, 4);
+    if ((*arg == '-' && !ft_isdigit(*(arg + 1))) || (*arg == '+' && !ft_isdigit(*(arg + 1))))
+        ft_ps_err(ps, 5);
+}
+
+int 	    ft_ps_ckeck_argv(t_ps *ps, int i, char **argv)
 {
 	char 	**args;
 	char 	*arg;
@@ -38,11 +49,12 @@ int 	ft_ps_ckeck_argv(t_ps *ps, int i, char **argv)
 		if (!(**args == '-' || **args == '+' || ft_isdigit(**args)))
 			ft_ps_err(ps, 1);
 		arg = *args;
+        ft_ps_ckeck_arg(ps, arg, 0);
 		++arg;
 		while (*arg)
 		{
-			if (!ft_isdigit(*arg))
-				ft_ps_err(ps, 2);
+            if (!ft_isdigit(*arg))
+                ft_ps_err(ps, 2);
 			++arg;
 		}
 		++args;
