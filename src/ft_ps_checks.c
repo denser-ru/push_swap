@@ -44,7 +44,7 @@ int 	    ft_ps_ckeck_argv(t_ps *ps, int i, char **argv)
 	char 	*arg;
 
 	args = argv;
-	while (i--)
+	while (*argv && i--)
 	{
 		if (!(**args == '-' || **args == '+' || ft_isdigit(**args)))
 			ft_ps_err(ps, 1);

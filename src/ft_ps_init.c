@@ -4,37 +4,45 @@
 
 #include "push_swap.h"
 
-static int      ft_atr_to_nbarr(int **nb, int argc, char *arg)
+static int      *ft_atr_to_nbarr(t_ps *ps, int *nb, int argc, char *arg)
 {
     t_list *nblst;
+    t_list  *lst;
     int     len;
+    int		*sort;
 
     nblst = ft_lststrsplit(arg, ' ');
+    lst = nblst;
     len = ft_lstsize(nblst);
-    *nb = (int*)malloc(sizeof(int) * (argc + len));
-    //// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    ps->nb = (int*)malloc(sizeof(int) * (--argc + len));
+    nb = ps->nb + (len - 1);
+    ps->sort = (int*)malloc(sizeof(int) * (argc + len));
+    ps->a->count = argc + len;
+    sort = ps->sort + (len - 1);
+    while (lst)
+    {
+        *(nb) = ft_atoi((char*)lst->content);
+        *(sort--) = *(nb--);
+        lst = lst->next;
+    }
+    ft_lstdel(&nblst, ft_lstdelcontent);
+    return (ps->nb);
 }
 
 static int		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 {
 	int		*nb;
 	int		*sort;
-	int 	*sort2;
 
-	nb = (int*)malloc(sizeof(int) * argc);
-	sort = (int*)malloc(sizeof(int) * argc);
-	sort2 = (int*)malloc(sizeof(int) * argc--);
-	ps->nb = nb;
-	ps->nb_size = argc;
-	ps->sort = sort;
-	ps->sort2 = sort2;
-	nb += argc - 1;
-	sort += argc - 1;
-	while (argc--)
+	nb = ft_atr_to_nbarr(ps, NULL, --argc, *argv);
+    ps->sort2 = (int*)malloc(sizeof(int) * ps->a->count);
+	ps->nb_size = ps->a->count;
+	nb += ps->a->count - 1;
+	sort = ps->sort + ps->a->count - 1;
+	while (--argc)
 	{
 		*(nb) = ft_atoi(*(++argv));
 		*(sort--) = *(nb--);
-		++(ps->a->count);
 	}
 	return (ps->nb);
 }
@@ -65,12 +73,12 @@ void		ft_init_ps(t_ps *ps, int argc, char **argv)
 
 	ft_bzero(ps->a, sizeof(t_stack));
 	ft_bzero(ps->b, sizeof(t_stack));
-	ft_ps_ckeck_argv(ps, argc - 1, argv + 1);
+    nb = ft_create_nbarr(ps, argc--, argv);
+//	ft_ps_ckeck_argv(ps, argc, argv + 1);
 	ps->st = ps->a;
-	nb = ft_create_nbarr(ps, argc--, argv);
 	ps->nb = nb;
 	ft_sort_nb_arr(ps->sort, ps->a->count);
-	ft_ps_check_uniq(ps);
+//	ft_ps_check_uniq(ps);
 	ft_ps_cp_sort2(ps->sort2, ps->sort, ps->a->count);
 	ps->sorted = ps->sort2;
 	ps->end = ps->a->count - 1;
@@ -78,6 +86,7 @@ void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	new = ps->a->start;
 	ps->s = 300000;
 	ps->cmds = (t_list*)NULL;
+	argc = ps->a->count;
 	while (--argc)
 	{
 		new->next = ft_lstsw_add(new, nb++);

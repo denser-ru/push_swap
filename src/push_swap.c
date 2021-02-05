@@ -28,7 +28,7 @@ int				main(int argc, char **argv)
 	ps.f = &f;
 	if (!ft_strcmp(argv[1], "-g"))
 		ps.gui = 1;
-	ft_init_ps(&ps, argc - (ps.gui > 0), argv + (ps.gui > 0));
+	ft_init_ps(&ps, argc - (ps.gui > 0), ++argv + (ps.gui > 0));
 	if (FT_DEV)
 	{
 		ft_print_bg(&f);
