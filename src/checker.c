@@ -46,7 +46,7 @@ int				main(int argc, char **argv)
 	ps.checker = 1;
 	if (!ft_strcmp(argv[1], "-g"))
 		ps.gui = 1;
-	ft_init_ps(&ps, argc - (ps.gui > 0), argv + (ps.gui > 0));
+	ft_init_ps(&ps, argc - (ps.gui > 0), ++argv + (ps.gui > 0));
 	if (ps.gui)
 	{
 		ft_print_bg(&f);
