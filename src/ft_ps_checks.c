@@ -22,7 +22,7 @@ void 	    ft_ps_check_uniq(t_ps *ps)
 	while (--i)
 	{
 		if (*nb == *(nb + 1))
-			ft_ps_err(ps, 3);
+			ft_ps_err(ps, 6);
 		++nb;
 	}
 }

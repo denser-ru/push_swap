@@ -4,6 +4,15 @@
 
 #include "push_swap.h"
 
+static void     ft_check_lstnbr(t_ps *ps, t_list *nblst)
+{
+    while (nblst)
+    {
+        ft_ps_ckeck_argv(ps, 1, (char**)(&nblst->content));
+        nblst = nblst->next;
+    }
+}
+
 static int      *ft_atr_to_nbarr(t_ps *ps, int *nb, int argc, char *arg)
 {
     t_list *nblst;
@@ -12,10 +21,11 @@ static int      *ft_atr_to_nbarr(t_ps *ps, int *nb, int argc, char *arg)
     int		*sort;
 
     nblst = ft_lststrsplit(arg, ' ');
+    ft_check_lstnbr(ps, nblst);
     lst = nblst;
     len = ft_lstsize(nblst);
     ps->nb = (int*)malloc(sizeof(int) * (--argc + len));
-    nb = ps->nb + (len - 1);
+    nb = ps->nb + (argc + len - 1);
     ps->sort = (int*)malloc(sizeof(int) * (argc + len));
     ps->a->count = argc + len;
     sort = ps->sort + (len - 1);
@@ -37,7 +47,7 @@ static int		*ft_create_nbarr(t_ps *ps, int argc, char **argv)
 	nb = ft_atr_to_nbarr(ps, NULL, --argc, *argv);
     ps->sort2 = (int*)malloc(sizeof(int) * ps->a->count);
 	ps->nb_size = ps->a->count;
-	nb += ps->a->count - 1;
+	nb += argc - 2;
 	sort = ps->sort + ps->a->count - 1;
 	while (--argc)
 	{
@@ -74,11 +84,11 @@ void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	ft_bzero(ps->a, sizeof(t_stack));
 	ft_bzero(ps->b, sizeof(t_stack));
     nb = ft_create_nbarr(ps, argc--, argv);
-//	ft_ps_ckeck_argv(ps, argc, argv + 1);
+	ft_ps_ckeck_argv(ps, argc - 1, argv + 1);
 	ps->st = ps->a;
 	ps->nb = nb;
 	ft_sort_nb_arr(ps->sort, ps->a->count);
-//	ft_ps_check_uniq(ps);
+	ft_ps_check_uniq(ps);
 	ft_ps_cp_sort2(ps->sort2, ps->sort, ps->a->count);
 	ps->sorted = ps->sort2;
 	ps->end = ps->a->count - 1;
