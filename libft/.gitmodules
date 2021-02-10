@@ -1,0 +1,9 @@
+[submodule "get_next_line.c"]
+	path = get_next_line.c
+	url = https://github.com/denser-ru/get_next_line
+[submodule "get_next_line.h"]
+	path = get_next_line.h
+	url = https://github.com/denser-ru/get_next_line
+[submodule "get_next_line"]
+	path = get_next_line
+	url = https://github.com/denser-ru/get_next_line
