@@ -35,23 +35,24 @@ void		ft_ps_check_uniq(t_ps *ps)
 	}
 }
 
-static void	ft_ps_ckeck_arg(t_ps *ps, char *arg, int n)
+static void	ft_ps_ckeck_arg(t_ps *ps, char *arg, size_t n)
 {
-	(void)n;
-	if (ft_strlen(arg) > 11)
+	n = !n ? ft_strlen(arg) : n;
+	if (n > 11)
 		ft_ps_err(ps, 3);
-	if ((*arg == '-' && ft_atoi(arg) > 0) ||
-			(ft_isdigit(*arg) && ft_atoi(arg) < 0))
+	if ((*arg == '-' && ft_atoi_n(arg, n) > 0) ||
+			(ft_isdigit(*arg) && ft_atoi_n(arg, n) < 0))
 		ft_ps_err(ps, 4);
 	if ((*arg == '-' && !ft_isdigit(*(arg + 1))) ||
 			(*arg == '+' && !ft_isdigit(*(arg + 1))))
 		ft_ps_err(ps, 5);
 }
 
-int			ft_ps_ckeck_argv(t_ps *ps, int i, char **argv)
+int			ft_ps_ckeck_argv(t_ps *ps, int i, char **argv, size_t n)
 {
 	char	**args;
 	char	*arg;
+	size_t	nn;
 
 	args = argv;
 	while (*argv && i--)
@@ -59,9 +60,12 @@ int			ft_ps_ckeck_argv(t_ps *ps, int i, char **argv)
 		if (!(**args == '-' || **args == '+' || ft_isdigit(**args)))
 			ft_ps_err(ps, 1);
 		arg = *args;
-		ft_ps_ckeck_arg(ps, arg, 0);
+		if (!(*arg))
+			return (0);
+		nn = !n ? ft_strlen(arg) : n;
+		ft_ps_ckeck_arg(ps, arg, nn);
 		++arg;
-		while (*arg)
+		while (--nn && *arg)
 		{
 			if (!ft_isdigit(*arg))
 				ft_ps_err(ps, 2);

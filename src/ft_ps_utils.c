@@ -69,8 +69,11 @@ int			ft_add_cmd_in(t_ps *ps, char *buf)
 	i = 0;
 	while (cmd[i] && *buf && i < 11)
 	{
-		if (!ft_strcmp(cmd[i], buf))
-			return (ft_lstpushb(&(ps->cmds), buf, ft_strlen(buf) - 1) != NULL);
+		if (!ft_strncmp(cmd[i], buf, 3))
+		{
+			return (ft_lstpushb(&(ps->cmds), (char *)cmd[i],
+						ft_strlen(cmd[i])) != NULL);
+		}
 		++i;
 	}
 	GOTOXY(0, 47);

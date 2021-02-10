@@ -116,7 +116,7 @@ int					ft_ps_mediana_chunk_count(t_swap *sw, int m, int chunk,
 int					ft_ps_fix(t_ps *ps, t_list *cmd, int i);
 void				ft_lst_swaps_del(t_swap *sw);
 
-int					ft_ps_ckeck_argv(t_ps *ps, int i, char **argv);
+int					ft_ps_ckeck_argv(t_ps *ps, int i, char **argv, size_t n);
 void				ft_ps_check_uniq(t_ps *ps);
 void				ft_memfree(t_ps *ps);
 

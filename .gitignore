@@ -55,6 +55,7 @@ dkms.conf
 *.c~
 *~
 push_swap
+checker
 .anjuta
 .anjuta_sym_db.db
 src/Makefile.am

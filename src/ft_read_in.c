@@ -122,7 +122,7 @@ int		ft_ps_read_stdin(t_ps *ps, char *buf)
 		ft_putendl(buf);
 		buf[ft_strlen(buf)] = '\n';
 		ft_add_cmd_in(ps, buf);
-		ft_bzero(buf, 5);
+		free(buf);
 		++i;
 	}
 	cmds = ps->cmds;

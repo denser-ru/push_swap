@@ -16,7 +16,7 @@ static void		ft_check_lstnbr(t_ps *ps, t_list *nblst)
 {
 	while (nblst)
 	{
-		ft_ps_ckeck_argv(ps, 1, (char**)(&nblst->content));
+		ft_ps_ckeck_argv(ps, 1, (char**)(&nblst->content), nblst->content_size);
 		nblst = nblst->next;
 	}
 }
@@ -39,7 +39,7 @@ static int		*ft_atr_to_nbarr(t_ps *ps, int *nb, int argc, char *arg)
 	sort = ps->sort + (len - 1);
 	while (lst)
 	{
-		*(nb) = ft_atoi((char*)lst->content);
+		*(nb) = ft_atoi_n((char*)lst->content, lst->content_size);
 		*(sort--) = *(nb--);
 		lst = lst->next;
 	}

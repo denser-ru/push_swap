@@ -39,7 +39,7 @@ void		ft_init_ps(t_ps *ps, int argc, char **argv)
 	ft_bzero(ps->a, sizeof(t_stack));
 	ft_bzero(ps->b, sizeof(t_stack));
 	nb = ft_create_nbarr(ps, argc--, argv);
-	ft_ps_ckeck_argv(ps, argc - 1, argv + 1);
+	ft_ps_ckeck_argv(ps, argc - 1, argv + 1, 0);
 	ps->st = ps->a;
 	ps->nb = nb;
 	ft_sort_nb_arr(ps->sort, ps->a->count);
