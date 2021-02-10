@@ -12,6 +12,20 @@
 
 #include "push_swap.h"
 
+static int		ft_ps_check_dev(t_ps *ps, char *buf)
+{
+	if (FT_DEV)
+	{
+		ft_print_bg(ps->f);
+		ft_print_sw(ps->a->start, 'a');
+	}
+	if (FT_DEV && ft_ps_read_in(ps, buf))
+		return (1);
+	else
+		ft_push_swap(ps, 0);
+	return (0);
+}
+
 int				main(int argc, char **argv)
 {
 	t_ps	ps;
@@ -29,15 +43,8 @@ int				main(int argc, char **argv)
 	if (!ft_strcmp(argv[1], "-g"))
 		ps.gui = 1;
 	ft_init_ps(&ps, argc - (ps.gui > 0), ++argv + (ps.gui > 0));
-	if (FT_DEV)
-	{
-		ft_print_bg(&f);
-		ft_print_sw(a.start, 'a');
-	}
-	if (FT_DEV && ft_ps_read_in(&ps, buf))
+	if (ft_ps_check_dev(&ps, buf))
 		return (1);
-	else
-		ft_push_swap(&ps, 0);
 	ft_putchar('\n');
 	return (0);
 }

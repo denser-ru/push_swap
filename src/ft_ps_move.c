@@ -20,19 +20,10 @@ void	ft_ps_ab_change(t_ps *ps)
 	ps->b->end = NULL;
 }
 
-void 	ft_ps_swaps_split(t_ps *ps)
-{
-	ps->a->end->next = ps->b->start;
-	ps->b->start->prev = ps->a->end;
-	ps->a->end = ps->b->end;
-	ps->b->start = NULL;
-	ps->b->end = NULL;
-}
-
 void	ft_ps_nb_list_reset(t_ps *ps, int s)
 {
 	t_swap	*sw;
-	int 	*nb;
+	int		*nb;
 
 	nb = ps->nb;
 	if (ps->a->start)
@@ -74,7 +65,7 @@ void	ft_ps_nb_list_reset2(t_ps *ps, int *nb, int i)
 	ft_print_sw(ps->a->start, 'a');
 }
 
-void 	ft_ps_print_stacks(t_ps *ps, t_list *cmd, int s)
+void	ft_ps_print_stacks(t_ps *ps, t_list *cmd, int s)
 {
 	if (cmd)
 	{
@@ -84,18 +75,18 @@ void 	ft_ps_print_stacks(t_ps *ps, t_list *cmd, int s)
 	GOTOXY(27, F_HEIGHT + 3);
 	if (!ps->wait)
 		read(0, ps->sort, 4);
-
-	if(ft_isdigit((char)ps->sort[0]))
+	if (ft_isdigit((char)ps->sort[0]))
 		ps->wait = ft_atoi((char*)ps->sort) * 1000;
 	s = ps->wait;
 	usleep(s);
 }
-void 	ft_ps_move(t_ps *ps, int s)
+
+void	ft_ps_move(t_ps *ps, int s)
 {
 	t_list	**cmdroot;
 	t_list	*cmd;
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	s = s ? s * 1000 : ps->s;
 	if (ps->gui)

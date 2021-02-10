@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "get_next_line.h"
 
 void	ft_put_cmd(t_ps *ps, t_list *cmd, int i, int c)
 {
@@ -85,10 +86,50 @@ void	ft_print_sw(t_swap *sw, char c)
 			GOTOXY(7, n--);
 		}
 		if (sw->nb && FT_DEV)
-			ft_printf("\e[38;5;%dm%-12d %2d", 262 , *(sw->nb), sw->chunk);
+			ft_printf("\e[38;5;%dm%-12d %2d", 262, *(sw->nb), sw->chunk);
 		else if (sw->nb)
-			ft_printf("\e[38;5;%dm%-16d", 262 , *(sw->nb));
+			ft_printf("\e[38;5;%dm%-16d", 262, *(sw->nb));
 		sw = sw->next;
 	}
 	SET_DISP_2ATR(F_WHITE, B_BLACK);
+}
+
+int		ft_ps_read_in_txt(t_ps *ps, char *buf)
+{
+	while (1)
+	{
+		if (!read(0, buf, 4))
+			return (0);
+		if (ft_isdigit(buf[0]))
+			return (ft_push_swap(ps, ft_atoi(buf)));
+		if (!ft_strcmp(buf, "exit"))
+			return (0);
+		if (!(ft_add_cmd(ps, buf)))
+			return (1);
+		buf[ft_strlen(buf) - 1] = '\0';
+		ft_put_cmd(ps, ps->cmds, 1, 255);
+	}
+}
+
+int		ft_ps_read_stdin(t_ps *ps, char *buf)
+{
+	int		i;
+	t_list	*cmds;
+
+	i = 0;
+	while (get_next_line(0, &buf))
+	{
+		ft_putendl(buf);
+		buf[ft_strlen(buf)] = '\n';
+		ft_add_cmd_in(ps, buf);
+		ft_bzero(buf, 5);
+		++i;
+	}
+	cmds = ps->cmds;
+	while (cmds)
+	{
+		ft_do_cmd(ps, (char*)cmds->content);
+		cmds = cmds->next;
+	}
+	return (i > 0);
 }

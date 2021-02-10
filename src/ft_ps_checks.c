@@ -1,10 +1,18 @@
-//
-// Created by Cheyenne Ayako on 12/26/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ps_checks.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cayako <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/02/10 16:30:17 by cayako            #+#    #+#             */
+/*   Updated: 2021/02/10 16:30:24 by cayako           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	    ft_ps_err(t_ps *ps, int err)
+void		ft_ps_err(t_ps *ps, int err)
 {
 	(void)err;
 	ft_memfree(ps);
@@ -12,10 +20,10 @@ void	    ft_ps_err(t_ps *ps, int err)
 	exit(err);
 }
 
-void 	    ft_ps_check_uniq(t_ps *ps)
+void		ft_ps_check_uniq(t_ps *ps)
 {
-	int 	*nb;
-	int 	i;
+	int		*nb;
+	int		i;
 
 	nb = ps->sort;
 	i = ps->a->count;
@@ -27,21 +35,23 @@ void 	    ft_ps_check_uniq(t_ps *ps)
 	}
 }
 
-static void  ft_ps_ckeck_arg(t_ps *ps, char *arg, int n)
+static void	ft_ps_ckeck_arg(t_ps *ps, char *arg, int n)
 {
-    (void)n;
-    if (ft_strlen(arg) > 11)
-        ft_ps_err(ps, 3);
-    if ((*arg == '-' && ft_atoi(arg) > 0) || (ft_isdigit(*arg) && ft_atoi(arg) < 0))
-        ft_ps_err(ps, 4);
-    if ((*arg == '-' && !ft_isdigit(*(arg + 1))) || (*arg == '+' && !ft_isdigit(*(arg + 1))))
-        ft_ps_err(ps, 5);
+	(void)n;
+	if (ft_strlen(arg) > 11)
+		ft_ps_err(ps, 3);
+	if ((*arg == '-' && ft_atoi(arg) > 0) ||
+			(ft_isdigit(*arg) && ft_atoi(arg) < 0))
+		ft_ps_err(ps, 4);
+	if ((*arg == '-' && !ft_isdigit(*(arg + 1))) ||
+			(*arg == '+' && !ft_isdigit(*(arg + 1))))
+		ft_ps_err(ps, 5);
 }
 
-int 	    ft_ps_ckeck_argv(t_ps *ps, int i, char **argv)
+int			ft_ps_ckeck_argv(t_ps *ps, int i, char **argv)
 {
-	char 	**args;
-	char 	*arg;
+	char	**args;
+	char	*arg;
 
 	args = argv;
 	while (*argv && i--)
@@ -49,12 +59,12 @@ int 	    ft_ps_ckeck_argv(t_ps *ps, int i, char **argv)
 		if (!(**args == '-' || **args == '+' || ft_isdigit(**args)))
 			ft_ps_err(ps, 1);
 		arg = *args;
-        ft_ps_ckeck_arg(ps, arg, 0);
+		ft_ps_ckeck_arg(ps, arg, 0);
 		++arg;
 		while (*arg)
 		{
-            if (!ft_isdigit(*arg))
-                ft_ps_err(ps, 2);
+			if (!ft_isdigit(*arg))
+				ft_ps_err(ps, 2);
 			++arg;
 		}
 		++args;

@@ -22,10 +22,10 @@ FTDIR   = ./libft/
 PRNTDIR  = ./ft_printf/
 INCL		= $(wildcard $(INCDIR)*.h)
 
-SRC = ft_ps_init.c ft_lst_swaps.c  ft_mem_u.c ft_frame.c \
+SRC = ft_ps_init.c ft_lst_swaps.c  ft_mem_u.c ft_frame.c ft_ps_arr_utils.c \
         ft_ps_utils.c ft_ps_ss.c ft_ps_p.c ft_ps_rr.c ft_ps_move.c \
 		ft_ps_sort.c ft_ps_chunk.c ft_push_swap.c ft_ps_checks.c ft_read_in.c \
-		ft_print_bg.c
+		ft_print_bg.c ft_ps_steps.c
 SRC_PS = push_swap.c
 SRC_CH = checker.c
 

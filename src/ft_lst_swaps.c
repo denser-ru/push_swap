@@ -35,3 +35,12 @@ t_swap		*ft_lstsw_add(t_swap *prev, int *nb)
 	sw->chunk = 1;
 	return (sw);
 }
+
+void		ft_ps_swaps_split(t_ps *ps)
+{
+	ps->a->end->next = ps->b->start;
+	ps->b->start->prev = ps->a->end;
+	ps->a->end = ps->b->end;
+	ps->b->start = NULL;
+	ps->b->end = NULL;
+}

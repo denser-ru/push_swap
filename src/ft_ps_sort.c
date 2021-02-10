@@ -38,42 +38,6 @@ int				*ft_sort_nb_arr(int *nb, size_t size)
 	return (nb);
 }
 
-int 			ft_ps_chunk_count(t_swap *sw, int *sort, int chunk, int i)
-{
-	while (sw)
-	{
-		if (sw->chunk && sw->chunk == chunk)
-			sort[i++] = *(sw->nb);
-		sw = sw->prev;
-	}
-	return (i);
-}
-
-int				ft_ps_get_chunk(t_swap *sw, int chunk)
-{
-	while (sw)
-	{
-		if (sw->chunk > chunk)
-			chunk = sw->chunk;
-		sw = sw->prev;
-	}
-	return (chunk);
-}
-
-int				ft_ps_mediana_chunk_count(t_swap *sw, int m, int chunk, int ab)
-{
-	int		i;
-
-	i = 0;
-	while (sw)
-	{
-		if ((ab && *(sw->nb) < m && sw->chunk == chunk) || (!ab && *(sw->nb) > m && sw->chunk == chunk))
-			++i;
-		sw = sw->prev;
-	}
-	return (i);
-}
-
 int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 {
 	int		m;
@@ -83,7 +47,8 @@ int				ft_ps_sw_sort(t_ps *ps, t_swap *sw, size_t d, int *sort)
 	ps->chunk_count = ps->i;
 	ft_sort_nb_arr(ps->sort, ps->i);
 	m = sort[ps->i / d - (ps->i > 1 && ps->st == ps->b)];
-	ps->i = ft_ps_mediana_chunk_count(ps->st->end, m, ps->cur_chunk, ps->st == ps->a);
+	ps->i = ft_ps_mediana_chunk_count(ps->st->end, m, ps->cur_chunk,
+				ps->st == ps->a);
 	ps->i = ps->i ? ps->i : ps->chunk_count;
 	return (m);
 }

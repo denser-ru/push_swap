@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void		ft_lst_swaps_del(t_swap *sw)
+void			ft_lst_swaps_del(t_swap *sw)
 {
 	if (sw->next)
 		ft_lst_swaps_del(sw->next);
@@ -33,7 +33,7 @@ void			ft_memfree(t_ps *ps)
 	ps->sort2 = NULL;
 }
 
-void 			ft_ps_print_sw(t_list *cmd)
+void			ft_ps_print_sw(t_list *cmd)
 {
 	while (cmd)
 	{
@@ -57,5 +57,15 @@ void			ft_ps_end(t_ps *ps)
 	if (ps->checker)
 		ft_printf("OK\n");
 	ft_memfree(ps);
-	exit (0);
+	exit(0);
+}
+
+void			ft_ps_dev(t_ps *ps, int m, char *dev)
+{
+	GOTOXY(44, 30);
+	SET_DISP_2ATR(F_WHITE, B_BLACK);
+	ft_printf("\e[38;5;251mмедиана: %-3d; (%s)ps->i: %-3d; ab: %-3c",
+				m, dev, ps->i, ps->st == ps->a ? 'a' : 'b');
+	GOTOXY(54, F_HEIGHT + 3);
+	usleep(ps->s);
 }

@@ -212,4 +212,4 @@ add_executable(checker
 		src/ft_ps_chunk.c
 		src/ft_ps_move.c
 		src/ft_ps_checks.c
-		)
+        src/ft_ps_arr_utils.c src/ft_ps_steps.c)

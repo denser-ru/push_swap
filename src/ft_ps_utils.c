@@ -60,25 +60,46 @@ int			ft_add_cmd(t_ps *ps, char *buf)
 	exit(1);
 }
 
-int 		ft_ps_find_bug(t_list *l1, t_list *l2, int i)
+int			ft_add_cmd_in(t_ps *ps, char *buf)
+{
+	const char	*cmd[11] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n",
+							"rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
+	int			i;
+
+	i = 0;
+	while (cmd[i] && *buf && i < 11)
+	{
+		if (!ft_strcmp(cmd[i], buf))
+			return (ft_lstpushb(&(ps->cmds), buf, ft_strlen(buf) - 1) != NULL);
+		++i;
+	}
+	GOTOXY(0, 47);
+	ft_printf(ESC "[0K");
+	ft_putendl("Error");
+	exit(1);
+}
+
+int			ft_ps_find_bug(t_list *l1, t_list *l2, int i)
 {
 	const char	*cmd[12] = {"pb", "pa",
-						   "pa", "pb",
-						   "ra", "rra",
-						   "rra", "ra",
-						   "rb", "rrb",
-						   "rrb", "rb"
+							"pa", "pb",
+							"ra", "rra",
+							"rra", "ra",
+							"rb", "rrb",
+							"rrb", "rb"
 	};
+
 	while (i < 12)
 	{
-		if (!ft_strncmp(l1->content, cmd[i], l1->content_size) && !ft_strncmp(l2->content, cmd[i + 1], l2->content_size))
+		if (!ft_strncmp(l1->content, cmd[i], l1->content_size) &&
+				!ft_strncmp(l2->content, cmd[i + 1], l2->content_size))
 			return (1);
 		i += 2;
 	}
 	return (0);
 }
 
-int 		ft_ps_fix(t_ps *ps, t_list *cmd, int i)
+int			ft_ps_fix(t_ps *ps, t_list *cmd, int i)
 {
 	while (cmd)
 	{
