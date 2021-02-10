@@ -52,5 +52,6 @@ int				main(int argc, char **argv)
 	ps.checker = 1;
 	ft_ps_select(&ps, argc, argv, buf);
 	ft_check_sorted(&ps);
+	ft_memfree(&ps);
 	return (0);
 }

@@ -24,6 +24,8 @@ void			ft_memfree(t_ps *ps)
 {
 	if (ps->a->start)
 		ft_lst_swaps_del(ps->a->start);
+	if (ps->b->start)
+		ft_lst_swaps_del(ps->b->start);
 	ft_lstdel(&(ps->cmds), ft_lstdelcontent);
 	free(ps->nb);
 	ps->nb = NULL;
@@ -35,8 +37,18 @@ void			ft_memfree(t_ps *ps)
 
 void			ft_ps_print_sw(t_list *cmd)
 {
-	while (cmd)
+	size_t	i;
+	size_t	j;
+	t_list	*root;
+
+	i = ft_lstsize(cmd);
+	root = cmd;
+	while (i--)
 	{
+		j = i;
+		cmd = root;
+		while (j--)
+			cmd = cmd->next;
 		ft_putnstr(cmd->content, cmd->content_size);
 		ft_putchar('\n');
 		cmd = cmd->next;
